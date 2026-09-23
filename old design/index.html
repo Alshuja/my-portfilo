@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="الموقع الشخصي للمهندس عبدالرحمن عادل الشجاع — مبرمج، مهتم بعلوم البيانات والذكاء الاصطناعي، ومؤسس منصة فكرة مبرمج وسندباد.">
+  <meta name="keywords" content="عبدالرحمن عادل الشجاع, Abdulrahman Alshujaa, فكرة مبرمج, سندباد, محفظة ريال, علوم البيانات, ذكاء اصطناعي, Flutter, Laravel, Python, Machine Learning">
+  <meta name="author" content="عبدالرحمن عادل الشجاع">
+  <title>عبدالرحمن عادل الشجاع | Abdulrahman Alshujaa - Data &amp; AI · Software Developer</title>
+
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scroll-progress" class="scroll-progress-bar"></div>
+
+  <!-- Interactive 3D Particles Background Canvas -->
+  <canvas id="particlesCanvas" class="particles-bg"></canvas>
+
+  <!-- ==================== HEADER & NAVBAR ==================== -->
+  <header id="header">
+    <div class="header-container">
+      <a href="#home" class="logo">
+        <span class="logo-badge"><i class="fas fa-terminal"></i></span>
+        <span class="logo-text">عبدالرحمن <span>.الشجاع</span></span>
+      </a>
+
+      <nav class="navbar" id="navbar">
+        <a href="#home" class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="#about" class="nav-link"><i class="fas fa-user"></i> عني</a>
+        <a href="#skills" class="nav-link"><i class="fas fa-cube"></i> المهارات (3D)</a>
+        <a href="#projects" class="nav-link"><i class="fas fa-laptop-code"></i> المشاريع</a>
+        <a href="#services" class="nav-link"><i class="fas fa-cubes"></i> الخدمات</a>
+        <a href="#journey" class="nav-link"><i class="fas fa-graduation-cap"></i> المسار</a>
+        <a href="#certificates" class="nav-link"><i class="fas fa-award"></i> الشهادات</a>
+        <a href="#testimonials" class="nav-link"><i class="fas fa-comments"></i> الآراء</a>
+        <a href="#blog" class="nav-link"><i class="fas fa-newspaper"></i> المدونة</a>
+        <a href="programmer-idea.html" class="nav-link"><i class="fas fa-graduation-cap"></i> فكرة مبرمج</a>
+        <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> تواصل معي</a>
+        <a href="admin.html" class="nav-link nav-admin-link" title="لوحة التحكم والإدارة"><i class="fas fa-cog"></i> الإدارة</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="sound-toggler" class="icon-btn" aria-label="المؤثرات الصوتية" title="تبديل المؤثرات الصوتية الميكانيكية">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="theme-toggler" class="icon-btn" aria-label="تغيير المظهر" title="تبديل الوضع الليلي / النهاري">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="menu-btn" class="icon-btn mobile-toggle" aria-label="فتح القائمة">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="home" id="home">
+    <div class="hero-wrapper">
+      <div class="content">
+        <div class="status-badge animate-fade">
+          <span class="pulse-dot"></span>
+          <span>متاح للعمل الحر وتطوير المشاريع البرمجية</span>
+        </div>
+
+        <span class="hello">مرحباً بك، أنا</span>
+        <h1>عبدالرحمن <span>عادل الشجاع</span></h1>
+        
+        <div class="role-badge">
+          <i class="fas fa-laptop-code"></i>
+          <span>Computer Science &amp; IT · Data &amp; AI · Software Development</span>
+        </div>
+
+        <p class="hero-description">
+          طالب علوم حاسوب وتقنية معلومات بجامعة إب، مبرمج ومؤسس منصة <strong>فكرة مبرمج</strong>.
+          شغوف بعلوم البيانات والذكاء الاصطناعي، وتطوير منصات الويب والموبايل،
+          وأعمل على تحويل الأفكار إلى منتجات رقمية متكاملة وقابلة للتوسع ذات أثر حقيقي.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> استكشف مشاريعي</a>
+          <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> تواصل معي</a>
+          <a href="assets/cvs/TamZyn CV.pdf" download class="btn btn-subtle"><i class="fas fa-download"></i> السيرة الذاتية (CV)</a>
+        </div>
+
+        <div class="social-hero">
+          <span class="social-label">تابعني وتواصل:</span>
+          <div class="social-links">
+            <a href="https://wa.me/967773853853" target="_blank" rel="noopener" aria-label="WhatsApp" title="واتساب: +967 773 853 853"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://t.me/Alshuja_ai" target="_blank" rel="noopener" aria-label="Telegram الشخصي" title="تيليجرام شخصي: @Alshuja_ai"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" aria-label="قناة فكرة مبرمج" title="قناة فكرة مبرمج"><i class="fas fa-bullhorn"></i></a>
+            <a href="https://www.instagram.com/alshujaa" target="_blank" rel="noopener" aria-label="Instagram الشخصي" title="انستغرام: @alshujaa"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener" aria-label="YouTube" title="يوتيوب فكرة مبرمج"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/programmerIdea.com.ye?mibextid=ZbWKwL" target="_blank" rel="noopener" aria-label="Facebook" title="فيسبوك فكرة مبرمج"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@programmer_idea?_t=ZS-8t1xmOmygNj&_r=1" target="_blank" rel="noopener" aria-label="TikTok" title="تيك توك فكرة مبرمج"><i class="fab fa-tiktok"></i></a>
+            <a href="mailto:Abdulrahman_Alshujaa@gmail.com" aria-label="Email" title="البريد الإلكتروني"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Profile Image with Unique 4-sided Border Frame -->
+      <div class="image">
+        <div class="avatar-frame">
+          <img src="images/profile-hero.png" alt="عبدالرحمن عادل الشجاع" onerror="this.src='images/main-img.jpg'">
+        </div>
+        <div class="image-badge-experience">
+          <span class="badge-number">+3</span>
+          <span class="badge-text">سنوات في البرمجة والبيانات</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT SECTION ==================== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">تعرّف علي أكثر</span>
+        <h2 class="heading">عن <span>عبدالرحمن الشجاع</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <div class="about-card-wrapper">
+        <div class="about-grid">
+          <div class="about-image-col">
+            <div class="about-img-frame">
+              <img src="images/profile-hero.png" alt="عبدالرحمن عادل الشجاع" onerror="this.src='images/main-img.jpg'">
+              <div class="badge-exp">
+                <span class="num">+3</span>
+                <span class="txt">سنوات شغف وبناء برمجيات</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text-col">
+            <span class="subtitle">شغف بالابتكار والحلول العملية</span>
+            <h2>مهندس ومطور <span>يحوّل الأفكار إلى منتجات رقمية</span></h2>
+            <p class="lead-text">
+              أنا <strong>عبدالرحمن عادل الشجاع</strong>، طالب في <strong>جامعة إب</strong> بكلية الحاسوب وتقنية المعلومات (المستوى الرابع).
+              أؤمن بأن التقنية والبيانات هما القوة المحركة لصناعة التغيير، ولذلك كرست وقتي لتعلم وتطبيق أحدث مهارات علم البيانات، ونماذج الذكاء الاصطناعي، وهندسة البرمجيات.
+            </p>
+            <p>
+              أسست منصة ومبادرة <strong>"فكرة مبرمج" (Programmer Idea)</strong> لتبسيط علوم البرمجة والذكاء الاصطناعي وإثراء المحتوى التقني العربي، كما شاركت في بناء وتطوير مشاريع حقيقية وناجحة كمنصة <strong>"سندباد" (Sinbad)</strong> للتجارة الإلكترونية وتطبيق <strong>"محفظة ريال" (Riyal Wallet)</strong>.
+            </p>
+
+            <div class="about-highlights-grid">
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-university"></i>
+                <div>
+                  <strong>جامعة إب</strong>
+                  <span>علوم حاسوب وتكنولوجيا معلومات (المستوى 4)</span>
+                </div>
+              </div>
+
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-brain"></i>
+                <div>
+                  <strong>Data &amp; AI</strong>
+                  <span>نماذج تعلم الآلة وتحليل البيانات ببايثون</span>
+                </div>
+              </div>
+
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-mobile-alt"></i>
+                <div>
+                  <strong>Flutter Apps</strong>
+                  <span>تطبيقات هواتف ذكية Android &amp; iOS</span>
+                </div>
+              </div>
+
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-bullhorn"></i>
+                <div>
+                  <strong>فكرة مبرمج</strong>
+                  <span>مبادرة ومجتمع تقني لتعليم البرمجة</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-actions-row">
+              <a href="assets/cvs/TamZyn CV.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> تحميل السيرة الذاتية (CV)</a>
+              <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> تواصل معي مباشرة</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS & 3D SECTION ==================== -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">قدراتي وكفاءتي البرمجية</span>
+        <h2 class="heading">المهارات والبيئة <span>ثلاثية الأبعاد (3D)</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <!-- 3D Spline Interactive Showcase & Tech Wall -->
+      <div class="skills-3d-stage">
+        <div class="stage-header">
+          <div class="stage-tag">
+            <span class="pulse-dot"></span>
+            <i class="fas fa-cube"></i> مجسم لوحة المفاتيح والتقنيات التفاعلي (Interactive 3D Stage)
+          </div>
+          <p class="stage-hint">
+            <i class="fas fa-mouse-pointer"></i> <strong>تجربة تفاعلية حية:</strong> اسحب وحرّك الماوس للتنقل ثلاثي الأبعاد داخل المشهد، واضغط على مفاتيح لوحة المفاتيح لتجربة المؤثرات الصوتية والميكانيكية الحقيقية.
+          </p>
+        </div>
+        
+        <div class="spline-wrapper">
+          <div class="spline-loading" id="splineLoader">
+            <div class="spinner-3d"></div>
+            <span>جاري تهيئة المشهد ثلاثي الأبعاد...</span>
+          </div>
+          <spline-viewer id="splineViewer" loading-anim-type="spinner-small-dark" url="assets/3d/skills-keyboard.spline"></spline-viewer>
+          <div class="spline-overlay-controls">
+            <button class="stage-btn-hint" id="reset3dCamera" title="إعادة ضبط زاوية الرؤية"><i class="fas fa-redo-alt"></i> إعادة ضبط المشهد</button>
+            <span class="stage-badge-live"><i class="fas fa-bolt text-gold"></i> WebGL 3D Runtime</span>
+          </div>
+        </div>
+
+        <!-- 3D Glowing Tech Wall -->
+        <div class="tech-wall-header">
+          <h3 class="tech-wall-title"><i class="fas fa-layer-group text-accent"></i> الأدوات والتقنيات الأساسية (Core Tech Stack)</h3>
+          <p class="tech-wall-desc">التقنيات والمكتبات المعتمدة في بناء مشاريع <strong>سندباد</strong>، <strong>محفظة ريال</strong>، ومنصة <strong>فكرة مبرمج</strong></p>
+        </div>
+
+        <div class="tech-wall-grid">
+          <div class="tech-card-3d tilt-card" style="--skill: #3776AB;" data-skill="Python">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/python-mono.svg" alt="Python" class="tech-icon" />
+            <h4 class="tech-name">Python</h4>
+            <span class="tech-category">Data &amp; AI · ML</span>
+            <p class="tech-brief">تحليل البيانات، تعلم الآلة، وبناء النماذج الذكية</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #02569B;" data-skill="Flutter">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <i class="fas fa-mobile-screen-button tech-fa-icon" style="color: #02569B;"></i>
+            <h4 class="tech-name">Flutter &amp; Dart</h4>
+            <span class="tech-category">Cross-Platform Apps</span>
+            <p class="tech-brief">تطبيقات هواتف ذكية حديثة وفائقة السرعة Android &amp; iOS</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #FF2D20;" data-skill="Laravel">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <i class="fab fa-laravel tech-fa-icon" style="color: #FF2D20;"></i>
+            <h4 class="tech-name">Laravel &amp; PHP</h4>
+            <span class="tech-category">Backend &amp; APIs</span>
+            <p class="tech-brief">بناء وتأمين واجهات البرمجة RESTful APIs وهيكلة الخوادم</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #2496ED;" data-skill="Docker">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/docker-mono.svg" alt="Docker" class="tech-icon" />
+            <h4 class="tech-name">Docker</h4>
+            <span class="tech-category">DevOps &amp; Containers</span>
+            <p class="tech-brief">عزل البيئات البرمجية وتسهيل النشر السحابي والتشغيل</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #4169E1;" data-skill="PostgreSQL">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/postgresql-mono.svg" alt="PostgreSQL" class="tech-icon" />
+            <h4 class="tech-name">PostgreSQL / SQL</h4>
+            <span class="tech-category">Relational DB</span>
+            <p class="tech-brief">تصميم قواعد البيانات، تحسين الفهارس، والاستعلامات المتقدمة</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #47A248;" data-skill="MongoDB">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/mongodb-mono.svg" alt="MongoDB" class="tech-icon" />
+            <h4 class="tech-name">MongoDB</h4>
+            <span class="tech-category">NoSQL Database</span>
+            <p class="tech-brief">تخزين البيانات غير المهيكلة والتوسع الأفقي السريع</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #DC382D;" data-skill="Redis">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/redis-mono.svg" alt="Redis" class="tech-icon" />
+            <h4 class="tech-name">Redis</h4>
+            <span class="tech-category">Cache &amp; Message Queue</span>
+            <p class="tech-brief">تسريع الاستجابة والتخزين المؤقت عالي السرعة في الذاكرة</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #F7DF1E;" data-skill="JavaScript">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/javascript-mono.svg" alt="JavaScript" class="tech-icon" />
+            <h4 class="tech-name">Modern JavaScript</h4>
+            <span class="tech-category">ES6+ &amp; Interactive UI</span>
+            <p class="tech-brief">واجهات الويب التفاعلية، معالجة البيانات، والتفاعل ثلاثي الأبعاد</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #38BDF8;" data-skill="Tailwind">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/tailwind-css-mono.svg" alt="Tailwind CSS" class="tech-icon" />
+            <h4 class="tech-name">Tailwind CSS</h4>
+            <span class="tech-category">Modern Styling</span>
+            <p class="tech-brief">تصاميم عصرية فائقة الخفة والاستجابة على كافة الشاشات</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #FFCA28;" data-skill="Firebase">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <img src="assets/logos/firebase-mono.svg" alt="Firebase" class="tech-icon" />
+            <h4 class="tech-name">Firebase BaaS</h4>
+            <span class="tech-category">Cloud Backend</span>
+            <p class="tech-brief">التوثيق الفوري وقواعد البيانات اللحظية والإشعارات السحابية</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #D97706;" data-skill="Power BI">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <i class="fas fa-chart-pie tech-fa-icon" style="color: #D97706;"></i>
+            <h4 class="tech-name">Power BI &amp; Excel</h4>
+            <span class="tech-category">Business Intelligence</span>
+            <p class="tech-brief">بناء الداشبوردات التفاعلية وتحويل البيانات لقرارات استراتيجية</p>
+          </div>
+
+          <div class="tech-card-3d tilt-card" style="--skill: #F05032;" data-skill="Git">
+            <div class="card-glare"></div>
+            <span class="tech-glow"></span>
+            <i class="fab fa-git-alt tech-fa-icon" style="color: #F05032;"></i>
+            <h4 class="tech-name">Git &amp; GitHub</h4>
+            <span class="tech-category">Version Control &amp; CI</span>
+            <p class="tech-brief">إدارة الكود والتفرع والتعاون البرمجي الاحترافي</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Tab Buttons (Detailed Categorization) -->
+      <div class="tabs-container">
+        <button class="tab-btn active" data-tab="data-ai"><i class="fas fa-brain"></i> البيانات والذكاء الاصطناعي</button>
+        <button class="tab-btn" data-tab="programming"><i class="fas fa-laptop-code"></i> البرمجة وتطوير الويب</button>
+        <button class="tab-btn" data-tab="mobile"><i class="fas fa-mobile-alt"></i> تطبيقات الهاتف</button>
+        <button class="tab-btn" data-tab="tools"><i class="fas fa-tools"></i> الأدوات وقواعد البيانات</button>
+      </div>
+
+      <!-- Tab Content 1: Data & AI -->
+      <div class="tab-content active" id="data-ai">
+        <div class="skills-grid">
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fab fa-python text-gold"></i> Python (Data &amp; AI)</span>
+              <span class="skill-level">92% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 92%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-chart-line text-accent"></i> Data Analysis &amp; Visualization</span>
+              <span class="skill-level">90% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 90%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-robot text-main"></i> Machine Learning Models</span>
+              <span class="skill-level">82% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 82%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-table"></i> pandas &amp; NumPy</span>
+              <span class="skill-level">88% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 88%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-chart-bar text-gold"></i> Power BI &amp; Advanced Excel</span>
+              <span class="skill-level">85% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 85%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-eye text-accent"></i> Data Storytelling &amp; Insights</span>
+              <span class="skill-level">86% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 86%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content 2: Programming & Web -->
+      <div class="tab-content" id="programming">
+        <div class="skills-grid">
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-code text-main"></i> C++ &amp; OOP &amp; Data Structures</span>
+              <span class="skill-level">85% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 85%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fab fa-php text-accent"></i> PHP &amp; Laravel Framework</span>
+              <span class="skill-level">80% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 80%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fab fa-js text-gold"></i> JavaScript (ES6+)</span>
+              <span class="skill-level">78% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 78%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fab fa-html5 text-main"></i> HTML5 &amp; CSS3 &amp; Responsive UI</span>
+              <span class="skill-level">90% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 90%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-network-wired"></i> RESTful APIs &amp; Integrations</span>
+              <span class="skill-level">82% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 82%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-layer-group"></i> Software Architecture</span>
+              <span class="skill-level">80% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 80%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content 3: Mobile Apps -->
+      <div class="tab-content" id="mobile">
+        <div class="skills-grid">
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-mobile-alt text-main"></i> Flutter Development</span>
+              <span class="skill-level">85% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 85%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-gem text-accent"></i> Dart Programming</span>
+              <span class="skill-level">84% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 84%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-paint-brush"></i> UI/UX Implementation</span>
+              <span class="skill-level">85% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 85%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-sync text-gold"></i> State Management (Provider / GetX)</span>
+              <span class="skill-level">78% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 78%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content 4: Tools & DB -->
+      <div class="tab-content" id="tools">
+        <div class="skills-grid">
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-database text-main"></i> SQL &amp; Relational DB (MySQL / PostgreSQL)</span>
+              <span class="skill-level">85% · متقدم</span>
+            </div>
+            <div class="progress-bar"><span style="width: 85%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fab fa-git-alt text-accent"></i> Git &amp; GitHub Version Control</span>
+              <span class="skill-level">84% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 84%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fas fa-server"></i> VPS &amp; Linux Server Basics</span>
+              <span class="skill-level">75% · جيد</span>
+            </div>
+            <div class="progress-bar"><span style="width: 75%"></span></div>
+          </div>
+
+          <div class="skill-box tilt-card">
+            <div class="card-glare"></div>
+            <div class="skill-info">
+              <span class="skill-name"><i class="fab fa-figma text-gold"></i> Figma UI Design Basics</span>
+              <span class="skill-level">78% · جيد جداً</span>
+            </div>
+            <div class="progress-bar"><span style="width: 78%"></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== STATS COUNTER SECTION ==================== -->
+  <section class="stats-section" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+          <div class="stat-value"><span class="counter" data-target="3">0</span>+</div>
+          <div class="stat-label">سنوات شغف وبناء برمجيات</div>
+        </div>
+
+        <div class="stat-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="stat-icon"><i class="fas fa-laptop-code"></i></div>
+          <div class="stat-value"><span class="counter" id="counterProjects" data-target="15">0</span>+</div>
+          <div class="stat-label">مشاريع ومنصات رقمية</div>
+        </div>
+
+        <div class="stat-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-value"><span class="counter" data-target="10000">0</span>+</div>
+          <div class="stat-label">مستفيد من محتوى "فكرة مبرمج"</div>
+        </div>
+
+        <div class="stat-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="stat-icon"><i class="fas fa-award"></i></div>
+          <div class="stat-value"><span class="counter" id="counterCerts" data-target="6">0</span>+</div>
+          <div class="stat-label">شهادات وتكريمات أكاديمية</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECTS SECTION ==================== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">أعمالي ومنتجاتي التقنية</span>
+        <h2 class="heading">المشاريع <span>الرقمية المنجزة</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <!-- Project Filters -->
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">جميع المشاريع</button>
+        <button class="filter-btn" data-filter="platform">المنصات والتجارة</button>
+        <button class="filter-btn" data-filter="ai-data">الذكاء الاصطناعي والبيانات</button>
+        <button class="filter-btn" data-filter="mobile">تطبيقات الهاتف</button>
+        <button class="filter-btn" data-filter="web">تطوير الويب</button>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="projects-grid" id="homeProjectsGrid">
+
+        <!-- Project 1: Sinbad -->
+        <article class="project-card featured tilt-card" data-category="platform web mobile" data-id="sinbad">
+          <div class="card-glare"></div>
+          <div class="card-thumb">
+            <img src="images/project-1.png" alt="منصة سندباد" onerror="this.src='images/placeholder.jpg'">
+            <span class="category-tag">Marketplace &amp; Platform</span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta-line">
+              <span class="project-date"><i class="far fa-calendar-alt"></i> 2024 - 2025</span>
+              <span class="badge-featured"><i class="fas fa-star"></i> مشروع رئيسي</span>
+            </div>
+            <h3>سندباد — Sinbad Marketplace</h3>
+            <p>
+              منصة تجارة إلكترونية متعددة التجار متكاملة، تربط العملاء والتجار ومندوبي التوصيل،
+              مبنية بنظام Backend قوي بـ Laravel وتطبيق موبايل بـ Flutter مع لوحة تحكم وإدارة للمخزون والطلبات.
+            </p>
+            <div class="tech-tags">
+              <span>Laravel</span><span>Flutter</span><span>PHP</span><span>MySQL</span><span>REST API</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-sm btn-primary open-project-modal" data-target="sinbad">
+                <i class="fas fa-info-circle"></i> التفاصيل الكاملة
+              </button>
+              <a href="https://sinbadd.com" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+                <i class="fas fa-external-link-alt"></i> زيارة الموقع (sinbadd.com)
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Programmer Idea -->
+        <article class="project-card featured tilt-card" data-category="platform web" data-id="fikrat">
+          <div class="card-glare"></div>
+          <div class="card-thumb">
+            <img src="images/project-2.jpg" alt="منصة فكرة مبرمج" onerror="this.src='images/placeholder.jpg'">
+            <span class="category-tag">EdTech &amp; Community</span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta-line">
+              <span class="project-date"><i class="far fa-calendar-alt"></i> 2023 - مستمر</span>
+              <span class="badge-community"><i class="fas fa-users"></i> منصة مجتمعية</span>
+            </div>
+            <h3>فكرة مبرمج — Programmer Idea</h3>
+            <p>
+              منصة تعليمية ومجتمع تقني لتبسيط مفاهيم البرمجة وعلوم الحاسوب والذكاء الاصطناعي باللغة العربية،
+              تقدم محتوى نوعي، ودروس تطبيقية ومشاريع عملية استفاد منها آلاف الطلاب والمطورين.
+            </p>
+            <div class="tech-tags">
+              <span>EdTech</span><span>Programming</span><span>Arabic Content</span><span>Telegram</span><span>Community</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-sm btn-primary open-project-modal" data-target="fikrat">
+                <i class="fas fa-info-circle"></i> التفاصيل الكاملة
+              </button>
+              <a href="https://programmer-idea.tech" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+                <i class="fas fa-external-link-alt"></i> المنصة (programmer-idea.tech)
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Riyal Wallet -->
+        <article class="project-card featured tilt-card" data-category="mobile web" data-id="riyal">
+          <div class="card-glare"></div>
+          <div class="card-thumb">
+            <img src="images/project-3.png" alt="محفظة ريال الرقمية" onerror="this.src='images/placeholder.jpg'">
+            <span class="category-tag">FinTech &amp; Mobile</span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta-line">
+              <span class="project-date"><i class="far fa-calendar-alt"></i> 2024</span>
+              <span class="badge-featured"><i class="fas fa-shield-alt"></i> FinTech موثق</span>
+            </div>
+            <h3>محفظة ريال — Riyal Wallet</h3>
+            <p>
+              تطبيق وموقع محفظة مالية رقمية متطورة توفر حلول دفع وتحويل إلكتروني آمنة وعصرية تدعم مسح رموز QR والتحويل اللحظي مع تجربة مستخدم سلسة وأمان عالي للبيانات.
+            </p>
+            <div class="tech-tags">
+              <span>Flutter</span><span>Dart</span><span>FinTech</span><span>Security</span><span>RESTful API</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-sm btn-primary open-project-modal" data-target="riyal">
+                <i class="fas fa-info-circle"></i> التفاصيل الكاملة
+              </button>
+              <a href="https://rial.cash" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+                <i class="fas fa-external-link-alt"></i> الموقع الرسمي (rial.cash)
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: AI & Data Analytics -->
+        <article class="project-card tilt-card" data-category="ai-data" data-id="analytics">
+          <div class="card-glare"></div>
+          <div class="card-thumb">
+            <img src="images/project-4.png" alt="تحليل البيانات والذكاء الاصطناعي" onerror="this.src='images/placeholder.jpg'">
+            <span class="category-tag">Data Science &amp; AI</span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta-line">
+              <span class="project-date"><i class="far fa-calendar-alt"></i> 2024</span>
+            </div>
+            <h3>نظام تحليل البيانات والتنبؤ — Data Insights</h3>
+            <p>
+              مشروع متقدم في علم البيانات يقوم باستخراج وتنظيف وتحليل بيانات تجارية متعددة، مع تطبيق خوارزميات تعلم الآلة Machine Learning لبناء نماذج تنبؤية دقيقة للمبيعات وسلوك العملاء.
+            </p>
+            <div class="tech-tags">
+              <span>Python</span><span>pandas</span><span>NumPy</span><span>Scikit-Learn</span><span>Power BI</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-sm btn-primary open-project-modal" data-target="analytics">
+                <i class="fas fa-info-circle"></i> التفاصيل الكاملة
+              </button>
+              <a href="https://github.com/alshujaa" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+                <i class="fab fa-github"></i> كود المشروع
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: Smart Store -->
+        <article class="project-card tilt-card" data-category="mobile" data-id="store-app">
+          <div class="card-glare"></div>
+          <div class="card-thumb">
+            <img src="images/project-6.png" alt="تطبيق المتجر الذكي" onerror="this.src='images/placeholder.jpg'">
+            <span class="category-tag">Flutter Mobile App</span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta-line">
+              <span class="project-date"><i class="far fa-calendar-alt"></i> 2024</span>
+            </div>
+            <h3>تطبيق المتجر الذكي — Smart E-Store App</h3>
+            <p>
+              تطبيق تجارة إلكترونية متكامل بـ Flutter، يشمل تصفح المنتجات، سلة المشتريات، المفضلة، بوابات الدفع، وإشعارات الطلبات مع دعم كامل للغتين العربية والإنجليزية.
+            </p>
+            <div class="tech-tags">
+              <span>Flutter</span><span>Dart</span><span>State Management</span><span>REST API</span><span>UI/UX</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-sm btn-primary open-project-modal" data-target="aiagent">
+                <i class="fas fa-info-circle"></i> التفاصيل الكاملة
+              </button>
+              <a href="https://github.com/alshujaa" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+                <i class="fab fa-github"></i> كود المشروع
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Inventory Pro -->
+        <article class="project-card tilt-card" data-category="web" data-id="inventory">
+          <div class="card-glare"></div>
+          <div class="card-thumb">
+            <img src="images/about-img.png" alt="نظام إدارة المخازن" onerror="this.src='images/placeholder.jpg'">
+            <span class="category-tag">Web &amp; Cloud ERP</span>
+          </div>
+          <div class="card-body">
+            <div class="project-meta-line">
+              <span class="project-date"><i class="far fa-calendar-alt"></i> 2023</span>
+            </div>
+            <h3>نظام إدارة المخازن والمبيعات — Inventory Pro</h3>
+            <p>
+              منظومة ويب متكاملة لإدارة المستودعات، حركات الصادر والوارد، الفواتير الإلكترونية، وإصدار تقارير الجرد الدورية والأرباح مع أمان عالي لقواعد البيانات.
+            </p>
+            <div class="tech-tags">
+              <span>Laravel</span><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Bootstrap</span>
+            </div>
+            <div class="project-links">
+              <button class="btn btn-sm btn-primary open-project-modal" data-target="erp">
+                <i class="fas fa-info-circle"></i> التفاصيل الكاملة
+              </button>
+              <a href="https://github.com/alshujaa" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+                <i class="fab fa-github"></i> كود المشروع
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES SECTION ==================== -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">حلول هندسية وتقنية</span>
+        <h2 class="heading">الخدمات <span>التي أقدمها</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="service-icon"><i class="fas fa-brain"></i></div>
+          <h3>علوم البيانات والذكاء الاصطناعي</h3>
+          <p>تحليل البيانات الاستكشافي، معالجة وتنظيف مجموعات البيانات الكبيرة، بناء وتدريب نماذج التعلم الآلي، وتصميم لوحات تحكم تفاعلية عبر Power BI لدعم اتخاذ القرار.</p>
+        </div>
+
+        <div class="service-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>تطوير تطبيقات الموبايل (Flutter)</h3>
+          <p>بناء تطبيقات هواتف ذكية عصرية لنظامي Android و iOS باستخدام Flutter و Dart، مع التركيز على التصميم السلس، الأداء الفائق، والربط المحكم مع الـ APIs.</p>
+        </div>
+
+        <div class="service-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="service-icon"><i class="fab fa-laravel"></i></div>
+          <h3>تطوير الويب والأنظمة الخلفية (Laravel)</h3>
+          <p>هندسة أنظمة الويب والخوادم وقواعد البيانات، وبناء واجهات البرمجة RESTful APIs الآمنة والسريعة، مع تطبيق أفضل ممارسات الحماية وهندسة البرمجيات.</p>
+        </div>
+
+        <div class="service-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+          <h3>تصميم تجربة وواجهة المستخدم UI/UX</h3>
+          <p>تحويل الأفكار إلى مخططات ونماذج تفاعلية أنيقة تركز على سهولة الاستخدام وتوافقها مع المعايير العالمية لجاذبية التصميم وسرعة الاستجابة.</p>
+        </div>
+
+        <div class="service-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="service-icon"><i class="fas fa-database"></i></div>
+          <h3>تصميم وإدارة قواعد البيانات</h3>
+          <p>تصميم مخططات قواعد البيانات العلائقية (MySQL / PostgreSQL) وغير العلائقية (MongoDB)، وتحسين سرعة الاستعلامات والفهارس لتناسب الأنظمة الكبيرة.</p>
+        </div>
+
+        <div class="service-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+          <h3>الاستشارات التقنية وتطوير المنتجات</h3>
+          <p>مساعدة رواد الأعمال والشركات الناشئة في تحويل الأفكار إلى منتجات رقمية قابلة للنمو (MVPs)، واختيار البنية التقنية الأمثل لتحقيق النجاح والتوسع.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TIMELINE / JOURNEY SECTION ==================== -->
+  <section class="timeline" id="journey">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">المسيرة والمحطات</span>
+        <h2 class="heading">المسار <span>التعليمي والمهني</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <div class="journey-compact-grid" id="homeJourneyGrid">
+        <div class="journey-mini-card tilt-card" data-category="work">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-rocket"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">تطوير منصة سندباد ومحفظة ريال الرقمية</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2024 - 2025</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>Full-Stack &amp; Flutter Mobile Developer</span>
+            </div>
+            <p class="journey-mini-desc">المشاركة في هندسة المنصة متعددة التجار "سندباد" (Laravel &amp; Flutter) وتطوير تطبيق "محفظة ريال" للخدمات المالية الرقمية وتطبيق نماذج التنبؤ الذكية بالمبيعات.</p>
+          </div>
+        </div>
+
+        <div class="journey-mini-card tilt-card" data-category="learning">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-brain"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">التخصص في علوم البيانات والذكاء الاصطناعي التوليدي</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2023 - 2024</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>Data Science &amp; Machine Learning Enthusiast</span>
+            </div>
+            <p class="journey-mini-desc">إنجاز معسكرات وشهادات معتمدة في مكتبات بايثون (pandas, NumPy, Scikit-Learn)، وبناء لوحات المؤشرات بـ Power BI، ودراسة معمارية النماذج اللغوية الكبيرة LLMs.</p>
+          </div>
+        </div>
+
+        <div class="journey-mini-card tilt-card" data-category="community">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">تأسيس مبادرة "فكرة مبرمج" (Programmer Idea)</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2023 - مستمر</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>Founder &amp; Tech Lead</span>
+            </div>
+            <p class="journey-mini-desc">إطلاق قنوات ومنصة فكرة مبرمج لتعليم البرمجة وتبسيط العلوم التقنية باللغة العربية، وتقديم شروحات عملية في مسارات بايثون وفلاتر وتطوير الويب.</p>
+          </div>
+        </div>
+
+        <div class="journey-mini-card tilt-card" data-category="education">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">دراسة علوم الحاسوب وتقنية المعلومات — جامعة إب</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2021 - الآن</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>المستوى الرابع (بكالوريوس تقنية معلومات)</span>
+            </div>
+            <p class="journey-mini-desc">دراسة متعمقة في هياكل البيانات (Data Structures)، الخوارزميات، البرمجة كائنية التوجه (OOP بـ C++)، قواعد البيانات العلائقية، وهندسة البرمجيات مع التكريم الأكاديمي.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CERTIFICATES SECTION ==================== -->
+  <section class="certificates" id="certificates">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">السجل والاعتمادات</span>
+        <h2 class="heading">الشهادات <span>والجوائز الأكاديمية</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <div class="certs-grid" id="homeCertsGrid">
+        <div class="cert-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="cert-thumb open-cert-lightbox-trigger" data-id="cert-1">
+            <img src="images/project-1.png" alt="Python for Data Science">
+            <span class="cert-badge-date">2024</span>
+            <div class="cert-preview-overlay"><i class="fas fa-search-plus"></i> تكبير ومعاينة</div>
+          </div>
+          <div class="cert-body">
+            <h3>Python for Data Science, AI &amp; Development</h3>
+            <span class="cert-issuer"><i class="fas fa-university"></i> IBM / Coursera</span>
+            <p>شهادة احترافية معتمدة في برمجة Python المتقدمة، معالجة البيانات بمكتبات pandas و NumPy، واستدعاء نماذج الذكاء الاصطناعي.</p>
+            <div class="cert-footer">
+              <button class="btn btn-sm btn-primary open-cert-lightbox-trigger" data-id="cert-1"><i class="fas fa-eye"></i> معاينة الشهادة</button>
+              <a href="https://coursera.org" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fas fa-check-circle text-green"></i> التحقق الرسمي</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="cert-thumb open-cert-lightbox-trigger" data-id="cert-2">
+            <img src="images/project-2.jpg" alt="تكريم التميز الأكاديمي بجامعة إب">
+            <span class="cert-badge-date">2024</span>
+            <div class="cert-preview-overlay"><i class="fas fa-search-plus"></i> تكبير ومعاينة</div>
+          </div>
+          <div class="cert-body">
+            <h3>تكريم التميز الأكاديمي — كلية الحاسوب</h3>
+            <span class="cert-issuer"><i class="fas fa-university"></i> جامعة إب (Ibb University)</span>
+            <p>تكريم رسمي من رئاسة قسم علوم الحاسوب وتقنية المعلومات بجامعة إب تقديراً للتفوق الأكاديمي والمبادرات التقنية الطلابية.</p>
+            <div class="cert-footer">
+              <button class="btn btn-sm btn-primary open-cert-lightbox-trigger" data-id="cert-2"><i class="fas fa-eye"></i> معاينة الشهادة</button>
+              <span class="btn btn-sm btn-outline"><i class="fas fa-award text-gold"></i> معتمد رسمياً</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="cert-thumb open-cert-lightbox-trigger" data-id="cert-3">
+            <img src="images/project-4.png" alt="Machine Learning Models">
+            <span class="cert-badge-date">2024</span>
+            <div class="cert-preview-overlay"><i class="fas fa-search-plus"></i> تكبير ومعاينة</div>
+          </div>
+          <div class="cert-body">
+            <h3>Machine Learning Models &amp; Data Analytics</h3>
+            <span class="cert-issuer"><i class="fas fa-brain"></i> DeepLearning.AI</span>
+            <p>بناء وتدريب وتقييم نماذج التعلم الآلي الخطي والتصنيفي والتجميعي، وتطبيقها على مجموعات بيانات واقعية.</p>
+            <div class="cert-footer">
+              <button class="btn btn-sm btn-primary open-cert-lightbox-trigger" data-id="cert-3"><i class="fas fa-eye"></i> معاينة الشهادة</button>
+              <a href="https://coursera.org" target="_blank" rel="noopener" class="btn btn-sm btn-outline"><i class="fas fa-check-circle text-green"></i> التحقق الرسمي</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cert-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="cert-thumb open-cert-lightbox-trigger" data-id="cert-4">
+            <img src="images/project-3.png" alt="Power BI Data Analyst">
+            <span class="cert-badge-date">2023</span>
+            <div class="cert-preview-overlay"><i class="fas fa-search-plus"></i> تكبير ومعاينة</div>
+          </div>
+          <div class="cert-body">
+            <h3>Power BI Data Analyst Associate</h3>
+            <span class="cert-issuer"><i class="fas fa-chart-line"></i> Microsoft Certified Partner</span>
+            <p>إتقان نمذجة البيانات، دوال DAX المتقدمة، وبناء لوحات المؤشرات التفاعلية وربط مصادر البيانات المتعددة.</p>
+            <div class="cert-footer">
+              <button class="btn btn-sm btn-primary open-cert-lightbox-trigger" data-id="cert-4"><i class="fas fa-eye"></i> معاينة الشهادة</button>
+              <span class="btn btn-sm btn-outline"><i class="fas fa-certificate text-gold"></i> معتمد</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS SECTION ==================== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">شهادات أعتز بها</span>
+        <h2 class="heading">آراء العملاء <span>والزملاء</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="rating-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="quote-text">
+            "عبدالرحمن مبرمج استثنائي يتمتع بعقلية هندسية منظمة وشغف غير عادي بالتفاصيل، ساهم بشكل ملموس في بناء المنصة وتطوير واجهات التطبيق بأعلى جودة واحترافية."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar"><i class="fas fa-user-tie"></i></div>
+            <div>
+              <strong>م. أحمد العريقي</strong>
+              <span>مدير مشروع تقني · شريك تجاري</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="rating-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="quote-text">
+            "محتوى فكرة مبرمج الذي يقدمه عبدالرحمن كان له أثر كبير في فهمي لعلوم البيانات وبايثون. طريقته في التبسيط والعمق البرمجي جعلت المفاهيم المعقدة سهلة وممتعة."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div>
+              <strong>ياسر الحميري</strong>
+              <span>طالب علوم حاسوب · عضو مجتمع فكرة مبرمج</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="rating-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="quote-text">
+            "التعامل مع عبدالرحمن في مشاريع الـ Flutter و Laravel يعطيك اطمئناناً كاملاً. التزام بالمواعيد، كود نظيف وقابل للتطوير، وفهم عميق لاحتياجات العميل الحقيقية."
+          </p>
+          <div class="reviewer-meta">
+            <div class="reviewer-avatar"><i class="fas fa-laptop-code"></i></div>
+            <div>
+              <strong>م. ساهر قائد</strong>
+              <span>مهندس برمجيات وزميل دراسة</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BLOG SECTION (WREN SUITE IN SITE THEME) ==================== -->
+  <section class="blog" id="blog">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">المعرفة والتدوين البرمجي</span>
+        <h2 class="heading">المدونة <span>والمقالات التقنية</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <div class="blog-modules-wrapper">
+
+        <!-- MODULE 1: HOT TOPICS SLIDER -->
+        <div class="topics-slider-card tilt-card">
+          <div class="topics-slider-info">
+            <div class="blog-module-header">
+              <span class="module-badge">
+                <i class="fas fa-fire text-accent"></i> المواضيع الرائجة
+              </span>
+              <h3>المواضيع والمسارات <span>Hot Topics</span></h3>
+              <p>استكشف أحدث الشروحات والمقالات والمسارات المتخصصة في الذكاء الاصطناعي، بايثون، فلاتر، وتطوير الأنظمة...</p>
+            </div>
+
+            <div class="slider-nav-btns">
+              <button class="slider-arrow-btn" id="topicSliderPrev" aria-label="السابق" title="المسار السابق">
+                <i class="fas fa-arrow-right"></i>
+              </button>
+              <button class="slider-arrow-btn" id="topicSliderNext" aria-label="التالي" title="المسار التالي">
+                <i class="fas fa-arrow-left"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="topics-slider-viewport">
+            <div class="topics-slider-track" id="topicSliderTrack">
+              <div class="topic-slide-item" data-topic-filter="ذكاء">
+                <div class="topic-mini-card">
+                  <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="الذكاء الاصطناعي وتعلم الآلة">
+                  <div class="topic-mini-card-overlay">
+                    <h4>الذكاء الاصطناعي وتعلم الآلة</h4>
+                    <span><i class="fas fa-book-open"></i> 24 مقالاً وشرحاً</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="topic-slide-item" data-topic-filter="بايثون">
+                <div class="topic-mini-card">
+                  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="بايثون وهندسة البيانات">
+                  <div class="topic-mini-card-overlay">
+                    <h4>بايثون وهندسة البيانات</h4>
+                    <span><i class="fas fa-book-open"></i> 38 مقالاً وشرحاً</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="topic-slide-item" data-topic-filter="flutter">
+                <div class="topic-mini-card">
+                  <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="تطوير تطبيقات الموبايل بـ Flutter">
+                  <div class="topic-mini-card-overlay">
+                    <h4>تطوير تطبيقات الموبايل بـ Flutter</h4>
+                    <span><i class="fas fa-book-open"></i> 19 مقالاً وشرحاً</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="topic-slide-item" data-topic-filter="ويب">
+                <div class="topic-mini-card">
+                  <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="تطوير الويب والـ Full-Stack">
+                  <div class="topic-mini-card-overlay">
+                    <h4>تطوير الويب والـ Full-Stack</h4>
+                    <span><i class="fas fa-book-open"></i> 27 مقالاً وشرحاً</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="topic-slide-item" data-topic-filter="معمارية">
+                <div class="topic-mini-card">
+                  <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="معمارية البرمجيات والخوارزميات">
+                  <div class="topic-mini-card-overlay">
+                    <h4>معمارية البرمجيات والخوارزميات</h4>
+                    <span><i class="fas fa-book-open"></i> 16 مقالاً وشرحاً</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="topic-slide-item" data-topic-filter="ريادة">
+                <div class="topic-mini-card">
+                  <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="ريادة الأعمال والمنتجات الرقمية">
+                  <div class="topic-mini-card-overlay">
+                    <h4>ريادة الأعمال والمنتجات الرقمية</h4>
+                    <span><i class="fas fa-book-open"></i> 12 مقالاً وشرحاً</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODULE 2: EDITOR'S PICK -->
+        <div class="featured-module">
+          <div class="blog-module-header">
+            <span class="module-badge"><i class="fas fa-star text-accent"></i> مختارات المحرر</span>
+            <h3>مختارات المحرر <span>Editor's Pick</span></h3>
+            <p>أهم وأشمل المقالات التقنية والمعمارية المختارة بعناية للمهتمين بعلوم البيانات والبرمجة الاحترافية.</p>
+          </div>
+
+          <div class="featured-posts-grid" id="homeFeaturedPosts">
+            <!-- Rendered dynamically from DataStore -->
+          </div>
+        </div>
+
+        <!-- MODULE 3: POPULAR TAGS -->
+        <div class="tags-module">
+          <div class="blog-module-header">
+            <span class="module-badge"><i class="fas fa-tags text-accent"></i> تصنيفات ووسوم سريعة</span>
+            <h3>الوسوم الأكثر تداولاً <span>Popular Tags</span></h3>
+            <p>انقر على أي وسم لفلترة المقالات والشروحات ذات الصلة فورياً دون إعادة تحميل الصفحة:</p>
+          </div>
+
+          <div class="popular-tags-container" id="homePopularTags">
+            <button class="blog-tag-pill active" data-tag="all">
+              <i class="fas fa-layer-group"></i> جميع المقالات
+            </button>
+            <button class="blog-tag-pill" data-tag="ذكاء">
+              <i class="fas fa-brain"></i> ذكاء اصطناعي
+            </button>
+            <button class="blog-tag-pill" data-tag="بايثون">
+              <i class="fab fa-python"></i> بايثون Python
+            </button>
+            <button class="blog-tag-pill" data-tag="بيانات">
+              <i class="fas fa-database"></i> علم البيانات
+            </button>
+            <button class="blog-tag-pill" data-tag="flutter">
+              <i class="fas fa-mobile-alt"></i> فلاتر Flutter
+            </button>
+            <button class="blog-tag-pill" data-tag="تعلم">
+              <i class="fas fa-robot"></i> تعلم الآلة ML
+            </button>
+            <button class="blog-tag-pill" data-tag="معمارية">
+              <i class="fas fa-sitemap"></i> معمارية النظم
+            </button>
+            <button class="blog-tag-pill" data-tag="سندباد">
+              <i class="fas fa-store"></i> منصة سندباد
+            </button>
+            <button class="blog-tag-pill" data-tag="ريال">
+              <i class="fas fa-wallet"></i> محفظة ريال
+            </button>
+            <button class="blog-tag-pill" data-tag="برمجيات">
+              <i class="fas fa-laptop-code"></i> هندسة البرمجيات
+            </button>
+            <button class="blog-tag-pill" data-tag="خوارزميات">
+              <i class="fas fa-project-diagram"></i> الخوارزميات
+            </button>
+            <button class="blog-tag-pill" data-tag="ريادة">
+              <i class="fas fa-chart-line"></i> المنتجات الرقمية
+            </button>
+          </div>
+        </div>
+
+        <!-- MODULE 4: RECENT POSTS & SIDEBAR -->
+        <div class="recent-module">
+          <div class="blog-module-header">
+            <span class="module-badge"><i class="fas fa-newspaper text-accent"></i> المحتوى المتجدد</span>
+            <h3>أحدث المقالات التقنية <span>Recent Posts</span></h3>
+            <p>شروحات عملية ومقالات مستمرة تثري المحتوى العربي البرمجي</p>
+          </div>
+
+          <div class="recent-layout-grid">
+            <!-- Main Column -->
+            <div class="recent-posts-list" id="homeRecentPosts">
+              <!-- Rendered dynamically from DataStore -->
+            </div>
+
+            <!-- Aside Column -->
+            <div class="blog-aside-widgets">
+              <!-- Widget 1: Popular Posts -->
+              <div class="blog-widget-card tilt-card">
+                <h4 class="blog-widget-title"><i class="fas fa-fire text-accent"></i> الأكثر قراءة وتفاعلاً</h4>
+                <div class="popular-aside-list" id="homePopularAside">
+                  <!-- Rendered dynamically from DataStore -->
+                </div>
+              </div>
+
+              <!-- Widget 2: Quotes / Insights -->
+              <div class="blog-widget-card tilt-card">
+                <h4 class="blog-widget-title"><i class="fas fa-quote-right text-accent"></i> إضاءات وخبرات ملهمة</h4>
+                <div class="quote-aside-box">
+                  <p>"البساطة والتسميات المعبرة والالتزام بالمبادئ المعمارية النظيفة هي ما يصنع المهندس المحترف، وليس تعقيد الشفرات بلا طائل."</p>
+                  <div class="quote-author">
+                    <img src="assets/cvs/profile-hero.png" alt="عبدالرحمن الشجاع" onerror="this.src='assets/about-img.png'">
+                    <span>م. عبدالرحمن عادل الشجاع</span>
+                  </div>
+                </div>
+                <div class="quote-aside-box">
+                  <p>"في مسار الذكاء الاصطناعي، فهم الرياضيات وراء الخوارزميات يمنحك البصيرة في معالجة المشاكل المستعصية التي تعجز الأدوات الجاهزة عن حلها."</p>
+                  <div class="quote-author">
+                    <img src="assets/cvs/profile-hero.png" alt="فكرة مبرمج" onerror="this.src='assets/about-img.png'">
+                    <span>مجتمع فكرة مبرمج</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Widget 3: Official Ecosystem -->
+              <div class="blog-widget-card tilt-card">
+                <h4 class="blog-widget-title"><i class="fas fa-globe text-accent"></i> المنصات والقنوات الرسمية</h4>
+                <div class="ecosystem-aside-grid">
+                  <a href="https://sinbadd.com" target="_blank" rel="noopener" class="ecosystem-aside-link" title="منصة سندباد">
+                    <img src="assets/images/project-1.png" alt="سندباد">
+                  </a>
+                  <a href="https://rial.cash" target="_blank" rel="noopener" class="ecosystem-aside-link" title="محفظة ريال">
+                    <img src="assets/images/project-2.jpg" alt="محفظة ريال">
+                  </a>
+                  <a href="https://programmer-idea.tech" target="_blank" rel="noopener" class="ecosystem-aside-link" title="أكاديمية فكرة مبرمج">
+                    <img src="assets/images/project-3.png" alt="أكاديمية فكرة مبرمج">
+                  </a>
+                  <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" class="ecosystem-aside-link" title="تيليجرام">
+                    <img src="assets/images/project-4.png" alt="تيليجرام">
+                  </a>
+                  <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener" class="ecosystem-aside-link" title="يوتيوب">
+                    <img src="assets/images/project-6.png" alt="يوتيوب">
+                  </a>
+                  <a href="https://wa.me/967773853853" target="_blank" rel="noopener" class="ecosystem-aside-link" title="واتساب">
+                    <img src="assets/about-img.png" alt="واتساب">
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT SECTION ==================== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <span class="subtitle">ابدأ مشروعك الآن</span>
+        <h2 class="heading">تواصل <span>معي مباشرة</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <!-- Contact Info Cards -->
+      <div class="contact-cards-grid">
+        <a href="https://wa.me/967773853853" target="_blank" rel="noopener" class="contact-info-card tilt-card" style="--accent: #25D366;">
+          <div class="card-glare"></div>
+          <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+          <h3>واتساب مباشر (1)</h3>
+          <span class="card-value" dir="ltr">+967 773 853 853</span>
+          <p>مراسلة فورية لمناقشة المشاريع والعمل الحر</p>
+        </a>
+
+        <a href="https://wa.me/967777580845" target="_blank" rel="noopener" class="contact-info-card tilt-card" style="--accent: #128C7E;">
+          <div class="card-glare"></div>
+          <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+          <h3>واتساب مباشر (2)</h3>
+          <span class="card-value" dir="ltr">+967 777 580 845</span>
+          <p>خط التواصل المباشر الثاني</p>
+        </a>
+
+        <a href="https://t.me/Alshuja_ai" target="_blank" rel="noopener" class="contact-info-card tilt-card" style="--accent: #0088cc;">
+          <div class="card-glare"></div>
+          <div class="card-icon"><i class="fab fa-telegram-plane"></i></div>
+          <h3>تيليجرام شخصي</h3>
+          <span class="card-value" dir="ltr">@Alshuja_ai</span>
+          <p>للمحادثات التقنية ومناقشات البرمجة</p>
+        </a>
+
+        <a href="https://www.instagram.com/alshujaa" target="_blank" rel="noopener" class="contact-info-card tilt-card" style="--accent: #E4405F;">
+          <div class="card-glare"></div>
+          <div class="card-icon"><i class="fab fa-instagram"></i></div>
+          <h3>انستغرام شخصي</h3>
+          <span class="card-value" dir="ltr">@alshujaa</span>
+          <p>متابعة التحديثات والأنشطة اليومية</p>
+        </a>
+      </div>
+
+      <!-- Contact Layout Grid (Form + Channels) -->
+      <div class="contact-layout-grid" style="margin-top: 4rem;">
+
+        <!-- Contact Form -->
+        <div class="contact-form-card tilt-card">
+          <div class="card-glare"></div>
+          <div class="form-header">
+            <h3><i class="fas fa-paper-plane text-accent"></i> أرسل رسالتك مباشرة</h3>
+            <p>املأ النموذج أدناه وسيقوم عبدالرحمن بالرد عليك في أسرع وقت، مع خيار فتح المحادثة على الواتساب فوراً.</p>
+          </div>
+
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">الاسم الكريم *</label>
+              <input type="text" id="name" required placeholder="أدخل اسمك الكريم">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="email">البريد الإلكتروني *</label>
+                <input type="email" id="email" required placeholder="name@example.com">
+              </div>
+              <div class="form-group flex-1">
+                <label for="phone">رقم الهاتف / الواتساب</label>
+                <input type="tel" id="phone" placeholder="+967 ...">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="service">نوع المشروع أو الخدمة المطلوبة *</label>
+              <select id="service" required>
+                <option value="data-ai">تحليل بيانات ونماذج ذكاء اصطناعي (Data &amp; AI)</option>
+                <option value="mobile">تطوير تطبيق هاتف ذكي (Flutter)</option>
+                <option value="web">تطوير منصة أو موقع ويب (Laravel / Full-Stack)</option>
+                <option value="consulting">استشارة تقنية أو عمل حر</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">تفاصيل رسالتك أو فكرة مشروعك *</label>
+              <textarea id="message" rows="4" required placeholder="اشرح باختصار متطلبات مشروعك، الميزانية المتوقعة، أو أي تفاصيل ترغب بمشاركتها..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> إرسال الرسالة الآن</button>
+
+            <div id="formFeedback" class="form-feedback"></div>
+          </form>
+        </div>
+
+        <!-- Official Ecosystem & Channels -->
+        <div class="official-channels-card tilt-card">
+          <div class="card-glare"></div>
+          <h3><i class="fas fa-globe text-accent"></i> المنصات والقنوات الرسمية</h3>
+          <p>قنوات مبادرة "فكرة مبرمج" ومنصات المنتجات الرقمية:</p>
+
+          <div class="channels-list">
+            <a href="https://sinbadd.com" target="_blank" rel="noopener" class="channel-link sinbad">
+              <div class="channel-icon"><i class="fas fa-store"></i></div>
+              <div class="channel-info">
+                <strong>منصة سندباد — Sinbad Marketplace</strong>
+                <span>sinbadd.com · التجارة الإلكترونية والمنصات</span>
+              </div>
+              <i class="fas fa-external-link-alt channel-arrow"></i>
+            </a>
+
+            <a href="https://programmer-idea.tech" target="_blank" rel="noopener" class="channel-link fikrat">
+              <div class="channel-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div class="channel-info">
+                <strong>أكاديمية ومنصة فكرة مبرمج</strong>
+                <span>programmer-idea.tech · التعليم البرمجي العربي</span>
+              </div>
+              <i class="fas fa-external-link-alt channel-arrow"></i>
+            </a>
+
+            <a href="https://rial.cash" target="_blank" rel="noopener" class="channel-link rial">
+              <div class="channel-icon"><i class="fas fa-wallet"></i></div>
+              <div class="channel-info">
+                <strong>محفظة ريال الرقمية — Riyal Wallet</strong>
+                <span>rial.cash · الدفع والتحويل الإلكتروني</span>
+              </div>
+              <i class="fas fa-external-link-alt channel-arrow"></i>
+            </a>
+
+            <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" class="channel-link telegram">
+              <div class="channel-icon"><i class="fab fa-telegram-plane"></i></div>
+              <div class="channel-info">
+                <strong>قناة فكرة مبرمج على تيليجرام</strong>
+                <span>@Programmer_Idea · شروحات ومقاطع برمجية</span>
+              </div>
+              <i class="fas fa-external-link-alt channel-arrow"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener" class="channel-link youtube">
+              <div class="channel-icon"><i class="fab fa-youtube"></i></div>
+              <div class="channel-info">
+                <strong>قناة فكرة مبرمج على يوتيوب</strong>
+                <span>@Programmer_idea · دروس تطبيقية ومشاريع</span>
+              </div>
+              <i class="fas fa-external-link-alt channel-arrow"></i>
+            </a>
+
+            <a href="https://www.facebook.com/programmerIdea.com.ye?mibextid=ZbWKwL" target="_blank" rel="noopener" class="channel-link facebook">
+              <div class="channel-icon"><i class="fab fa-facebook-f"></i></div>
+              <div class="channel-info">
+                <strong>صفحة فكرة مبرمج على فيسبوك</strong>
+                <span>مجتمع فكرة مبرمج ومشاركات تقنية</span>
+              </div>
+              <i class="fas fa-external-link-alt channel-arrow"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FLOATING ACTION BUTTONS (FABs) ==================== -->
+  <div class="floating-fabs">
+    <a href="https://wa.me/967773853853?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3.%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B1%D8%AD%D9%85%D9%86%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D9%85%D9%86%D8%A7%D9%82%D8%B4%D8%A9%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%AA%D9%82%D9%86%D9%8A" target="_blank" rel="noopener" class="fab-btn fab-wa" title="محادثة واتساب مباشرة">
+      <i class="fab fa-whatsapp"></i>
+      <span class="fab-tooltip">تواصل واتساب</span>
+    </a>
+
+    <button id="openAiChatBtn" class="fab-btn fab-ai" title="المساعد الذكي (AI Assistant)">
+      <i class="fas fa-robot"></i>
+      <span class="fab-badge">AI</span>
+      <span class="fab-tooltip">المساعد الذكي</span>
+    </button>
+
+    <button id="scrollTopBtn" class="fab-btn fab-top" title="العودة للأعلى">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>
+
+  <!-- ==================== SMART AI ASSISTANT CHATBOT ==================== -->
+  <div id="aiChatWindow" class="ai-assistant-window">
+    <div class="ai-chat-header">
+      <div class="ai-profile">
+        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+        <div class="ai-meta">
+          <strong>مساعد عبدالرحمن الذكي</strong>
+          <span><span class="pulse-dot"></span> متصل وجاهز للرد</span>
+        </div>
+      </div>
+      <button id="closeAiChatBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="ai-chat-body" id="aiChatBody">
+      <div class="ai-msg bot">
+        <p>مرحباً بك! أنا المساعد الذكي الخاص بـ <strong>عبدالرحمن عادل الشجاع</strong>. يمكنك سؤالي عن مشاريعه (سندباد، فكرة مبرمج، محفظة ريال)، مهاراته في بايثون وفلاتر، أو طلب استشارة تقنية.</p>
+        <span class="msg-time">الآن</span>
+      </div>
+    </div>
+
+    <div class="ai-suggestions" id="aiSuggestions">
+      <button class="chip" data-q="ما هو مشروع سندباد؟">مشروع سندباد؟</button>
+      <button class="chip" data-q="ما هي محفظة ريال؟">محفظة ريال؟</button>
+      <button class="chip" data-q="ما هي مهارات بايثون والذكاء الاصطناعي؟">مهارات الـ AI؟</button>
+      <button class="chip" data-q="كيف أتواصل مع عبدالرحمن؟">طرق التواصل؟</button>
+    </div>
+
+    <div class="ai-chat-footer">
+      <input type="text" id="aiUserInput" placeholder="اكتب سؤالك هنا..." autocomplete="off">
+      <button id="sendAiBtn" aria-label="إرسال"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- ==================== PROJECT DETAILS MODAL ==================== -->
+  <div id="projectModal" class="custom-modal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-container">
+      <button class="modal-close" id="closeProjectModal" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+      <div class="modal-content" id="modalContent">
+        <!-- Content will be injected dynamically via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CERTIFICATE LIGHTBOX MODAL ==================== -->
+  <div id="certLightboxModal" class="custom-modal">
+    <div class="modal-overlay" id="certModalOverlay"></div>
+    <div class="modal-container cert-modal-container">
+      <button class="modal-close" id="closeCertLightboxBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+      <div class="modal-content" id="certLightboxContent">
+        <!-- Content will be injected dynamically via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ARTICLE READER MODAL ==================== -->
+  <div id="articleModal" class="custom-modal">
+    <div class="modal-overlay" id="articleModalOverlay"></div>
+    <div class="modal-container">
+      <button class="modal-close" id="closeArticleModal" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+      <div class="modal-content" id="articleModalContent">
+        <!-- Content will be injected dynamically via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h2>عبدالرحمن <span>.الشجاع</span></h2>
+        <p>طالب علوم حاسوب وتقنية معلومات بجامعة إب · مطور برمجيات ومؤسس فكرة مبرمج.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/967773853853" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://t.me/Alshuja_ai" target="_blank" rel="noopener"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener"><i class="fas fa-bullhorn"></i></a>
+          <a href="https://www.instagram.com/alshujaa" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/programmerIdea.com.ye?mibextid=ZbWKwL" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.tiktok.com/@programmer_idea?_t=ZS-8t1xmOmygNj&_r=1" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-copy">
+        <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> عبدالرحمن عادل الشجاع — مصمم ومطور بحرفية وعناية فائقة.</p>
+        <div class="footer-links">
+          <a href="#home">الرئيسية</a> ·
+          <a href="#about">عني</a> ·
+          <a href="#skills">المهارات</a> ·
+          <a href="#projects">المشاريع</a> ·
+          <a href="#certificates">الشهادات</a> ·
+          <a href="#blog">المدونة</a> ·
+          <a href="programmer-idea.html">فكرة مبرمج</a> ·
+          <a href="#contact">تواصل معي</a> ·
+          <a href="admin.html">لوحة التحكم ⚙️</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 3D & Animation Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.54/build/spline-viewer.js"></script>
+
+  <!-- jQuery & Custom Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="data-store.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

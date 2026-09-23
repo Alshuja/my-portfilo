@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم والإدارة | عبدالرحمن عادل الشجاع</title>
+  
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- ==================== LOGIN OVERLAY ==================== -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="brand-icon"><i class="fas fa-shield-alt"></i></span>
+        <h2>لوحة إدارة الموقع الشخصي</h2>
+        <p>مرحباً بك يا مهندس عبدالرحمن. أدخل رمز الدخول للمتابعة</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="adminPasscode"><i class="fas fa-lock"></i> رمز الدخول السري (Passcode):</label>
+          <input type="password" id="adminPasscode" placeholder="أدخل كلمة المرور..." required autocomplete="current-password">
+        </div>
+        <div class="login-hint">الرمز الافتراضي: <code>alshujaa2026</code></div>
+        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول للوحة الإدارة</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN DASHBOARD ==================== -->
+  <div id="adminDashboard" class="admin-dashboard" style="display: none;">
+    
+    <!-- Top Bar Navigation -->
+    <header class="admin-header">
+      <div class="admin-brand">
+        <span class="badge-tag"><i class="fas fa-terminal"></i> لوحة التحكم</span>
+        <h1>عبدالرحمن <span>.الشجاع</span></h1>
+      </div>
+
+      <div class="admin-actions">
+        <button id="adminThemeToggler" class="icon-btn" aria-label="تغيير المظهر" title="تبديل الوضع الليلي / النهاري">
+          <i class="fas fa-moon"></i>
+        </button>
+        <a href="index.html" target="_blank" class="btn btn-outline" title="معاينة الموقع الرئيسي"><i class="fas fa-external-link-alt"></i> الموقع الرئيسي</a>
+        <a href="blog.html" target="_blank" class="btn btn-outline" title="معاينة صفحة المدونة"><i class="fas fa-newspaper"></i> المدونة</a>
+        <a href="programmer-idea.html" target="_blank" class="btn btn-outline" title="معاينة صفحة فكرة مبرمج"><i class="fas fa-graduation-cap"></i> فكرة مبرمج</a>
+        <button id="exportDataBtn" class="btn btn-subtle" title="تصدير نسخة احتياطية"><i class="fas fa-file-download"></i> تصدير (JSON)</button>
+        <label for="importFileInput" class="btn btn-subtle file-label" title="استيراد نسخة احتياطية">
+          <i class="fas fa-file-upload"></i> استيراد
+          <input type="file" id="importFileInput" accept=".json" style="display: none;">
+        </label>
+        <button id="logoutBtn" class="btn btn-danger-outline" title="تسجيل الخروج"><i class="fas fa-sign-out-alt"></i> خروج</button>
+      </div>
+    </header>
+
+    <main class="admin-content container">
+
+      <!-- Stats Overview Row -->
+      <section class="stats-overview">
+        <div class="stat-box">
+          <div class="stat-icon icon-projects"><i class="fas fa-laptop-code"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" id="statsProjectsCount">0</span>
+            <span class="stat-title">المشاريع المسجلة</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-icon icon-certs"><i class="fas fa-award"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" id="statsCertsCount">0</span>
+            <span class="stat-title">الشهادات والجوائز</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-icon icon-skills"><i class="fas fa-code"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" id="statsSkillsCount">0</span>
+            <span class="stat-title">المهارات التقنية</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-icon icon-journey"><i class="fas fa-route"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" id="statsJourneyCount">0</span>
+            <span class="stat-title">محطات المسار</span>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-icon icon-articles"><i class="fas fa-newspaper"></i></div>
+          <div class="stat-info">
+            <span class="stat-number" id="statsArticlesCount">0</span>
+            <span class="stat-title">المقالات والتدوين</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Admin Tabs Navigation -->
+      <div class="admin-tabs">
+        <button class="tab-link active" data-tab="tab-certs"><i class="fas fa-graduation-cap"></i> إدارة الشهادات والجوائز</button>
+        <button class="tab-link" data-tab="tab-projects"><i class="fas fa-folder-open"></i> إدارة المشاريع والأعمال</button>
+        <button class="tab-link" data-tab="tab-skills"><i class="fas fa-tools"></i> إدارة المهارات والتخصصات</button>
+        <button class="tab-link" data-tab="tab-journey"><i class="fas fa-route"></i> إدارة المسار والمحطات</button>
+        <button class="tab-link" data-tab="tab-articles"><i class="fas fa-newspaper"></i> إدارة المدونة والمقالات</button>
+      </div>
+
+      <!-- ==================== TAB 1: CERTIFICATES ==================== -->
+      <div id="tab-certs" class="tab-pane active">
+        <div class="pane-header">
+          <div>
+            <h2>الشهادات والجوائز الأكاديمية والمهنية</h2>
+            <p>أضف شهاداتك الجديدة أو عدّل القائمة الحالية، وستظهر فوراً في صفحة الشهادات.</p>
+          </div>
+          <button id="openAddCertModalBtn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> إضافة شهادة جديدة</button>
+        </div>
+
+        <div class="items-grid" id="certsListContainer">
+          <!-- Rendered dynamically by admin.js -->
+        </div>
+      </div>
+
+      <!-- ==================== TAB 2: PROJECTS ==================== -->
+      <div id="tab-projects" class="tab-pane">
+        <div class="pane-header">
+          <div>
+            <h2>المشاريع والأعمال البرمجية</h2>
+            <p>تحكم بمشاريعك (سندباد، فكرة مبرمج، محفظة ريال، والمشاريع الجديدة مستقبلاً).</p>
+          </div>
+          <button id="openAddProjectModalBtn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> إضافة مشروع جديد</button>
+        </div>
+
+        <div class="items-grid" id="projectsListContainer">
+          <!-- Rendered dynamically by admin.js -->
+        </div>
+      </div>
+
+      <!-- ==================== TAB 3: SKILLS ==================== -->
+      <div id="tab-skills" class="tab-pane">
+        <div class="pane-header">
+          <div>
+            <h2>المهارات والتقنيات البرمجية</h2>
+            <p>أضف مهارات جديدة تكتسبها وحدد مستواها ولونها النيوني لتظهر في شاشات المهارات.</p>
+          </div>
+          <button id="openAddSkillModalBtn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> إضافة مهارة جديدة</button>
+        </div>
+
+        <div class="skills-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>اسم المهارة</th>
+                <th>التصنيف</th>
+                <th>مستوى الإتقان</th>
+                <th>اللون النيوني</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="skillsListContainer">
+              <!-- Rendered dynamically by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 4: JOURNEY ==================== -->
+      <div id="tab-journey" class="tab-pane">
+        <div class="pane-header">
+          <div>
+            <h2>المسار التعليمي والمهني والمحطات</h2>
+            <p>أضف أو عدّل محطات مسيرتك الأكاديمية والمهنية لتظهر فوراً بتصميم مصغر وأنيق في الموقع.</p>
+          </div>
+          <button id="openAddJourneyModalBtn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> إضافة محطة جديدة</button>
+        </div>
+
+        <div class="items-grid" id="journeyListContainer">
+          <!-- Rendered dynamically by admin.js -->
+        </div>
+      </div>
+
+      <!-- ==================== TAB 5: ARTICLES ==================== -->
+      <div id="tab-articles" class="tab-pane">
+        <div class="pane-header">
+          <div>
+            <h2>المدونة والمقالات التقنية</h2>
+            <p>أضف مقالات جديدة أو عدّل المقالات الحالية لتظهر فوراً في قسم المدونة بالموقع وصفحة المدونة المستقلة.</p>
+          </div>
+          <button id="openAddArticleModalBtn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> كتابة مقال جديد</button>
+        </div>
+
+        <div class="items-grid" id="articlesListContainer">
+          <!-- Rendered dynamically by admin.js -->
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ==================== MODAL: ADD / EDIT CERTIFICATE ==================== -->
+  <div id="certModal" class="admin-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="certModalTitle"><i class="fas fa-award"></i> إضافة شهادة جديدة</h3>
+        <button class="modal-close-btn" data-close="certModal"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="certForm">
+        <input type="hidden" id="certId">
+        
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="certTitle">عنوان الشهادة أو التكريم *</label>
+            <input type="text" id="certTitle" required placeholder="مثال: Machine Learning Specialization">
+          </div>
+          <div class="form-group flex-1">
+            <label for="certDate">سنة الإنجاز / التاريخ *</label>
+            <input type="text" id="certDate" required placeholder="مثال: 2024">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="certIssuer">الجهة المانحة *</label>
+            <input type="text" id="certIssuer" required placeholder="مثال: جامعة إب / DeepLearning.AI / Coursera">
+          </div>
+          <div class="form-group flex-1">
+            <label for="certCategory">التصنيف *</label>
+            <select id="certCategory" required>
+              <option value="data-ai">علوم البيانات والذكاء الاصطناعي</option>
+              <option value="academic">التكريمات الأكاديمية والجامعية</option>
+              <option value="mobile">تطبيقات الهواتف الذكية</option>
+              <option value="web">تطوير الويب والخوادم</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label-bold"><i class="fas fa-image text-accent"></i> صورة الشهادة أو التكريم *</label>
+          <div class="drop-zone" id="certDropZone">
+            <input type="file" id="certFileInput" accept="image/*" class="drop-zone-input">
+            <div class="drop-zone-prompt" id="certDropPrompt">
+              <div class="drop-zone-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <h4>اسحب وأفلت صورة الشهادة هنا أو <span>انقر للاختيار من جهازك</span></h4>
+              <p>يدعم JPG, PNG, WebP (يتم ضغط الصورة تلقائياً لسرعة التحميل وتوفير التخزين)</p>
+            </div>
+            <div class="upload-preview-card" id="certUploadPreview" style="display: none;">
+              <img id="certPreviewImg" src="" alt="معاينة الشهادة">
+              <div class="upload-file-meta">
+                <strong id="certFileName">certificate.png</strong>
+                <span id="certFileSize">محسنة ومضغوطة</span>
+              </div>
+              <button type="button" class="btn-remove-upload" id="removeCertUploadBtn" title="إزالة الصورة"><i class="fas fa-trash-alt"></i> إزالة</button>
+            </div>
+          </div>
+          <input type="hidden" id="certImage">
+          <div class="url-fallback-toggle">
+            <button type="button" class="toggle-link" id="toggleCertUrlInput"><i class="fas fa-link"></i> أو أدخل رابط صورة خارجي يدوي</button>
+            <div id="certUrlInputWrapper" style="display: none; margin-top: 0.8rem;">
+              <input type="text" id="certImageUrlManual" placeholder="https://... أو images/project-1.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="certCredentialUrl">رابط التحقق الرسمي من الشهادة (اختياري)</label>
+          <input type="url" id="certCredentialUrl" placeholder="https://coursera.org/verify/...">
+        </div>
+
+        <div class="form-group">
+          <label for="certDescription">نبذة مختصرة عن مخرجات ومحتوى الشهادة</label>
+          <textarea id="certDescription" rows="3" placeholder="اكتب تفاصيل المهارات المكتسبة في هذه الشهادة..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-subtle" data-close="certModal">إلغاء</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> حفظ الشهادة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD / EDIT PROJECT ==================== -->
+  <div id="projectModal" class="admin-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="projectModalTitle"><i class="fas fa-laptop-code"></i> إضافة مشروع جديد</h3>
+        <button class="modal-close-btn" data-close="projectModal"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="projectForm">
+        <input type="hidden" id="projectId">
+        
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="projectTitle">اسم المشروع *</label>
+            <input type="text" id="projectTitle" required placeholder="مثال: نظام ذكي للتجارة الإلكترونية">
+          </div>
+          <div class="form-group flex-1">
+            <label for="projectDate">فترة العمل / السنة *</label>
+            <input type="text" id="projectDate" required placeholder="مثال: 2024 - 2025">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="projectCategory">التصنيف *</label>
+            <select id="projectCategory" required>
+              <option value="platform">المنصات والتجارة الإلكترونية</option>
+              <option value="ai-data">الذكاء الاصطناعي وعلم البيانات</option>
+              <option value="mobile">تطبيقات الموبايل (Flutter)</option>
+              <option value="web">تطوير الويب (Laravel / Full-Stack)</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label for="projectTags">التقنيات المستخدمة (افصل بينها بفواصل) *</label>
+            <input type="text" id="projectTags" required placeholder="مثال: Flutter, Laravel, Python, MySQL">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="projectBrief">موجز سريع عن المشروع (يظهر في الكرت) *</label>
+          <input type="text" id="projectBrief" required placeholder="مثال: تطبيق محفظة مالية رقمية مبني بـ Flutter يدعم رموز QR">
+        </div>
+
+        <div class="form-group">
+          <label for="projectDescription">الوصف التفصيلي الكامل للمشروع وميزاته *</label>
+          <textarea id="projectDescription" rows="4" required placeholder="اشرح معمارية المشروع، الميزات التي يقدمها، والحل التقني..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="projectLiveUrl">رابط المعاينة الحية / الموقع (اختياري)</label>
+            <input type="url" id="projectLiveUrl" placeholder="https://sinbadd.com">
+          </div>
+          <div class="form-group flex-1">
+            <label for="projectGithubUrl">رابط مستودع الكود GitHub (اختياري)</label>
+            <input type="text" id="projectGithubUrl" placeholder="https://github.com/...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label-bold"><i class="fas fa-image text-accent"></i> صورة غلاف المشروع *</label>
+          <div class="drop-zone" id="projectDropZone">
+            <input type="file" id="projectFileInput" accept="image/*" class="drop-zone-input">
+            <div class="drop-zone-prompt" id="projectDropPrompt">
+              <div class="drop-zone-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <h4>اسحب وأفلت صورة المشروع هنا أو <span>انقر للاختيار من جهازك</span></h4>
+              <p>يدعم JPG, PNG, WebP (يتم ضغط الصورة تلقائياً لسرعة التحميل)</p>
+            </div>
+            <div class="upload-preview-card" id="projectUploadPreview" style="display: none;">
+              <img id="projectPreviewImg" src="" alt="معاينة المشروع">
+              <div class="upload-file-meta">
+                <strong id="projectFileName">project-cover.png</strong>
+                <span id="projectFileSize">محسنة ومضغوطة</span>
+              </div>
+              <button type="button" class="btn-remove-upload" id="removeProjectUploadBtn" title="إزالة الصورة"><i class="fas fa-trash-alt"></i> إزالة</button>
+            </div>
+          </div>
+          <input type="hidden" id="projectImage">
+          <div class="url-fallback-toggle">
+            <button type="button" class="toggle-link" id="toggleProjectUrlInput"><i class="fas fa-link"></i> أو أدخل رابط صورة خارجي يدوي</button>
+            <div id="projectUrlInputWrapper" style="display: none; margin-top: 0.8rem;">
+              <input type="text" id="projectImageUrlManual" placeholder="https://... أو images/project-1.png">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="projectFeatured">
+            <span>عرض كمشروع رئيسي مميز في الصفحة الرئيسية</span>
+          </label>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-subtle" data-close="projectModal">إلغاء</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> حفظ المشروع</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD / EDIT SKILL ==================== -->
+  <div id="skillModal" class="admin-modal">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h3 id="skillModalTitle"><i class="fas fa-tools"></i> إضافة مهارة جديدة</h3>
+        <button class="modal-close-btn" data-close="skillModal"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="skillForm">
+        <input type="hidden" id="skillId">
+
+        <div class="form-group">
+          <label for="skillName">اسم المهارة أو التقنية *</label>
+          <input type="text" id="skillName" required placeholder="مثال: PyTorch &amp; Deep Learning">
+        </div>
+
+        <div class="form-group">
+          <label for="skillCategory">المسار التقني *</label>
+          <select id="skillCategory" required>
+            <option value="data-ai">البيانات والذكاء الاصطناعي</option>
+            <option value="programming">البرمجة وتطوير الويب</option>
+            <option value="mobile">تطبيقات الهواتف الذكية</option>
+            <option value="tools">الأدوات وقواعد البيانات</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="skillLevel">نسبة الإتقان (1-100%) *</label>
+            <input type="number" id="skillLevel" min="1" max="100" required value="85">
+          </div>
+          <div class="form-group flex-1">
+            <label for="skillColor">اللون النيوني *</label>
+            <div class="color-picker-wrapper">
+              <input type="color" id="skillColor" value="#FF6A32">
+              <span id="skillColorHex">#FF6A32</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-subtle" data-close="skillModal">إلغاء</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> حفظ المهارة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD / EDIT JOURNEY ==================== -->
+  <div id="journeyModal" class="admin-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="journeyModalTitle"><i class="fas fa-route"></i> إضافة محطة في المسار</h3>
+        <button class="modal-close-btn" data-close="journeyModal"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="journeyForm">
+        <input type="hidden" id="journeyId">
+
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="journeyTitle">عنوان المحطة أو الإنجاز *</label>
+            <input type="text" id="journeyTitle" required placeholder="مثال: تطوير منصة سندباد ومحفظة ريال">
+          </div>
+          <div class="form-group flex-1">
+            <label for="journeyDate">الفترة الزمنية / التاريخ *</label>
+            <input type="text" id="journeyDate" required placeholder="مثال: 2024 - 2025 أو 2023 - الآن">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="journeyRole">المسمى الوظيفي أو التخصص *</label>
+            <input type="text" id="journeyRole" required placeholder="مثال: Full-Stack & Flutter Mobile Developer">
+          </div>
+          <div class="form-group flex-1">
+            <label for="journeyCategory">نوع المحطة *</label>
+            <select id="journeyCategory" required>
+              <option value="work">خبرة ومشاريع كبرى</option>
+              <option value="learning">تعلّم وتخصص</option>
+              <option value="community">مبادرة ومجتمع</option>
+              <option value="education">تعليم أكاديمي وجامعي</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="journeyIcon">أيقونة FontAwesome (فئة الأيقونة) *</label>
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <input type="text" id="journeyIcon" value="fas fa-rocket" required placeholder="مثال: fas fa-rocket">
+            <div id="journeyIconPreview" style="width: 4.4rem; height: 4.4rem; border-radius: 1.2rem; background: rgba(215, 25, 22, 0.1); border: 1px solid rgba(215, 25, 22, 0.2); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--main-color, #D71916); flex-shrink: 0;">
+              <i class="fas fa-rocket"></i>
+            </div>
+          </div>
+          <small style="color: var(--secondary-text-color); font-size: 1.2rem; display: block; margin-top: 0.5rem;">
+            أمثلة سريعة: <code>fas fa-rocket</code> (صاروخ)، <code>fas fa-brain</code> (ذكاء اصطناعي)، <code>fas fa-lightbulb</code> (فكرة ومبادرة)، <code>fas fa-graduation-cap</code> (أكاديمي)، <code>fas fa-briefcase</code> (عمل)، <code>fas fa-laptop-code</code> (برمجة)
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="journeyDescription">نبذة مختصرة عن المحطة *</label>
+          <textarea id="journeyDescription" rows="3" required placeholder="اكتب وصفاً موجزاً ومميزاً للإنجاز أو المسار..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-subtle" data-close="journeyModal">إلغاء</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> حفظ المحطة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: ADD / EDIT ARTICLE ==================== -->
+  <div id="articleAdminModal" class="admin-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="articleAdminModalTitle"><i class="fas fa-newspaper"></i> كتابة مقال تقني جديد</h3>
+        <button class="modal-close-btn" data-close="articleAdminModal"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="articleAdminForm">
+        <input type="hidden" id="articleAdminId">
+
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="articleAdminTitle">عنوان المقال التقني *</label>
+            <input type="text" id="articleAdminTitle" required placeholder="مثال: دليل المبرمج للبدء في علم البيانات وتحليلها">
+          </div>
+          <div class="form-group flex-1">
+            <label for="articleAdminCategory">المجال / التصنيف *</label>
+            <select id="articleAdminCategory" required>
+              <option value="data-ai">علوم البيانات والذكاء الاصطناعي</option>
+              <option value="mobile">تطبيقات الهواتف الذكية</option>
+              <option value="programming">البرمجة وتطوير الويب</option>
+              <option value="startups">ريادة الأعمال والمنتجات الرقمية</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label for="articleAdminAuthor">اسم الكاتب *</label>
+            <input type="text" id="articleAdminAuthor" required value="عبدالرحمن عادل الشجاع">
+          </div>
+          <div class="form-group flex-1">
+            <label for="articleAdminDate">سنة النشر / التاريخ *</label>
+            <input type="text" id="articleAdminDate" required value="2025" placeholder="مثال: 2025">
+          </div>
+          <div class="form-group flex-1">
+            <label for="articleAdminReadingTime">مدة القراءة المتوقعة *</label>
+            <input type="text" id="articleAdminReadingTime" required value="5 دقائق قراءة" placeholder="مثال: 5 دقائق قراءة">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="articleAdminTags"><i class="fas fa-tags text-accent"></i> الوسوم والكلمات المفتاحية (تظهر في البطاقات وتُستخدم للفلترة)</label>
+          <input type="text" id="articleAdminTags" placeholder="مثال: ذكاء_اصطناعي, بايثون, علم_البيانات, flutter">
+        </div>
+
+        <!-- Image Upload Drop Zone for Article -->
+        <div class="form-group">
+          <label class="form-label-bold"><i class="fas fa-image text-accent"></i> غلاف المقال أو الصورة البارزة *</label>
+          <div class="upload-drop-zone" id="articleDropZone" style="cursor: pointer;">
+            <input type="file" id="articleFileInput" accept="image/*" style="display: none;">
+            <div class="drop-zone-prompt" id="articleDropPrompt">
+              <i class="fas fa-cloud-upload-alt upload-icon"></i>
+              <h4>اضغط هنا لاختيار صورة من جهازك أو اسحب الصورة وأفلتها</h4>
+              <p>يدعم JPG، PNG، WebP بأي حجم (يتم ضغط الصورة تلقائياً لتكون خفيفة وسريعة)</p>
+              <button type="button" class="btn btn-outline btn-sm" style="margin-top: 1rem; pointer-events: none;">
+                <i class="fas fa-folder-open"></i> تصفح واختيار صورة من جهازك
+              </button>
+            </div>
+            <div class="upload-preview-card" id="articleUploadPreview" style="display: none;">
+              <img id="articlePreviewImg" src="" alt="معاينة الغلاف">
+              <div class="preview-info">
+                <span id="articleFileName">غلاف المقال</span>
+                <span id="articleFileSize" class="file-size-badge"></span>
+              </div>
+              <button type="button" class="btn btn-sm btn-danger-outline remove-upload-btn" id="removeArticleUploadBtn">
+                <i class="fas fa-trash"></i> إزالة
+              </button>
+            </div>
+          </div>
+          <input type="hidden" id="articleAdminImage" value="images/blog2.jpg">
+
+          <div class="manual-url-fallback" style="margin-top: 1rem;">
+            <button type="button" class="btn btn-subtle btn-sm" id="toggleArticleUrlInput">
+              <i class="fas fa-link"></i> أو أدخل رابط صورة خارجي مباشرة
+            </button>
+            <div id="articleUrlInputWrapper" style="display: none; margin-top: 0.8rem;">
+              <input type="text" id="articleImageUrlManual" placeholder="https://example.com/cover.jpg">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="articleAdminLink"><i class="fas fa-link text-accent"></i> رابط خارجي للمقال أو المشروع / المصدر (اختياري)</label>
+          <input type="url" id="articleAdminLink" placeholder="https://... (رابط المقال، فيديو يوتيوب، أو مستودع GitHub)">
+        </div>
+
+        <div class="form-group">
+          <label for="articleAdminExcerpt"><i class="fas fa-align-right text-accent"></i> نبذة مختصرة عن المقال (تظهر في البطاقة التعريفية) *</label>
+          <textarea id="articleAdminExcerpt" rows="2" placeholder="اكتب نبذة شيقة وموجزة من سطرين تجذب القارئ للمقال..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="articleAdminBody"><i class="fas fa-file-alt text-accent"></i> نص ومحتوى المقال كاملاً *</label>
+          <textarea id="articleAdminBody" rows="7" required placeholder="اكتب نص المقال وتفاصيله وشروحاتك هنا... يمكنك كتابة فقرات عادية وعناوين وأكواد برمجية..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-subtle" data-close="articleAdminModal">إلغاء</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> نشر وحفظ المقال</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Core Scripts -->
+  <script src="data-store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

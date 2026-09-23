@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="السيرة الذاتية والمسار الأكاديمي والمهني للمهندس عبدالرحمن عادل الشجاع — طالب علوم حاسوب بجامعة إب ومؤسس فكرة مبرمج.">
+  <title>عني ومساري المهني | عبدالرحمن عادل الشجاع</title>
+
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scroll-progress" class="scroll-progress-bar"></div>
+
+  <!-- Interactive 3D Particles Background Canvas -->
+  <canvas id="particlesCanvas" class="particles-bg"></canvas>
+
+  <!-- ==================== HEADER & NAVBAR ==================== -->
+  <header id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <span class="logo-badge"><i class="fas fa-terminal"></i></span>
+        <span class="logo-text">عبدالرحمن <span>.الشجاع</span></span>
+      </a>
+
+      <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="about.html" class="nav-link active"><i class="fas fa-user"></i> عني ومساري</a>
+        <a href="skills.html" class="nav-link"><i class="fas fa-cube"></i> المهارات (3D)</a>
+        <a href="projects.html" class="nav-link"><i class="fas fa-laptop-code"></i> المشاريع</a>
+        <a href="certificates.html" class="nav-link"><i class="fas fa-award"></i> الشهادات</a>
+        <a href="blog.html" class="nav-link"><i class="fas fa-newspaper"></i> المدونة</a>
+        <a href="programmer-idea.html" class="nav-link"><i class="fas fa-graduation-cap"></i> فكرة مبرمج</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> تواصل معي</a>
+        <a href="admin.html" class="nav-link nav-admin-link" title="لوحة التحكم والإدارة"><i class="fas fa-cog"></i> الإدارة</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="sound-toggler" class="icon-btn" aria-label="المؤثرات الصوتية" title="تبديل المؤثرات الصوتية الميكانيكية">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="theme-toggler" class="icon-btn" aria-label="تغيير المظهر" title="تبديل الوضع الليلي / النهاري">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="menu-btn" class="icon-btn mobile-toggle" aria-label="فتح القائمة">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== PAGE HERO ==================== -->
+  <div class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <span>/</span>
+        <span class="current">السيرة الذاتية والمسار</span>
+      </div>
+      <div class="page-banner-content">
+        <span class="page-tag"><i class="fas fa-user-graduate"></i> السيرة والرحلة المهنية</span>
+        <h1>عن عبدالرحمن <span>عادل الشجاع</span></h1>
+        <p>طالب علوم حاسوب وتقنية معلومات (المستوى الرابع) بجامعة إب، مطور برمجيات، شغوف بعلوم البيانات والذكاء الاصطناعي وبناء منصات رقمية تخدم المجتمع.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ABOUT CONTENT ==================== -->
+  <main class="page-main-content">
+    <div class="container">
+
+      <!-- Profile & Bio Card -->
+      <div class="about-card-wrapper">
+        <div class="about-grid">
+          <div class="about-image-col">
+            <div class="about-img-frame">
+              <img src="images/profile-hero.png" alt="عبدالرحمن عادل الشجاع" onerror="this.src='images/main-img.jpg'">
+              <div class="badge-exp">
+                <span class="num">+3</span>
+                <span class="txt">سنوات خبرة وشغف بالبرمجة</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text-col">
+            <span class="subtitle">تعرّف علي أكثر</span>
+            <h2>مهندس ومطور <span>يبني الأفكار إلى واقع رقمي</span></h2>
+            <p class="lead-text">
+              أنا <strong>عبدالرحمن عادل الشجاع</strong>، طالب في <strong>جامعة إب</strong> بكلية الحاسوب وتقنية المعلومات (المستوى الرابع).
+              أؤمن بأن التقنية والبيانات هما القوة المحركة لصناعة التغيير، ولذلك كرست وقتي لتعلم وتطبيق أحدث مهارات علم البيانات، ونماذج الذكاء الاصطناعي، وهندسة البرمجيات.
+            </p>
+            <p>
+              أسست منصة ومبادرة <strong>"فكرة مبرمج" (Programmer Idea)</strong> لتبسيط علوم البرمجة والذكاء الاصطناعي وإثراء المحتوى التقني العربي واليمني، كما شاركت في بناء وتطوير مشاريع حقيقية وناجحة كمنصة <strong>"سندباد" (Sinbad)</strong> للتجارة الإلكترونية وتطبيق <strong>"محفظة ريال" (Riyal Wallet)</strong>.
+            </p>
+
+            <div class="about-highlights-grid">
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-university"></i>
+                <div>
+                  <strong>جامعة إب</strong>
+                  <span>علوم حاسوب وتكنولوجيا معلومات (المستوى 4)</span>
+                </div>
+              </div>
+
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-brain"></i>
+                <div>
+                  <strong>Data &amp; AI</strong>
+                  <span>نماذج تعلم الآلة وتحليل البيانات ببايثون</span>
+                </div>
+              </div>
+
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-mobile-alt"></i>
+                <div>
+                  <strong>Flutter Apps</strong>
+                  <span>تطبيقات هواتف ذكية Android &amp; iOS</span>
+                </div>
+              </div>
+
+              <div class="highlight-item tilt-card">
+                <div class="card-glare"></div>
+                <i class="fas fa-bullhorn"></i>
+                <div>
+                  <strong>فكرة مبرمج</strong>
+                  <span>مبادرة ومجتمع تقني لتعليم البرمجة</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-actions-row">
+              <a href="assets/cvs/TamZyn CV.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> تحميل السيرة الذاتية (CV)</a>
+              <a href="contact.html" class="btn btn-outline"><i class="fas fa-paper-plane"></i> تواصل معي مباشرة</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline & Milestones -->
+      <div class="section-title" style="margin-top: 5rem;">
+        <span class="subtitle">المسار والمحطات</span>
+        <h2 class="heading">محطات <span>المسيرة الأكاديمية والمهنية</span></h2>
+        <div class="heading-line"></div>
+      </div>
+
+      <div class="journey-compact-grid" id="aboutJourneyGrid">
+        <div class="journey-mini-card tilt-card" data-category="work">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-rocket"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">تطوير منصة سندباد ومحفظة ريال الرقمية</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2024 - 2025</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>Full-Stack &amp; Flutter Mobile Developer</span>
+            </div>
+            <p class="journey-mini-desc">المشاركة في هندسة المنصة متعددة التجار "سندباد" (Laravel &amp; Flutter) وتطوير تطبيق "محفظة ريال" للخدمات المالية الرقمية وتطبيق نماذج التنبؤ الذكية بالمبيعات.</p>
+          </div>
+        </div>
+
+        <div class="journey-mini-card tilt-card" data-category="learning">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-brain"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">التخصص في علوم البيانات والذكاء الاصطناعي التوليدي</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2023 - 2024</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>Data Science &amp; Machine Learning Enthusiast</span>
+            </div>
+            <p class="journey-mini-desc">إنجاز معسكرات وشهادات معتمدة في مكتبات بايثون (pandas, NumPy, Scikit-Learn)، وبناء لوحات المؤشرات بـ Power BI، ودراسة معمارية النماذج اللغوية الكبيرة LLMs.</p>
+          </div>
+        </div>
+
+        <div class="journey-mini-card tilt-card" data-category="community">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">تأسيس مبادرة "فكرة مبرمج" (Programmer Idea)</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2023 - مستمر</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>Founder &amp; Tech Lead</span>
+            </div>
+            <p class="journey-mini-desc">إطلاق قنوات ومنصة فكرة مبرمج لتعليم البرمجة وتبسيط العلوم التقنية باللغة العربية، وتقديم شروحات عملية في مسارات بايثون وفلاتر وتطوير الويب.</p>
+          </div>
+        </div>
+
+        <div class="journey-mini-card tilt-card" data-category="education">
+          <div class="card-glare"></div>
+          <div class="journey-mini-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="journey-mini-body">
+            <div class="journey-mini-header">
+              <h3 class="journey-mini-title">دراسة علوم الحاسوب وتقنية المعلومات — جامعة إب</h3>
+              <span class="journey-mini-badge"><i class="far fa-calendar-alt"></i> 2021 - الآن</span>
+            </div>
+            <div class="journey-mini-role">
+              <i class="fas fa-user-tag text-gold"></i>
+              <span>المستوى الرابع (بكالوريوس تقنية معلومات)</span>
+            </div>
+            <p class="journey-mini-desc">دراسة متعمقة في هياكل البيانات (Data Structures)، الخوارزميات، البرمجة كائنية التوجه (OOP بـ C++)، قواعد البيانات العلائقية، وهندسة البرمجيات مع التكريم الأكاديمي.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== FLOATING ACTION BUTTONS (FABs) ==================== -->
+  <div class="floating-fabs">
+    <a href="https://wa.me/967773853853" target="_blank" rel="noopener" class="fab-btn fab-wa" title="محادثة واتساب">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <button id="openAiChatBtn" class="fab-btn fab-ai" title="المساعد الذكي">
+      <i class="fas fa-robot"></i>
+      <span class="fab-badge">AI</span>
+    </button>
+    <button id="scrollTopBtn" class="fab-btn fab-top" title="العودة للأعلى">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>
+
+  <!-- ==================== SMART AI ASSISTANT CHATBOT ==================== -->
+  <div id="aiChatWindow" class="ai-assistant-window">
+    <div class="ai-chat-header">
+      <div class="ai-profile">
+        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+        <div class="ai-meta">
+          <strong>مساعد عبدالرحمن الذكي</strong>
+          <span>متصل وجاهز للرد</span>
+        </div>
+      </div>
+      <button id="closeAiChatBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="ai-chat-body" id="aiChatBody">
+      <div class="ai-msg bot">
+        <p>مرحباً! اسألني عن دراسة عبدالرحمن بجامعة إب، سنوات خبرته، أو كيف أسس فكرة مبرمج وسندباد.</p>
+      </div>
+    </div>
+    <div class="ai-chat-footer">
+      <input type="text" id="aiUserInput" placeholder="اكتب سؤالك هنا...">
+      <button id="sendAiBtn" aria-label="إرسال"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h2>عبدالرحمن <span>.الشجاع</span></h2>
+        <p>طالب علوم حاسوب وتقنية معلومات بجامعة إب · مطور برمجيات ومؤسس فكرة مبرمج.</p>
+      </div>
+      <div class="footer-copy">
+        <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> عبدالرحمن عادل الشجاع.</p>
+        <div class="footer-links">
+          <a href="index.html">الرئيسية</a> ·
+          <a href="about.html">عني ومساري</a> ·
+          <a href="skills.html">المهارات (3D)</a> ·
+          <a href="projects.html">المشاريع</a> ·
+          <a href="certificates.html">الشهادات</a> ·
+          <a href="blog.html">المدونة</a> ·
+          <a href="programmer-idea.html">فكرة مبرمج</a> ·
+          <a href="contact.html">تواصل معي</a> ·
+          <a href="admin.html">لوحة التحكم ⚙️</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="data-store.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

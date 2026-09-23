@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="الشهادات الأكاديمية والجوائز والاعتمادات المهنية للمهندس عبدالرحمن عادل الشجاع — جامعة إب، بايثون، علم البيانات، وتعلم الآلة.">
+  <title>الشهادات والجوائز | عبدالرحمن عادل الشجاع</title>
+
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scroll-progress" class="scroll-progress-bar"></div>
+
+  <!-- Interactive 3D Particles Background Canvas -->
+  <canvas id="particlesCanvas" class="particles-bg"></canvas>
+
+  <!-- ==================== HEADER & NAVBAR ==================== -->
+  <header id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <span class="logo-badge"><i class="fas fa-terminal"></i></span>
+        <span class="logo-text">عبدالرحمن <span>.الشجاع</span></span>
+      </a>
+
+      <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="about.html" class="nav-link"><i class="fas fa-user"></i> عني ومساري</a>
+        <a href="skills.html" class="nav-link"><i class="fas fa-cube"></i> المهارات (3D)</a>
+        <a href="projects.html" class="nav-link"><i class="fas fa-laptop-code"></i> المشاريع</a>
+        <a href="certificates.html" class="nav-link active"><i class="fas fa-award"></i> الشهادات</a>
+        <a href="blog.html" class="nav-link"><i class="fas fa-newspaper"></i> المدونة</a>
+        <a href="programmer-idea.html" class="nav-link"><i class="fas fa-graduation-cap"></i> فكرة مبرمج</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> تواصل معي</a>
+        <a href="admin.html" class="nav-link nav-admin-link" title="لوحة التحكم والإدارة"><i class="fas fa-cog"></i> الإدارة</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="sound-toggler" class="icon-btn" aria-label="المؤثرات الصوتية" title="تبديل المؤثرات الصوتية الميكانيكية">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="theme-toggler" class="icon-btn" aria-label="تغيير المظهر" title="تبديل الوضع الليلي / النهاري">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="menu-btn" class="icon-btn mobile-toggle" aria-label="فتح القائمة">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== PAGE HERO ==================== -->
+  <div class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <span>/</span>
+        <span class="current">الشهادات والجوائز</span>
+      </div>
+      <div class="page-banner-content">
+        <span class="page-tag"><i class="fas fa-award"></i> السجل الأكاديمي والمهني</span>
+        <h1>الشهادات والاعتمادات <span>والتكريمات</span></h1>
+        <p>توثيق مسيرتي التعليمية والمهنية عبر شهادات احترافية وتكريمات جامعية في مجالات علوم الحاسوب، البرمجة، علم البيانات، والذكاء الاصطناعي.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CERTIFICATES MAIN SECTION ==================== -->
+  <main class="page-main-content">
+    <div class="container">
+
+      <!-- Category Filter Bar -->
+      <div class="projects-control-bar">
+        <div class="project-filters" id="certFiltersContainer">
+          <button class="filter-btn active" data-cert-filter="all">جميع الشهادات</button>
+          <button class="filter-btn" data-cert-filter="academic">التكريمات الجامعية</button>
+          <button class="filter-btn" data-cert-filter="data-ai">البيانات والذكاء الاصطناعي</button>
+          <button class="filter-btn" data-cert-filter="mobile">تطبيقات الموبايل</button>
+          <button class="filter-btn" data-cert-filter="web">تطوير الويب</button>
+        </div>
+
+        <div class="certs-count-badge">
+          <span id="certsCounter">جارِ التحميل...</span>
+        </div>
+      </div>
+
+      <!-- Dynamic Certificates Grid -->
+      <div class="certs-grid" id="dynamicCertsGrid">
+        <!-- Rendered dynamically from DataStore via script.js -->
+      </div>
+
+      <!-- Verification & Credibility Note -->
+      <div class="credibility-box tilt-card">
+        <div class="card-glare"></div>
+        <div class="credibility-icon"><i class="fas fa-shield-check"></i></div>
+        <div class="credibility-info">
+          <h3>التحقق والمصداقية الأكاديمية والمهنية</h3>
+          <p>جميع الشهادات والاعتمادات المذكورة صادرة عن جهات أكاديمية ومنصات تدريبية معترف بها دولياً وجامعياً، ويمكن التحقق من صحتها مباشرة عبر روابط التحقق الخاصة بكل شهادة.</p>
+        </div>
+        <a href="https://wa.me/967773853853" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-whatsapp"></i> طلب استفسار أكاديمي</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== CERTIFICATE LIGHTBOX MODAL ==================== -->
+  <div id="certLightboxModal" class="custom-modal">
+    <div class="modal-overlay" id="certModalOverlay"></div>
+    <div class="modal-container cert-modal-container">
+      <button class="modal-close" id="closeCertLightboxBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+      <div class="modal-content" id="certLightboxContent">
+        <!-- Content will be injected dynamically via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FLOATING ACTION BUTTONS (FABs) ==================== -->
+  <div class="floating-fabs">
+    <a href="https://wa.me/967773853853" target="_blank" rel="noopener" class="fab-btn fab-wa" title="محادثة واتساب مباشرة">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <button id="openAiChatBtn" class="fab-btn fab-ai" title="المساعد الذكي">
+      <i class="fas fa-robot"></i>
+      <span class="fab-badge">AI</span>
+    </button>
+    <button id="scrollTopBtn" class="fab-btn fab-top" title="العودة للأعلى">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>
+
+  <!-- ==================== SMART AI ASSISTANT CHATBOT ==================== -->
+  <div id="aiChatWindow" class="ai-assistant-window">
+    <div class="ai-chat-header">
+      <div class="ai-profile">
+        <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+        <div class="ai-meta">
+          <strong>مساعد عبدالرحمن الذكي</strong>
+          <span>متصل وجاهز للرد</span>
+        </div>
+      </div>
+      <button id="closeAiChatBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="ai-chat-body" id="aiChatBody">
+      <div class="ai-msg bot">
+        <p>مرحباً بك في صفحة الشهادات! يمكنك سؤالي عن اعتمادات عبدالرحمن في بايثون، الذكاء الاصطناعي، أو مساره بجامعة إب.</p>
+      </div>
+    </div>
+    <div class="ai-chat-footer">
+      <input type="text" id="aiUserInput" placeholder="اكتب سؤالك هنا...">
+      <button id="sendAiBtn" aria-label="إرسال"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h2>عبدالرحمن <span>.الشجاع</span></h2>
+        <p>طالب علوم حاسوب وتقنية معلومات بجامعة إب · مطور برمجيات ومؤسس فكرة مبرمج.</p>
+      </div>
+      <div class="footer-copy">
+        <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> عبدالرحمن عادل الشجاع.</p>
+        <div class="footer-links">
+          <a href="index.html">الرئيسية</a> ·
+          <a href="projects.html">المشاريع</a> ·
+          <a href="skills.html">المهارات</a> ·
+          <a href="certificates.html">الشهادات</a> ·
+          <a href="blog.html">المدونة</a> ·
+          <a href="programmer-idea.html">فكرة مبرمج</a> ·
+          <a href="contact.html">تواصل معي</a> ·
+          <a href="admin.html">لوحة التحكم ⚙️</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="data-store.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

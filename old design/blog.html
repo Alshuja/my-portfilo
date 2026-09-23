@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Meta Tags -->
+  <title>المدونة والمقالات التقنية | عبدالرحمن عادل الشجاع</title>
+  <meta name="title" content="المدونة والمقالات التقنية | عبدالرحمن عادل الشجاع">
+  <meta name="description" content="المدونة التقنية للمهندس عبدالرحمن عادل الشجاع — شروحات ومقالات تخصصية معمقة في الذكاء الاصطناعي، بايثون، علم البيانات، فلاتر، وهندسة البرمجيات.">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/Pyramid-Shape--Streamline-Core-Gradient.svg" type="image/svg+xml">
+
+  <!-- Google Fonts: Tajawal & Noto Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Wren-Styled Blog CSS -->
+  <link rel="stylesheet" href="blog.css">
+</head>
+
+<body id="top">
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scroll-progress" class="scroll-progress-bar"></div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="index.html" class="logo">
+        <span class="logo-badge"><i class="fas fa-terminal"></i></span>
+        <span class="logo-text">عبدالرحمن <span>.الشجاع</span></span>
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <div class="navbar-top">
+          <a href="index.html" class="logo">
+            <span class="logo-badge"><i class="fas fa-terminal"></i></span>
+            <span class="logo-text">عبدالرحمن <span>.الشجاع</span></span>
+          </a>
+
+          <button class="nav-close-btn" aria-label="إغلاق القائمة" data-nav-toggler>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+          <li>
+            <a href="index.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-home"></i> الرئيسية
+            </a>
+          </li>
+
+          <li>
+            <a href="about.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-user"></i> عني ومساري
+            </a>
+          </li>
+
+          <li>
+            <a href="skills.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-cube"></i> المهارات (3D)
+            </a>
+          </li>
+
+          <li>
+            <a href="projects.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-laptop-code"></i> المشاريع
+            </a>
+          </li>
+
+          <li>
+            <a href="certificates.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-award"></i> الشهادات
+            </a>
+          </li>
+
+          <li>
+            <a href="blog.html" class="navbar-link active hover-1" data-nav-toggler>
+              <i class="fas fa-newspaper"></i> المدونة
+            </a>
+          </li>
+
+          <li>
+            <a href="programmer-idea.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-graduation-cap"></i> فكرة مبرمج
+            </a>
+          </li>
+
+          <li>
+            <a href="contact.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-envelope"></i> تواصل معي
+            </a>
+          </li>
+
+          <li>
+            <a href="admin.html" class="navbar-link hover-1" data-nav-toggler>
+              <i class="fas fa-cog"></i> الإدارة ⚙️
+            </a>
+          </li>
+        </ul>
+
+        <div class="navbar-bottom">
+          <div class="profile-card">
+            <img src="assets/cvs/profile-hero.png" width="48" height="48" alt="عبدالرحمن عادل الشجاع" class="profile-banner" onerror="this.src='assets/about-img.png'">
+
+            <div>
+              <p class="card-title">مرحباً بكم جميعاً!</p>
+              <p class="card-subtitle">م. عبدالرحمن الشجاع — مدونة المعرفة</p>
+            </div>
+          </div>
+
+          <ul class="link-list">
+            <li>
+              <a href="https://sinbadd.com" target="_blank" rel="noopener" class="navbar-bottom-link hover-1">
+                <i class="fas fa-store"></i> منصة سندباد
+              </a>
+            </li>
+
+            <li>
+              <a href="https://programmer-idea.tech" target="_blank" rel="noopener" class="navbar-bottom-link hover-1">
+                <i class="fas fa-graduation-cap"></i> أكاديمية فكرة مبرمج
+              </a>
+            </li>
+
+            <li>
+              <a href="https://rial.cash" target="_blank" rel="noopener" class="navbar-bottom-link hover-1">
+                <i class="fas fa-wallet"></i> محفظة ريال
+              </a>
+            </li>
+
+            <li>
+              <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" class="navbar-bottom-link hover-1">
+                <i class="fab fa-telegram-plane"></i> تيليجرام
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener" class="navbar-bottom-link hover-1">
+                <i class="fab fa-youtube"></i> يوتيوب
+              </a>
+            </li>
+
+            <li>
+              <a href="admin.html" class="navbar-bottom-link hover-1">
+                <i class="fas fa-user-shield"></i> لوحة الإدارة
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <p class="copyright-text">
+          جميع الحقوق محفوظة &copy; <span id="currentYear"></span> المهندس عبدالرحمن عادل الشجاع — مدونة هندسية تخصصية.
+        </p>
+
+      </nav>
+
+      <div class="header-actions">
+        <a href="#newsletter" class="btn btn-primary">
+          <span class="span">اشتراك بالنشرة</span>
+          <i class="fas fa-paper-plane"></i>
+        </a>
+
+        <button class="nav-open-btn" aria-label="فتح القائمة" data-nav-toggler>
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- ==================== HERO SECTION ==================== -->
+      <section class="hero" id="home" aria-label="home">
+        <div class="container">
+
+          <div class="hero-content">
+            <p class="hero-subtitle">
+              <i class="fas fa-sparkles"></i> مرحباً بكم جميعاً في مدونتي التقنية!
+            </p>
+
+            <h1 class="headline headline-1 section-title">
+              أنا المهندس <span class="span">عبدالرحمن عادل الشجاع</span>
+            </h1>
+
+            <p class="hero-text">
+              طالب علوم حاسوب وتقنية معلومات بجامعة إب، مطور برمجيات ومؤسس مجتمع "فكرة مبرمج". أشارككم هنا خلاصة التجارب، والشروحات المعمقة في بايثون وعلوم البيانات، الذكاء الاصطناعي، تطبيقات فلاتر، ومعمارية النظم وهندسة البرمجيات الحديثة.
+            </p>
+
+            <form class="input-wrapper newsletter-form-action" id="newsletter">
+              <input type="email" name="email_address" placeholder="أدخل بريدك الإلكتروني ليصلك كل مقال جديد..." required class="input-field" autocomplete="off">
+
+              <button type="submit" class="btn btn-primary">
+                <span class="span">اشتراك الآن</span>
+                <i class="fas fa-arrow-left"></i>
+              </button>
+            </form>
+          </div>
+
+          <div class="hero-banner">
+            <img src="assets/cvs/profile-hero.png" width="340" height="490" alt="المهندس عبدالرحمن عادل الشجاع" class="w-100" onerror="this.src='assets/about-img.png'">
+
+            <svg class="shape shape-1" width="35" height="35" viewBox="0 0 24 24" fill="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="#0ea5ea" stroke-width="2" fill="rgba(14, 165, 234, 0.2)"/>
+            </svg>
+
+            <svg class="shape shape-2" width="30" height="30" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#FF6A32" stroke-width="2" stroke-dasharray="4 4" fill="rgba(255, 106, 50, 0.2)"/>
+            </svg>
+          </div>
+
+          <!-- Ambient Glow Shapes -->
+          <div class="hero-bg hero-bg-1" style="background: radial-gradient(circle, rgba(14, 165, 234, 0.25) 0%, transparent 70%); height: 450px;"></div>
+          <div class="hero-bg hero-bg-2" style="background: radial-gradient(circle, rgba(215, 25, 22, 0.2) 0%, transparent 70%); height: 450px;"></div>
+
+        </div>
+      </section>
+
+      <!-- ==================== TOPICS SLIDER ==================== -->
+      <section class="topics" id="topics" aria-labelledby="topic-label">
+        <div class="container">
+
+          <div class="card topic-card">
+
+            <div class="card-content">
+              <h2 class="headline headline-2 section-title card-title" id="topic-label">
+                المواضيع الرائجة <span class="span">Hot Topics</span>
+              </h2>
+
+              <p class="card-text">
+                استكشف أحدث الشروحات والمقالات والمسارات المتخصصة في الذكاء الاصطناعي، بايثون، فلاتر، وتطوير الأنظمة...
+              </p>
+
+              <div class="btn-group">
+                <button class="btn-icon" aria-label="السابق" data-slider-prev title="الموضوع السابق">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <button class="btn-icon" aria-label="التالي" data-slider-next title="الموضوع التالي">
+                  <i class="fas fa-arrow-left"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="slider" data-slider>
+              <ul class="slider-list" data-slider-container>
+
+                <li class="slider-item">
+                  <a href="#recent" class="slider-card">
+                    <figure class="slider-banner img-holder">
+                      <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="الذكاء الاصطناعي" class="img-cover">
+                    </figure>
+
+                    <div class="slider-content">
+                      <span class="slider-title">الذكاء الاصطناعي وتعلم الآلة</span>
+                      <p class="slider-subtitle"><i class="fas fa-book-open"></i> 24 مقالاً وشرحاً</p>
+                    </div>
+                  </a>
+                </li>
+
+                <li class="slider-item">
+                  <a href="#recent" class="slider-card">
+                    <figure class="slider-banner img-holder">
+                      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="بايثون وعلم البيانات" class="img-cover">
+                    </figure>
+
+                    <div class="slider-content">
+                      <span class="slider-title">بايثون وهندسة البيانات</span>
+                      <p class="slider-subtitle"><i class="fas fa-book-open"></i> 38 مقالاً وشرحاً</p>
+                    </div>
+                  </a>
+                </li>
+
+                <li class="slider-item">
+                  <a href="#recent" class="slider-card">
+                    <figure class="slider-banner img-holder">
+                      <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="تطبيقات الهواتف" class="img-cover">
+                    </figure>
+
+                    <div class="slider-content">
+                      <span class="slider-title">تطوير تطبيقات الموبايل بـ Flutter</span>
+                      <p class="slider-subtitle"><i class="fas fa-book-open"></i> 19 مقالاً وشرحاً</p>
+                    </div>
+                  </a>
+                </li>
+
+                <li class="slider-item">
+                  <a href="#recent" class="slider-card">
+                    <figure class="slider-banner img-holder">
+                      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="تطوير الويب" class="img-cover">
+                    </figure>
+
+                    <div class="slider-content">
+                      <span class="slider-title">تطوير الويب والـ Full-Stack</span>
+                      <p class="slider-subtitle"><i class="fas fa-book-open"></i> 27 مقالاً وشرحاً</p>
+                    </div>
+                  </a>
+                </li>
+
+                <li class="slider-item">
+                  <a href="#recent" class="slider-card">
+                    <figure class="slider-banner img-holder">
+                      <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="معمارية البرمجيات" class="img-cover">
+                    </figure>
+
+                    <div class="slider-content">
+                      <span class="slider-title">معمارية البرمجيات والخوارزميات</span>
+                      <p class="slider-subtitle"><i class="fas fa-book-open"></i> 16 مقالاً وشرحاً</p>
+                    </div>
+                  </a>
+                </li>
+
+                <li class="slider-item">
+                  <a href="#recent" class="slider-card">
+                    <figure class="slider-banner img-holder">
+                      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop" loading="lazy" alt="المنتجات وريادة الأعمال" class="img-cover">
+                    </figure>
+
+                    <div class="slider-content">
+                      <span class="slider-title">ريادة الأعمال والمنتجات الرقمية</span>
+                      <p class="slider-subtitle"><i class="fas fa-book-open"></i> 12 مقالاً وشرحاً</p>
+                    </div>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== FEATURED POSTS ==================== -->
+      <section class="section feature" aria-label="feature" id="featured">
+        <div class="container">
+
+          <h2 class="headline headline-2 section-title">
+            مختارات المحرر <span class="span">Editor's Pick</span>
+          </h2>
+
+          <p class="section-text">
+            أهم وأشمل المقالات التقنية والمعمارية المختارة بعناية للمهتمين بعلوم البيانات والبرمجة الاحترافية.
+          </p>
+
+          <!-- Dynamic Featured Articles Grid from DataStore -->
+          <ul class="feature-list" id="featuredPostsList">
+            <!-- Rendered by blog.js -->
+          </ul>
+
+          <div style="text-align: center; margin-top: 40px;">
+            <a href="#recent" class="btn btn-secondary btn-center">
+              <span class="span">استكشف باقي المقالات التقنية</span>
+              <i class="fas fa-arrow-down"></i>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== POPULAR TAGS ==================== -->
+      <section class="tags" aria-labelledby="tag-label" id="tags">
+        <div class="container">
+
+          <h2 class="headline headline-2 section-title" id="tag-label">
+            الوسوم الأكثر تداولاً <span class="span">Popular Tags</span>
+          </h2>
+
+          <p class="section-text">
+            انقر على أي وسم لفلترة المقالات والشروحات ذات الصلة فورياً:
+          </p>
+
+          <ul class="grid-list">
+            <li>
+              <button class="card tag-btn active" data-tag-keyword="all">
+                <i class="fas fa-layer-group"></i>
+                <span class="btn-text">جميع المقالات</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="ذكاء">
+                <i class="fas fa-brain"></i>
+                <span class="btn-text">ذكاء اصطناعي</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="بايثون">
+                <i class="fab fa-python"></i>
+                <span class="btn-text">بايثون Python</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="بيانات">
+                <i class="fas fa-database"></i>
+                <span class="btn-text">علم البيانات</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="flutter">
+                <i class="fas fa-mobile-alt"></i>
+                <span class="btn-text">فلاتر Flutter</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="تعلم">
+                <i class="fas fa-robot"></i>
+                <span class="btn-text">تعلم الآلة ML</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="معمارية">
+                <i class="fas fa-sitemap"></i>
+                <span class="btn-text">معمارية النظم</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="سندباد">
+                <i class="fas fa-store"></i>
+                <span class="btn-text">منصة سندباد</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="ريال">
+                <i class="fas fa-wallet"></i>
+                <span class="btn-text">محفظة ريال</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="برمجيات">
+                <i class="fas fa-laptop-code"></i>
+                <span class="btn-text">هندسة البرمجيات</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="خوارزميات">
+                <i class="fas fa-project-diagram"></i>
+                <span class="btn-text">الخوارزميات</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="card tag-btn" data-tag-keyword="ريادة">
+                <i class="fas fa-chart-line"></i>
+                <span class="btn-text">المنتجات الرقمية</span>
+              </button>
+            </li>
+          </ul>
+
+        </div>
+      </section>
+
+      <!-- ==================== RECENT POSTS & SIDEBAR ==================== -->
+      <section class="section recent-post" id="recent" aria-labelledby="recent-label">
+        <div class="container">
+
+          <!-- Left Column (Main Posts) -->
+          <div class="post-main">
+
+            <h2 class="headline headline-2 section-title">
+              أحدث المقالات التقنية <span class="span">Recent Posts</span>
+            </h2>
+
+            <p class="section-text">
+              شروحات عملية ومقالات مستمرة تثري المحتوى العربي البرمجي
+            </p>
+
+            <!-- Dynamic Recent Articles List -->
+            <ul class="grid-list" id="recentPostsList">
+              <!-- Rendered by blog.js -->
+            </ul>
+
+            <!-- Pagination -->
+            <nav aria-label="pagination" class="pagination">
+              <a href="javascript:void(0)" class="pagination-btn active">1</a>
+              <a href="javascript:void(0)" class="pagination-btn">2</a>
+              <a href="javascript:void(0)" class="pagination-btn">3</a>
+              <span style="color: var(--text-slate-gray); padding-inline: 4px;">...</span>
+              <a href="javascript:void(0)" class="pagination-btn" aria-label="الصفحة التالية">
+                <i class="fas fa-chevron-left"></i>
+              </a>
+            </nav>
+
+          </div>
+
+          <!-- Right Column (Sidebar / Post Aside) -->
+          <div class="post-aside grid-list">
+
+            <!-- Card 1: Popular Posts -->
+            <div class="card aside-card">
+              <h3 class="headline headline-2 aside-title">
+                <span class="span">المقالات الأكثر قراءة</span>
+              </h3>
+
+              <ul class="popular-list" id="popularPostsList">
+                <!-- Rendered by blog.js -->
+              </ul>
+            </div>
+
+            <!-- Card 2: Technical Insights & Quotes -->
+            <div class="card aside-card">
+              <h3 class="headline headline-2 aside-title">
+                <span class="span">إضاءات وخبرات ملهمة</span>
+              </h3>
+
+              <ul class="comment-list">
+                <li>
+                  <div class="comment-card">
+                    <blockquote class="card-text">
+                      "البساطة والتسميات المعبرة والالتزام بالمبادئ المعمارية النظيفة هي ما يصنع المهندس المحترف، وليس تعقيد الشفرات بلا طائل."
+                    </blockquote>
+
+                    <div class="profile-card">
+                      <figure class="profile-banner img-holder" style="--width: 36; --height: 36;">
+                        <img src="assets/cvs/profile-hero.png" width="36" height="36" loading="lazy" alt="عبدالرحمن الشجاع" onerror="this.src='assets/about-img.png'">
+                      </figure>
+                      <div>
+                        <p class="card-title">م. عبدالرحمن عادل الشجاع</p>
+                        <time class="card-date">مؤسس مبادرة فكرة مبرمج</time>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="comment-card">
+                    <blockquote class="card-text">
+                      "في مسار الذكاء الاصطناعي، فهم الرياضيات وراء الخوارزميات يمنحك البصيرة في معالجة المشاكل المستعصية التي تعجز الأدوات الجاهزة عن حلها."
+                    </blockquote>
+
+                    <div class="profile-card">
+                      <figure class="profile-banner img-holder" style="--width: 36; --height: 36;">
+                        <img src="assets/cvs/profile-hero.png" width="36" height="36" loading="lazy" alt="مجتمع فكرة مبرمج" onerror="this.src='assets/about-img.png'">
+                      </figure>
+                      <div>
+                        <p class="card-title">فكرة مبرمج — Programmer Idea</p>
+                        <time class="card-date">مجتمع التعلم الرقمي</time>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Card 3: Ecosystem & Official Channels -->
+            <div class="card aside-card insta-card">
+              <a href="programmer-idea.html" class="logo" style="margin-bottom: 10px;">
+                <span class="logo-badge"><i class="fas fa-graduation-cap"></i></span>
+                <span class="logo-text">فكرة <span>مبرمج</span></span>
+              </a>
+
+              <p class="card-text">
+                تابع منصات ومجتمعات فكرة مبرمج الرسمية:
+              </p>
+
+              <ul class="insta-list">
+                <li>
+                  <a href="https://sinbadd.com" target="_blank" rel="noopener" class="insta-post img-holder" style="--width: 100; --height: 100;" title="منصة سندباد">
+                    <img src="assets/images/project-1.png" loading="lazy" alt="سندباد" class="img-cover">
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://rial.cash" target="_blank" rel="noopener" class="insta-post img-holder" style="--width: 100; --height: 100;" title="محفظة ريال">
+                    <img src="assets/images/project-2.jpg" loading="lazy" alt="محفظة ريال" class="img-cover">
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://programmer-idea.tech" target="_blank" rel="noopener" class="insta-post img-holder" style="--width: 100; --height: 100;" title="أكاديمية فكرة مبرمج">
+                    <img src="assets/images/project-3.png" loading="lazy" alt="أكاديمية فكرة مبرمج" class="img-cover">
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" class="insta-post img-holder" style="--width: 100; --height: 100;" title="تيليجرام">
+                    <img src="assets/images/project-4.png" loading="lazy" alt="تيليجرام" class="img-cover">
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener" class="insta-post img-holder" style="--width: 100; --height: 100;" title="يوتيوب">
+                    <img src="assets/images/project-6.png" loading="lazy" alt="يوتيوب" class="img-cover">
+                  </a>
+                </li>
+
+                <li>
+                  <a href="https://wa.me/967773853853" target="_blank" rel="noopener" class="insta-post img-holder" style="--width: 100; --height: 100;" title="واتساب المباشر">
+                    <img src="assets/about-img.png" loading="lazy" alt="واتساب" class="img-cover">
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- ==================== ARTICLE READER MODAL ==================== -->
+  <div id="articleModal" class="article-modal-overlay">
+    <div class="article-modal-content">
+      <button class="modal-close-btn" id="closeArticleModalBtn" aria-label="إغلاق النافذة">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="modal-article-header">
+        <span class="card-badge" id="modalArticleCategory" style="background-color: var(--bg-prussian-blue); color: var(--text-carolina-blue); padding: 4px 12px; border-radius: var(--radius-pill); font-size: 1.2rem;">تقنية</span>
+        <h2 class="headline headline-2" id="modalArticleTitle" style="margin-block: 15px 10px; color: var(--text-alice-blue);">عنوان المقال</h2>
+        <div class="modal-article-meta">
+          <span><i class="far fa-user text-accent"></i> م. عبدالرحمن عادل الشجاع</span>
+          <span><i class="far fa-calendar-alt text-accent"></i> <span id="modalArticleDate">2026</span></span>
+          <span><i class="far fa-clock text-accent"></i> <span id="modalArticleReadTime">5 دقائق قراءة</span></span>
+        </div>
+      </div>
+
+      <img src="assets/images/project-1.png" alt="غلاف المقال" class="modal-article-img" id="modalArticleImg">
+
+      <div class="modal-article-body" id="modalArticleBody">
+        <!-- Body rendered dynamically -->
+      </div>
+
+      <div class="modal-article-footer">
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span style="font-size: 1.3rem; color: var(--text-wild-blue-yonder);">مشاركة المقال:</span>
+          <a href="https://wa.me/?text=%D9%85%D9%82%D8%A7%D9%84%20%D8%AA%D9%82%D9%86%D9%8A%20%D9%85%D9%85%D9%8A%D8%B2%20%D9%85%D9%86%20%D9%85%D8%AF%D9%88%D9%86%D8%A9%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B1%D8%AD%D9%85%D9%86%20%D8%A7%D9%84%D8%B4%D8%AC%D8%A7%D8%B9" target="_blank" class="social-link" style="padding: 6px 12px;"><i class="fab fa-whatsapp"></i> واتساب</a>
+          <a href="https://t.me/share/url?url=http://localhost:3000/blog.html" target="_blank" class="social-link" style="padding: 6px 12px;"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
+        </div>
+
+        <button class="btn btn-primary" onclick="document.getElementById('articleModal').classList.remove('active'); document.body.style.overflow='';" style="font-size: 1.3rem; padding: 6px 16px;">
+          إغلاق النافذة
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="card footer">
+
+        <div class="section footer-top">
+
+          <div class="footer-brand">
+            <a href="index.html" class="logo">
+              <span class="logo-badge"><i class="fas fa-terminal"></i></span>
+              <span class="logo-text">عبدالرحمن <span>.الشجاع</span></span>
+            </a>
+
+            <p class="footer-text">
+              مهندس برمجيات وباحث في علوم البيانات والذكاء الاصطناعي بجامعة إب، مؤسس مبادرة "فكرة مبرمج". نسعى لتمكين العقول الشابة وبناء منتجات رقمية مؤثرة.
+            </p>
+
+            <p class="footer-list-title"><i class="fas fa-map-marker-alt text-accent"></i> المقر الرئيسي</p>
+            <address class="footer-text" style="color: var(--text-columbia-blue);">
+              جامعة إب · كلية العلوم والتقنية · الجمهورية اليمنية
+            </address>
+          </div>
+
+          <div class="footer-list">
+            <p class="footer-list-title"><i class="fas fa-tags text-accent"></i> الأقسام والمسارات</p>
+
+            <ul>
+              <li><a href="#topics" class="footer-link hover-2">الذكاء الاصطناعي</a></li>
+              <li><a href="#topics" class="footer-link hover-2">علم البيانات</a></li>
+              <li><a href="#topics" class="footer-link hover-2">بايثون المتقدمة</a></li>
+              <li><a href="#topics" class="footer-link hover-2">تطبيقات Flutter</a></li>
+              <li><a href="#topics" class="footer-link hover-2">تطوير الويب</a></li>
+              <li><a href="#topics" class="footer-link hover-2">معمارية النظم</a></li>
+              <li><a href="#topics" class="footer-link hover-2">الخوارزميات</a></li>
+              <li><a href="#topics" class="footer-link hover-2">منصة سندباد</a></li>
+              <li><a href="#topics" class="footer-link hover-2">محفظة ريال</a></li>
+              <li><a href="#topics" class="footer-link hover-2">فكرة مبرمج</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-list">
+            <p class="footer-list-title"><i class="fas fa-envelope-open-text text-accent"></i> النشرة البرمجية</p>
+
+            <p class="footer-text">
+              اشترك في النشرة الأسبوعية لتكون أول من يتلقى أحدث المقالات التقنية، دراسات الحالة، وأخبار المنتجات الرقمية.
+            </p>
+
+            <form class="newsletter-form-action">
+              <div class="input-wrapper">
+                <input type="text" name="name" placeholder="اسمك الكريم" required class="input-field" autocomplete="off">
+                <i class="far fa-user"></i>
+              </div>
+
+              <div class="input-wrapper">
+                <input type="email" name="email_address" placeholder="بريدك الإلكتروني" required class="input-field" autocomplete="off">
+                <i class="far fa-envelope"></i>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                <span class="span">اشتراك الآن</span>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">
+            جميع الحقوق محفوظة &copy; <span id="currentYearFooter">2026</span> <a href="index.html" class="copyright-link">عبدالرحمن عادل الشجاع</a> — تطوير بحرفية وعناية فائقة.
+          </p>
+
+          <ul class="social-list">
+            <li>
+              <a href="https://wa.me/967773853853" target="_blank" rel="noopener" class="social-link" title="واتساب">
+                <i class="fab fa-whatsapp"></i>
+                <span class="span">واتساب</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" class="social-link" title="تيليجرام">
+                <i class="fab fa-telegram-plane"></i>
+                <span class="span">تيليجرام</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener" class="social-link" title="يوتيوب">
+                <i class="fab fa-youtube"></i>
+                <span class="span">يوتيوب</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.instagram.com/alshujaa" target="_blank" rel="noopener" class="social-link" title="إنستغرام">
+                <i class="fab fa-instagram"></i>
+                <span class="span">إنستغرام</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://www.facebook.com/programmerIdea.com.ye?mibextid=ZbWKwL" target="_blank" rel="noopener" class="social-link" title="فيسبوك">
+                <i class="fab fa-facebook-f"></i>
+                <span class="span">فيسبوك</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== BACK TO TOP ==================== -->
+  <a href="#top" class="back-top-btn" aria-label="العودة لأعلى الصفحة" data-back-top-btn>
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="data-store.js"></script>
+  <script src="blog.js"></script>
+  <script>
+    // Set Current Year
+    const year = new Date().getFullYear();
+    const yrEl1 = document.getElementById('currentYear');
+    const yrEl2 = document.getElementById('currentYearFooter');
+    if (yrEl1) yrEl1.textContent = year;
+    if (yrEl2) yrEl2.textContent = year;
+  </script>
+
+</body>
+</html>

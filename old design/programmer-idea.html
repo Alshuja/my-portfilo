@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="منصة ومبادرة فكرة مبرمج — مجتمع إلهام وتعلّم لرواد التقنية بإشراف عبدالرحمن عادل الشجاع. شروحات بايثون، علم البيانات، فلاتر، وتطوير البرمجيات.">
+  <meta name="keywords" content="فكرة مبرمج, Programmer Idea, عبدالرحمن الشجاع, بايثون, فلاتر, علم البيانات, ذكاء اصطناعي, تعليم البرمجة">
+  <title>فكرة مبرمج | المحتوى التقني والتعليمي — عبدالرحمن عادل الشجاع</title>
+
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top Scroll Progress Indicator -->
+  <div id="scroll-progress" class="scroll-progress-bar"></div>
+
+  <!-- Interactive 3D Particles Background Canvas -->
+  <canvas id="particlesCanvas" class="particles-bg"></canvas>
+
+  <!-- ==================== HEADER & NAVBAR ==================== -->
+  <header id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <span class="logo-badge"><i class="fas fa-terminal"></i></span>
+        <span class="logo-text">عبدالرحمن <span>.الشجاع</span></span>
+      </a>
+
+      <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="about.html" class="nav-link"><i class="fas fa-user"></i> عني ومساري</a>
+        <a href="skills.html" class="nav-link"><i class="fas fa-cube"></i> المهارات (3D)</a>
+        <a href="projects.html" class="nav-link"><i class="fas fa-laptop-code"></i> المشاريع</a>
+        <a href="certificates.html" class="nav-link"><i class="fas fa-award"></i> الشهادات</a>
+        <a href="blog.html" class="nav-link"><i class="fas fa-newspaper"></i> المدونة</a>
+        <a href="programmer-idea.html" class="nav-link active"><i class="fas fa-graduation-cap"></i> فكرة مبرمج</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> تواصل معي</a>
+        <a href="admin.html" class="nav-link nav-admin-link" title="لوحة التحكم والإدارة"><i class="fas fa-cog"></i> الإدارة</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="sound-toggler" class="icon-btn" aria-label="المؤثرات الصوتية" title="تبديل المؤثرات الصوتية الميكانيكية">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="theme-toggler" class="icon-btn" aria-label="تغيير المظهر" title="تبديل الوضع الليلي / النهاري">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="menu-btn" class="icon-btn mobile-toggle" aria-label="فتح القائمة">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== PAGE HERO / BANNER ==================== -->
+  <div class="page-banner">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <span>/</span>
+        <span class="current">منصة ومبادرة فكرة مبرمج</span>
+      </div>
+      <div class="page-banner-content">
+        <span class="page-tag"><i class="fas fa-graduation-cap"></i> المحتوى التقني والتعليمي</span>
+        <h1>منصة ومبادرة <span>فكرة مبرمج</span></h1>
+        <p>مبادرة تعليمية رائدة ومجتمع تقني ملهم يهدف إلى تبسيط علوم الحاسوب، البرمجة، البيانات، والذكاء الاصطناعي للمطورين والطلاب في اليمن والوطن العربي.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="page-main-content">
+    <div class="container">
+
+      <!-- ==================== SPOTLIGHT SHOWCASE ==================== -->
+      <section class="programmer-idea-spotlight tilt-card">
+        <div class="card-glare"></div>
+        <div class="spotlight-content">
+          <span class="spotlight-badge"><i class="fas fa-bullhorn"></i> مبادرة تعليمية رائدة</span>
+          <h2>"فكرة مبرمج" — مجتمع إلهام وتعلّم لرواد التقنية</h2>
+          <p class="spotlight-main-desc">
+            منصة ومجتمع تقني تأسس بهدف إثراء المحتوى البرمجي العربي واليمني، وتبسيط علوم الحاسوب، البيانات، والذكاء الاصطناعي من خلال محاضرات نصية، مقاطع تطبيقية، ومشاريع واقعية يستفيد منها آلاف الطلاب والمطورين.
+          </p>
+
+          <!-- 4 Pillars Highlights Grid -->
+          <div class="spotlight-features">
+            <div class="feature-item">
+              <i class="fas fa-check-circle text-accent"></i>
+              <div>
+                <strong>شروحات معمقة في بايثون وعلم البيانات</strong>
+                <p>سلاسل تطبيقية تبدأ من الأساسيات وتتدرج إلى تحليل البيانات بـ pandas ونماذج Machine Learning.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle text-accent"></i>
+              <div>
+                <strong>معسكرات وتطبيقات هواتف بـ Flutter</strong>
+                <p>دروس عملية لبناء تطبيقات حقيقية تعمل على Android و iOS بكود نظيف وتصميم عصري.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle text-accent"></i>
+              <div>
+                <strong>مجتمع تفاعلي للمساعدة وحل المشكلات البرمجية</strong>
+                <p>نقاشات حية لحل أخطاء الأكواد ومساعدة الطلاب الجدد في تخصصات علوم الحاسوب وهندسة البرمجيات.</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle text-accent"></i>
+              <div>
+                <strong>متاح مجاناً للجميع عبر تيليجرام ويوتيوب والموقع</strong>
+                <p>إيماناً بأن العلم زكاة المعرفة، نوفر كافة الشروحات والمصادر مفتوحة ومتاحة بدون أي رسوم.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Impact Metrics Row -->
+          <div class="impact-metrics-row">
+            <div class="metric-item">
+              <i class="fas fa-users text-gold"></i>
+              <span class="metric-num">12,000+</span>
+              <span class="metric-text">مستفيد وطالب في المجتمع</span>
+            </div>
+            <div class="metric-item">
+              <i class="fas fa-video text-accent"></i>
+              <span class="metric-num">450+</span>
+              <span class="metric-text">درس ومقال برمجي تطبيقي</span>
+            </div>
+            <div class="metric-item">
+              <i class="fas fa-globe text-green"></i>
+              <span class="metric-num">100%</span>
+              <span class="metric-text">محتوى مجاني ومتاح للجميع</span>
+            </div>
+          </div>
+
+          <!-- Official Channels Section -->
+          <div class="spotlight-channels" style="margin-top: 3.5rem;">
+            <div class="channels-header">
+              <h3 class="channels-title"><i class="fas fa-satellite-dish text-accent"></i> انضم وتابع قنوات فكرة مبرمج الرسمية:</h3>
+              <p class="channels-subtitle">اختر المنصة المفضلة لديك للانضمام إلى مجتمعنا التقني المتنامي:</p>
+            </div>
+
+            <div class="channels-grid">
+              <a href="https://programmer-idea.tech" target="_blank" rel="noopener" class="channel-btn web" title="الموقع الرسمي والأكاديمية">
+                <i class="fas fa-globe"></i>
+                <div class="btn-text-wrap">
+                  <strong>الموقع الرسمي والأكاديمية</strong>
+                  <span>programmer-idea.tech</span>
+                </div>
+              </a>
+
+              <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" class="channel-btn tg" title="قناة تيليجرام الأساسية">
+                <i class="fab fa-telegram-plane"></i>
+                <div class="btn-text-wrap">
+                  <strong>قناة تيليجرام الأساسية</strong>
+                  <span>@Programmer_Idea</span>
+                </div>
+              </a>
+
+              <a href="https://t.me/Programmer_Idea2" target="_blank" rel="noopener" class="channel-btn tg-sub" title="القناة الفرعية بتيليجرام">
+                <i class="fab fa-telegram-plane"></i>
+                <div class="btn-text-wrap">
+                  <strong>القناة الفرعية للمناقشات</strong>
+                  <span>@Programmer_Idea2</span>
+                </div>
+              </a>
+
+              <a href="https://youtube.com/@Programmer_idea?si=XbI8c2wU-9vj_rJq" target="_blank" rel="noopener" class="channel-btn yt" title="قناة يوتيوب الرسمية">
+                <i class="fab fa-youtube"></i>
+                <div class="btn-text-wrap">
+                  <strong>قناة يوتيوب</strong>
+                  <span>دروس وورش عمل مرئية</span>
+                </div>
+              </a>
+
+              <a href="https://www.facebook.com/programmerIdea.com.ye?mibextid=ZbWKwL" target="_blank" rel="noopener" class="channel-btn fb" title="صفحة فيسبوك">
+                <i class="fab fa-facebook-f"></i>
+                <div class="btn-text-wrap">
+                  <strong>صفحة فيسبوك</strong>
+                  <span>أخبار ومقالات المنصة</span>
+                </div>
+              </a>
+
+              <a href="https://www.instagram.com/programmer_idea?igsh=emw4NzhpZWdrN3k1" target="_blank" rel="noopener" class="channel-btn ig" title="حساب انستغرام">
+                <i class="fab fa-instagram"></i>
+                <div class="btn-text-wrap">
+                  <strong>انستغرام</strong>
+                  <span>إنفوجرافيك ونصائح سريعة</span>
+                </div>
+              </a>
+
+              <a href="https://www.tiktok.com/@programmer_idea?_t=ZS-8t1xmOmygNj&_r=1" target="_blank" rel="noopener" class="channel-btn tt" title="حساب تيك توك">
+                <i class="fab fa-tiktok"></i>
+                <div class="btn-text-wrap">
+                  <strong>تيك توك</strong>
+                  <span>كبسولات ومقاطع تقنية</span>
+                </div>
+              </a>
+
+              <a href="https://whatsapp.com/channel/0029VaC5D4y6xCSN9zKjN63T" target="_blank" rel="noopener" class="channel-btn wa" title="قناة واتساب الرسمية">
+                <i class="fab fa-whatsapp"></i>
+                <div class="btn-text-wrap">
+                  <strong>قناة واتساب</strong>
+                  <span>تنبيهات فورية وشروحات</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ARTICLES SECTION ==================== -->
+      <section class="articles-section-wrapper" style="margin-top: 5rem;">
+        <div class="section-title">
+          <span class="subtitle">مكتبة المعرفة والتدوين التقني</span>
+          <h2 class="heading">المقالات والشروحات <span>من فكرة مبرمج</span></h2>
+          <div class="heading-line"></div>
+        </div>
+
+        <div class="articles-grid">
+          <!-- Article 1 -->
+          <article class="article-card tilt-card">
+            <div class="card-glare"></div>
+            <div class="article-thumb">
+              <img src="images/blog2.jpg" alt="علم البيانات وبايثون" onerror="this.src='images/placeholder.jpg'">
+              <span class="article-category">Data Science &amp; Python</span>
+            </div>
+            <div class="article-body">
+              <span class="article-date"><i class="far fa-clock"></i> 5 دقائق قراءة · عبدالرحمن عادل الشجاع</span>
+              <h3>دليل المبرمج للبدء في علم البيانات وتحليلها بلغة بايثون</h3>
+              <p>خارطة طريق مبسطة لفهم مكتبات pandas و NumPy و Matplotlib وكيفية تحويل الأرقام الخام إلى رؤى وقرارات استراتيجية.</p>
+              <button class="read-article-btn" data-article="data-science">اقرأ المقال كاملاً <i class="fas fa-arrow-left"></i></button>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="article-card tilt-card">
+            <div class="card-glare"></div>
+            <div class="article-thumb">
+              <img src="images/blog3.jpg" alt="الذكاء الاصطناعي والمستقبل" onerror="this.src='images/placeholder.jpg'">
+              <span class="article-category">AI &amp; Machine Learning</span>
+            </div>
+            <div class="article-body">
+              <span class="article-date"><i class="far fa-clock"></i> 6 دقائق قراءة · عبدالرحمن عادل الشجاع</span>
+              <h3>مستقبل الذكاء الاصطناعي التوليدي وتطبيقاته للمطورين</h3>
+              <p>نظرة تحليلية عن النماذج اللغوية الكبيرة LLMs، وبناء الوكلاء الأذكياء (AI Agents)، وهندسة الأوامر المتقدمة للمبرمجين.</p>
+              <button class="read-article-btn" data-article="ai-ml">اقرأ المقال كاملاً <i class="fas fa-arrow-left"></i></button>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="article-card tilt-card">
+            <div class="card-glare"></div>
+            <div class="article-thumb">
+              <img src="images/blog1.jpg" alt="تطوير تطبيقات فلاتر" onerror="this.src='images/placeholder.jpg'">
+              <span class="article-category">Mobile Dev (Flutter)</span>
+            </div>
+            <div class="article-body">
+              <span class="article-date"><i class="far fa-clock"></i> 5 دقائق قراءة · عبدالرحمن عادل الشجاع</span>
+              <h3>أسرار بناء تطبيقات Flutter احترافية وقابلة للتوسع</h3>
+              <p>أهم المعايير في إدارة حالة التطبيق (State Management عبر Provider/GetX)، معمارية الكود النظيف، وربط الـ APIs بسلاسة لتجربة مستخدم متميزة.</p>
+              <button class="read-article-btn" data-article="flutter-secrets">اقرأ المقال كاملاً <i class="fas fa-arrow-left"></i></button>
+            </div>
+          </article>
+
+          <!-- Article 4 -->
+          <article class="article-card tilt-card">
+            <div class="card-glare"></div>
+            <div class="article-thumb">
+              <img src="images/project-1.png" alt="بناء الـ MVP" onerror="this.src='images/placeholder.jpg'">
+              <span class="article-category">Product Management &amp; Startups</span>
+            </div>
+            <div class="article-body">
+              <span class="article-date"><i class="far fa-clock"></i> 4 دقائق قراءة · عبدالرحمن عادل الشجاع</span>
+              <h3>من الفكرة المجردة إلى أول إطلاق: كيف تبني MVP ناجحاً؟</h3>
+              <p>تجارب واقعية مستفادة من بناء منصة سندباد ومحفظة ريال حول تحديد المشكلة المحورية، هندسة الحل السريع، واختبار المنتج مع المستخدمين الأوائل.</p>
+              <button class="read-article-btn" data-article="products">اقرأ المقال كاملاً <i class="fas fa-arrow-left"></i></button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================== COMMUNITY CALL TO ACTION BANNER ==================== -->
+      <section class="cta-banner tilt-card" style="margin-top: 5rem; margin-bottom: 3rem;">
+        <div class="card-glare"></div>
+        <div class="cta-content">
+          <span class="cta-badge"><i class="fas fa-rocket"></i> انضم لعائلتنا التقنية</span>
+          <h2>كن جزءاً من مجتمع "فكرة مبرمج" اليوم!</h2>
+          <p>أكثر من 12,000 طالب ومطور يتبادلون الخبرات ويتعلمون كل يوم. لا تفوت فرصة التطوير البرمجي المستمر.</p>
+          <div class="cta-actions">
+            <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener" class="btn btn-primary">
+              <i class="fab fa-telegram-plane"></i> انضم لقناة تيليجرام
+            </a>
+            <a href="https://whatsapp.com/channel/0029VaC5D4y6xCSN9zKjN63T" target="_blank" rel="noopener" class="btn btn-outline">
+              <i class="fab fa-whatsapp"></i> انضم لقناة واتساب
+            </a>
+            <a href="https://programmer-idea.tech" target="_blank" rel="noopener" class="btn btn-subtle">
+              <i class="fas fa-graduation-cap"></i> زيارة الأكاديمية
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==================== ARTICLE READER MODAL ==================== -->
+  <div id="articleModal" class="custom-modal">
+    <div class="modal-overlay" id="articleModalOverlay"></div>
+    <div class="modal-container">
+      <button class="modal-close" id="closeArticleModal" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+      <div class="modal-content" id="articleModalContent">
+        <!-- Content will be injected dynamically via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FLOATING ACTION BUTTONS (FABs) ==================== -->
+  <div class="floating-fabs">
+    <a href="https://wa.me/967773853853?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3.%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B1%D8%AD%D9%85%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D9%86%20%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D9%8A%20%D9%81%D9%83%D8%B1%D8%A9%20%D9%85%D8%A8%D8%B1%D9%85%D8%AC" target="_blank" rel="noopener" class="fab-btn fab-wa" title="محادثة واتساب مباشرة">
+      <i class="fab fa-whatsapp"></i>
+      <span class="fab-tooltip">تواصل واتساب</span>
+    </a>
+
+    <button id="scrollTopBtn" class="fab-btn fab-top" title="العودة للأعلى">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h2>عبدالرحمن <span>.الشجاع</span></h2>
+        <p>طالب علوم حاسوب وتقنية معلومات بجامعة إب · مطور برمجيات ومؤسس فكرة مبرمج.</p>
+        <div class="footer-socials">
+          <a href="https://wa.me/967773853853" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://t.me/Alshuja_ai" target="_blank" rel="noopener"><i class="fab fa-telegram-plane"></i></a>
+          <a href="https://t.me/Programmer_Idea" target="_blank" rel="noopener"><i class="fas fa-bullhorn"></i></a>
+          <a href="https://www.instagram.com/alshujaa" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@Programmer_idea" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/programmerIdea.com.ye?mibextid=ZbWKwL" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.tiktok.com/@programmer_idea?_t=ZS-8t1xmOmygNj&_r=1" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-copy">
+        <p>جميع الحقوق محفوظة &copy; <span id="currentYear"></span> عبدالرحمن عادل الشجاع — مصمم ومطور بحرفية وعناية فائقة.</p>
+        <div class="footer-links">
+          <a href="index.html">الرئيسية</a> ·
+          <a href="about.html">عني ومساري</a> ·
+          <a href="skills.html">المهارات (3D)</a> ·
+          <a href="projects.html">المشاريع</a> ·
+          <a href="certificates.html">الشهادات</a> ·
+          <a href="blog.html">المدونة</a> ·
+          <a href="programmer-idea.html">فكرة مبرمج</a> ·
+          <a href="contact.html">تواصل معي</a> ·
+          <a href="admin.html">لوحة التحكم ⚙️</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 3D & Animation Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- jQuery & Custom Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="data-store.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
