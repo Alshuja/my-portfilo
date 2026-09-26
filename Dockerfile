@@ -16,7 +16,6 @@ COPY tsconfig.json ./
 
 RUN npm run build
 
-
 # =========================
 # Stage 2: PHP dependencies
 # =========================
