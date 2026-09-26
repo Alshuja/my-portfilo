@@ -1,7 +1,7 @@
 # =========================================================
 # Stage 1 — Install Laravel / PHP Dependencies
 # =========================================================
-FROM php:8.3-cli-alpine AS composer-deps
+FROM php:8.4-cli-alpine AS composer-deps
 
 WORKDIR /app
 
@@ -48,7 +48,7 @@ RUN composer install \
 # =========================================================
 # Stage 2 — Build Frontend
 # =========================================================
-FROM php:8.3-cli-alpine AS frontend
+FROM php:8.4-cli-alpine AS frontend
 
 WORKDIR /app
 
@@ -99,7 +99,7 @@ RUN pnpm run build
 # =========================================================
 # Stage 3 — Production Laravel Application
 # =========================================================
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 WORKDIR /var/www/html
 
