@@ -1,34 +1,11 @@
 # =========================================================
-# Stage 1 — Build Frontend
-# =========================================================
-FROM node:22-alpine AS frontend
-
-WORKDIR /app
-
-# Enable Corepack and pnpm
-RUN corepack enable
-
-# Copy package manager files
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-
-# Install frontend dependencies
-RUN pnpm install --frozen-lockfile
-
-# Copy the complete project
-COPY . .
-
-# Build React / Vite frontend
-RUN pnpm run build
-
-
-# =========================================================
-# Stage 2 — Install PHP / Laravel Dependencies
+# Stage 1 — Install Laravel / PHP Dependencies
 # =========================================================
 FROM php:8.3-cli-alpine AS composer-deps
 
 WORKDIR /app
 
-# Install required system packages
+# System dependencies
 RUN apk add --no-cache \
     icu-dev \
     libzip-dev \
@@ -40,7 +17,7 @@ RUN apk add --no-cache \
     git \
     bash
 
-# Install PHP extensions required by Laravel
+# PHP extensions required by Laravel
 RUN docker-php-ext-install \
     bcmath \
     intl \
@@ -52,13 +29,13 @@ RUN docker-php-ext-install \
     exif \
     pcntl
 
-# Copy Composer from official Composer image
+# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy Composer files first for Docker cache
+# Copy Composer files
 COPY composer.json composer.lock ./
 
-# Install production PHP dependencies
+# Install Laravel dependencies
 RUN composer install \
     --no-dev \
     --no-interaction \
@@ -69,13 +46,64 @@ RUN composer install \
 
 
 # =========================================================
+# Stage 2 — Build Frontend
+# =========================================================
+FROM php:8.3-cli-alpine AS frontend
+
+WORKDIR /app
+
+# Install PHP dependencies required by Laravel
+RUN apk add --no-cache \
+    icu-dev \
+    libzip-dev \
+    oniguruma-dev \
+    sqlite-dev \
+    libxml2-dev \
+    nodejs \
+    npm \
+    bash \
+    git
+
+# Install PHP extensions
+RUN docker-php-ext-install \
+    bcmath \
+    intl \
+    mbstring \
+    pdo \
+    pdo_mysql \
+    pdo_sqlite \
+    zip \
+    exif \
+    pcntl
+
+# Enable pnpm through Corepack
+RUN corepack enable
+
+# Copy Composer dependencies
+COPY --from=composer-deps /app/vendor ./vendor
+
+# Copy project
+COPY . .
+
+# Create environment file for build if it doesn't exist
+RUN if [ ! -f .env ]; then cp .env.example .env; fi
+
+# Install frontend dependencies
+RUN pnpm install --frozen-lockfile
+
+# Build frontend
+# Wayfinder needs PHP + artisan during this step
+RUN pnpm run build
+
+
+# =========================================================
 # Stage 3 — Production Laravel Application
 # =========================================================
 FROM php:8.3-fpm-alpine
 
 WORKDIR /var/www/html
 
-# Install Nginx and required libraries
+# Runtime packages
 RUN apk add --no-cache \
     nginx \
     bash \
@@ -86,7 +114,7 @@ RUN apk add --no-cache \
     sqlite-libs \
     libxml2
 
-# Install PHP extensions
+# PHP extensions
 RUN apk add --no-cache --virtual .build-deps \
     icu-dev \
     libzip-dev \
@@ -108,15 +136,15 @@ RUN apk add --no-cache --virtual .build-deps \
 
 
 # =========================================================
-# Copy Laravel Application
+# Copy Application
 # =========================================================
 
 COPY . .
 
-# Copy Composer vendor directory
+# Copy Composer dependencies
 COPY --from=composer-deps /app/vendor ./vendor
 
-# Copy built frontend assets
+# Copy compiled frontend
 COPY --from=frontend /app/public/build ./public/build
 
 
@@ -141,7 +169,7 @@ RUN chmod -R 775 \
 
 
 # =========================================================
-# PHP-FPM Configuration
+# PHP-FPM
 # =========================================================
 
 RUN sed -i 's|^listen = .*|listen = 127.0.0.1:9000|' \
@@ -149,7 +177,7 @@ RUN sed -i 's|^listen = .*|listen = 127.0.0.1:9000|' \
 
 
 # =========================================================
-# Nginx Configuration
+# Nginx
 # =========================================================
 
 RUN rm -f /etc/nginx/http.d/default.conf
@@ -183,23 +211,13 @@ RUN printf '%s\n' \
 
 
 # =========================================================
-# Laravel Production Configuration
+# Production
 # =========================================================
 
 ENV APP_ENV=production
 ENV APP_DEBUG=false
 ENV LOG_CHANNEL=stderr
 
-
-# =========================================================
-# Port
-# =========================================================
-
 EXPOSE 80
-
-
-# =========================================================
-# Start PHP-FPM + Nginx
-# =========================================================
 
 CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
