@@ -12,10 +12,10 @@ RUN apk add --no-cache \
     oniguruma-dev \
     sqlite-dev \
     libxml2-dev \
-    curl \
-    unzip \
-    git \
-    bash
+    nodejs \
+    npm \
+    bash \
+    git
 
 # PHP extensions required by Laravel
 RUN docker-php-ext-install \
@@ -77,7 +77,7 @@ RUN docker-php-ext-install \
     pcntl
 
 # Enable pnpm through Corepack
-RUN corepack enable
+RUN npm install -g pnpm@10
 
 # Copy Composer dependencies
 COPY --from=composer-deps /app/vendor ./vendor
