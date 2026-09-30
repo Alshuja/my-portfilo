@@ -5,17 +5,16 @@ FROM php:8.4-cli-alpine AS composer-deps
 
 WORKDIR /app
 
-# System dependencies
+# System dependencies for Composer
 RUN apk add --no-cache \
     icu-dev \
     libzip-dev \
     oniguruma-dev \
     sqlite-dev \
     libxml2-dev \
-    nodejs \
-    npm \
     bash \
-    git
+    git \
+    unzip
 
 # PHP extensions required by Laravel
 RUN docker-php-ext-install \
@@ -52,7 +51,7 @@ FROM php:8.4-cli-alpine AS frontend
 
 WORKDIR /app
 
-# Install PHP dependencies required by Laravel
+# Install PHP & Node dependencies for frontend build
 RUN apk add --no-cache \
     icu-dev \
     libzip-dev \
@@ -64,7 +63,7 @@ RUN apk add --no-cache \
     bash \
     git
 
-# Install PHP extensions
+# Install PHP extensions required by Wayfinder & Artisan
 RUN docker-php-ext-install \
     bcmath \
     intl \
@@ -76,23 +75,26 @@ RUN docker-php-ext-install \
     exif \
     pcntl
 
-# Enable pnpm through Corepack
+# Install pnpm v10
 RUN npm install -g pnpm@10
 
-# Copy Composer dependencies
-COPY --from=composer-deps /app/vendor ./vendor
-
-# Copy project
-COPY . .
-
-# Create environment file for build if it doesn't exist
-RUN if [ ! -f .env ]; then cp .env.example .env; fi
+# Copy package files first for Docker layer caching
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Install frontend dependencies
 RUN pnpm install --frozen-lockfile
 
-# Build frontend
-# Wayfinder needs PHP + artisan during this step
+# Copy Composer dependencies for Wayfinder route extraction
+COPY --from=composer-deps /app/vendor ./vendor
+
+# Copy project source
+COPY . .
+
+# Wayfinder requires Laravel to boot and discover routes
+RUN if [ ! -f .env ]; then cp .env.example .env; fi \
+    && php artisan key:generate --no-interaction
+
+# Build frontend assets
 RUN pnpm run build
 
 
@@ -134,90 +136,59 @@ RUN apk add --no-cache --virtual .build-deps \
         opcache \
     && apk del .build-deps
 
+# Copy Composer binary for dump-autoload & artisan operations
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# =========================================================
-# Copy Application
-# =========================================================
+# Copy configurations
+COPY docker/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY docker/php-fpm.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
+# Copy Application files
 COPY . .
 
-# Copy Composer dependencies
+# Copy Composer vendor from stage 1
 COPY --from=composer-deps /app/vendor ./vendor
 
-# Copy compiled frontend
+# Copy compiled frontend from stage 2
 COPY --from=frontend /app/public/build ./public/build
 
+# Regenerate autoloader for production
+RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
 
-# =========================================================
-# Laravel Permissions
-# =========================================================
-
+# Ensure storage, database, and cache directories exist with correct permissions
 RUN mkdir -p \
-    storage/framework/cache \
+    database \
+    storage/app/public \
+    storage/framework/cache/data \
     storage/framework/sessions \
     storage/framework/views \
     storage/logs \
-    bootstrap/cache
+    bootstrap/cache \
+    /run/nginx \
+    /var/lib/nginx
 
 RUN chown -R www-data:www-data \
+    database \
     storage \
-    bootstrap/cache
+    bootstrap/cache \
+    /run/nginx \
+    /var/lib/nginx
 
 RUN chmod -R 775 \
+    database \
     storage \
     bootstrap/cache
 
+# Copy entrypoint script and make executable
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# =========================================================
-# PHP-FPM
-# =========================================================
-
-RUN sed -i 's|^listen = .*|listen = 127.0.0.1:9000|' \
-    /usr/local/etc/php-fpm.d/www.conf
-
-
-# =========================================================
-# Nginx
-# =========================================================
-
-RUN rm -f /etc/nginx/http.d/default.conf
-
-RUN printf '%s\n' \
-    'server {' \
-    '    listen 80;' \
-    '    listen [::]:80;' \
-    '    server_name _;' \
-    '' \
-    '    root /var/www/html/public;' \
-    '    index index.php index.html;' \
-    '' \
-    '    location / {' \
-    '        try_files $uri $uri/ /index.php?$query_string;' \
-    '    }' \
-    '' \
-    '    location ~ \.php$ {' \
-    '        try_files $uri =404;' \
-    '        include fastcgi_params;' \
-    '        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;' \
-    '        fastcgi_param DOCUMENT_ROOT $document_root;' \
-    '        fastcgi_pass 127.0.0.1:9000;' \
-    '    }' \
-    '' \
-    '    location ~ /\.ht {' \
-    '        deny all;' \
-    '    }' \
-    '}' \
-    > /etc/nginx/http.d/default.conf
-
-
-# =========================================================
-# Production
-# =========================================================
-
+# Production Environment Variables
 ENV APP_ENV=production
 ENV APP_DEBUG=false
 ENV LOG_CHANNEL=stderr
 
 EXPOSE 80
 
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

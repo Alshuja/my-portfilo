@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { Head, useForm, router } from '@inertiajs/react';
-import { PlusCircle, Edit3, Trash2, Newspaper, Eye, EyeOff, ExternalLink } from 'lucide-react';
+import {
+    PlusCircle,
+    Edit3,
+    Trash2,
+    Newspaper,
+    Eye,
+    EyeOff,
+    ExternalLink,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -91,35 +99,43 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
     };
 
     const handleTogglePublish = (id: number) => {
-        router.patch(`/admin/articles/${id}/toggle-publish`, {}, { preserveScroll: true });
+        router.patch(
+            `/admin/articles/${id}/toggle-publish`,
+            {},
+            { preserveScroll: true },
+        );
     };
 
     return (
-        <div className="flex flex-col gap-6 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:p-8">
             <Head title="إدارة المدونة والمقالات" />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <div className="flex flex-col justify-between gap-4 rounded-3xl border border-border/80 bg-card p-6 shadow-sm sm:flex-row sm:items-center">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                    <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
                         <Newspaper className="size-6 text-primary" />
                         إدارة المدونة والمقالات
                     </h1>
                     <p className="text-xs text-muted-foreground">
-                        كتابة ونشر المقالات التقنية والشروحات ({articles.length} مقال مسجل).
+                        كتابة ونشر المقالات التقنية والشروحات ({articles.length}{' '}
+                        مقال مسجل).
                     </p>
                 </div>
 
-                <Button onClick={openAddModal} className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold gap-2 shadow-md">
+                <Button
+                    onClick={openAddModal}
+                    className="gap-2 rounded-xl bg-primary font-bold text-primary-foreground shadow-md hover:bg-primary/90"
+                >
                     <PlusCircle className="size-4" />
                     كتابة مقال جديد
                 </Button>
             </div>
 
             {/* Table */}
-            <div className="rounded-3xl border border-border/80 bg-card overflow-hidden shadow-sm">
+            <div className="overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-right text-xs">
-                        <thead className="bg-muted/50 border-b border-border/80 font-bold text-muted-foreground">
+                        <thead className="border-b border-border/80 bg-muted/50 font-bold text-muted-foreground">
                             <tr>
                                 <th className="p-4">عنوان المقال</th>
                                 <th className="p-4">التصنيف</th>
@@ -131,42 +147,55 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                         </thead>
                         <tbody className="divide-y divide-border/60">
                             {articles.map((art) => (
-                                <tr key={art.id} className="hover:bg-muted/30 transition-colors">
+                                <tr
+                                    key={art.id}
+                                    className="transition-colors hover:bg-muted/30"
+                                >
                                     <td className="p-4 font-bold text-foreground">
                                         <div className="flex items-center gap-3">
                                             {art.image && (
                                                 <img
                                                     src={art.image}
                                                     alt=""
-                                                    className="size-10 rounded-lg object-cover bg-muted shrink-0"
+                                                    className="size-10 shrink-0 rounded-lg bg-muted object-cover"
                                                 />
                                             )}
                                             <div>
                                                 <div>{art.title}</div>
-                                                <div className="text-[10px] text-muted-foreground font-mono">
+                                                <div className="font-mono text-[10px] text-muted-foreground">
                                                     /{art.slug}
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="p-4">
-                                        <Badge variant="outline" className="text-[10px]">
+                                        <Badge
+                                            variant="outline"
+                                            className="text-[10px]"
+                                        >
                                             {art.category_label}
                                         </Badge>
                                     </td>
-                                    <td className="p-4 font-mono text-muted-foreground">{art.date}</td>
+                                    <td className="p-4 font-mono text-muted-foreground">
+                                        {art.date}
+                                    </td>
                                     <td className="p-4">
                                         <button
-                                            onClick={() => handleTogglePublish(art.id)}
+                                            onClick={() =>
+                                                handleTogglePublish(art.id)
+                                            }
                                             className="cursor-pointer"
                                             title="تبديل حالة النشر"
                                         >
                                             {art.is_published ? (
-                                                <Badge className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-[10px]">
+                                                <Badge className="border border-emerald-500/30 bg-emerald-500/10 text-[10px] text-emerald-600 dark:text-emerald-400">
                                                     منشور
                                                 </Badge>
                                             ) : (
-                                                <Badge variant="outline" className="text-muted-foreground text-[10px]">
+                                                <Badge
+                                                    variant="outline"
+                                                    className="text-[10px] text-muted-foreground"
+                                                >
                                                     مسودة
                                                 </Badge>
                                             )}
@@ -177,7 +206,7 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                                             href={`/blog/${art.slug}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-primary hover:underline flex items-center gap-1"
+                                            className="flex items-center gap-1 text-primary hover:underline"
                                         >
                                             <span>عرض</span>
                                             <ExternalLink className="size-3" />
@@ -188,7 +217,9 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => openEditModal(art)}
+                                                onClick={() =>
+                                                    openEditModal(art)
+                                                }
                                                 className="size-8 rounded-lg"
                                             >
                                                 <Edit3 className="size-3.5 text-primary" />
@@ -196,7 +227,9 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => handleDelete(art.id)}
+                                                onClick={() =>
+                                                    handleDelete(art.id)
+                                                }
                                                 className="size-8 rounded-lg hover:text-destructive"
                                             >
                                                 <Trash2 className="size-3.5" />
@@ -212,10 +245,12 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
 
             {/* Modal */}
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-3xl">
-                    <DialogHeader className="text-right space-y-1">
+                <DialogContent className="max-h-[90vh] max-w-3xl overflow-y-auto rounded-3xl p-6 md:p-8">
+                    <DialogHeader className="space-y-1 text-right">
                         <DialogTitle className="text-xl font-bold">
-                            {editingArticle ? 'تعديل المقال' : 'كتابة مقال تقني جديد'}
+                            {editingArticle
+                                ? 'تعديل المقال'
+                                : 'كتابة مقال تقني جديد'}
                         </DialogTitle>
                         <DialogDescription className="text-xs text-muted-foreground">
                             أدخل تفاصيل المقال، محتواه، والوسوم التوضيحية.
@@ -223,44 +258,64 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                     </DialogHeader>
 
                     <form onSubmit={handleSubmit} className="space-y-4 pt-2">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">عنوان المقال *</label>
+                                <label className="text-xs font-semibold">
+                                    عنوان المقال *
+                                </label>
                                 <Input
                                     value={data.title}
-                                    onChange={(e) => setData('title', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('title', e.target.value)
+                                    }
                                     placeholder="مثال: دليل المبرمج للبدء في علم البيانات"
                                     required
                                     className="rounded-xl"
                                 />
-                                {errors.title && <p className="text-xs text-destructive">{errors.title}</p>}
+                                {errors.title && (
+                                    <p className="text-xs text-destructive">
+                                        {errors.title}
+                                    </p>
+                                )}
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">الرابط التعريفي (Slug) *</label>
+                                <label className="text-xs font-semibold">
+                                    الرابط التعريفي (Slug) *
+                                </label>
                                 <Input
                                     value={data.slug}
-                                    onChange={(e) => setData('slug', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('slug', e.target.value)
+                                    }
                                     placeholder="data-science-guide"
                                     className="rounded-xl font-mono text-xs"
                                     dir="ltr"
                                 />
-                                {errors.slug && <p className="text-xs text-destructive">{errors.slug}</p>}
+                                {errors.slug && (
+                                    <p className="text-xs text-destructive">
+                                        {errors.slug}
+                                    </p>
+                                )}
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">التصنيف *</label>
+                                <label className="text-xs font-semibold">
+                                    التصنيف *
+                                </label>
                                 <select
                                     value={data.category}
                                     onChange={(e) => {
                                         const val = e.target.value;
                                         const labels: Record<string, string> = {
-                                            'data-ai': 'علوم البيانات والذكاء الاصطناعي',
+                                            'data-ai':
+                                                'علوم البيانات والذكاء الاصطناعي',
                                             mobile: 'تطبيقات الهواتف الذكية',
                                             programming: 'البرمجة وتطوير الويب',
-                                            startups: 'ريادة الأعمال والمنتجات الرقمية',
+                                            startups:
+                                                'ريادة الأعمال والمنتجات الرقمية',
                                         };
                                         setData({
                                             ...data,
@@ -268,20 +323,32 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                                             category_label: labels[val] || val,
                                         });
                                     }}
-                                    className="w-full h-9 rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
+                                    className="h-9 w-full rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
                                 >
-                                    <option value="data-ai">علوم البيانات والذكاء الاصطناعي</option>
-                                    <option value="mobile">تطبيقات الهواتف الذكية</option>
-                                    <option value="programming">البرمجة وتطوير الويب</option>
-                                    <option value="startups">ريادة الأعمال والمنتجات الرقمية</option>
+                                    <option value="data-ai">
+                                        علوم البيانات والذكاء الاصطناعي
+                                    </option>
+                                    <option value="mobile">
+                                        تطبيقات الهواتف الذكية
+                                    </option>
+                                    <option value="programming">
+                                        البرمجة وتطوير الويب
+                                    </option>
+                                    <option value="startups">
+                                        ريادة الأعمال والمنتجات الرقمية
+                                    </option>
                                 </select>
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">مدة القراءة *</label>
+                                <label className="text-xs font-semibold">
+                                    مدة القراءة *
+                                </label>
                                 <Input
                                     value={data.reading_time}
-                                    onChange={(e) => setData('reading_time', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('reading_time', e.target.value)
+                                    }
                                     placeholder="5 دقائق قراءة"
                                     required
                                     className="rounded-xl"
@@ -289,10 +356,14 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">سنة النشر *</label>
+                                <label className="text-xs font-semibold">
+                                    سنة النشر *
+                                </label>
                                 <Input
                                     value={data.date}
-                                    onChange={(e) => setData('date', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('date', e.target.value)
+                                    }
                                     placeholder="2025"
                                     required
                                     className="rounded-xl"
@@ -308,21 +379,29 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                         />
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">الوسوم (مفصولة بفواصل)</label>
+                            <label className="text-xs font-semibold">
+                                الوسوم (مفصولة بفواصل)
+                            </label>
                             <Input
                                 value={data.tags}
-                                onChange={(e) => setData('tags', e.target.value)}
+                                onChange={(e) =>
+                                    setData('tags', e.target.value)
+                                }
                                 placeholder="Python, Data Science, pandas, AI"
                                 className="rounded-xl"
                             />
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">الموجز والنبذة (Excerpt) *</label>
+                            <label className="text-xs font-semibold">
+                                الموجز والنبذة (Excerpt) *
+                            </label>
                             <Textarea
                                 rows={2}
                                 value={data.excerpt}
-                                onChange={(e) => setData('excerpt', e.target.value)}
+                                onChange={(e) =>
+                                    setData('excerpt', e.target.value)
+                                }
                                 placeholder="نبذة مختصرة تظهر في البطاقات..."
                                 required
                                 className="rounded-xl"
@@ -330,11 +409,15 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">محتوى المقال كاملاً (يدعم HTML) *</label>
+                            <label className="text-xs font-semibold">
+                                محتوى المقال كاملاً (يدعم HTML) *
+                            </label>
                             <Textarea
                                 rows={8}
                                 value={data.body}
-                                onChange={(e) => setData('body', e.target.value)}
+                                onChange={(e) =>
+                                    setData('body', e.target.value)
+                                }
                                 placeholder="اكتب محتوى المقال هنا..."
                                 required
                                 className="rounded-xl font-mono text-xs"
@@ -346,15 +429,20 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                                 type="checkbox"
                                 id="is_published"
                                 checked={data.is_published}
-                                onChange={(e) => setData('is_published', e.target.checked)}
-                                className="rounded size-4 text-primary"
+                                onChange={(e) =>
+                                    setData('is_published', e.target.checked)
+                                }
+                                className="size-4 rounded text-primary"
                             />
-                            <label htmlFor="is_published" className="text-xs font-medium cursor-pointer">
+                            <label
+                                htmlFor="is_published"
+                                className="cursor-pointer text-xs font-medium"
+                            >
                                 نشر المقال فوراً في المدونة
                             </label>
                         </div>
 
-                        <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+                        <div className="flex items-center justify-end gap-3 border-t border-border pt-4">
                             <Button
                                 type="button"
                                 variant="ghost"
@@ -366,9 +454,13 @@ export default function AdminArticles({ articles }: AdminArticlesProps) {
                             <Button
                                 type="submit"
                                 disabled={processing}
-                                className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
+                                className="rounded-xl bg-primary font-bold text-primary-foreground hover:bg-primary/90"
                             >
-                                {processing ? 'جارٍ الحفظ...' : editingArticle ? 'حفظ التعديلات' : 'نشر المقال'}
+                                {processing
+                                    ? 'جارٍ الحفظ...'
+                                    : editingArticle
+                                      ? 'حفظ التعديلات'
+                                      : 'نشر المقال'}
                             </Button>
                         </div>
                     </form>

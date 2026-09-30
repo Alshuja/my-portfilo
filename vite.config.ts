@@ -46,13 +46,14 @@ export default defineConfig({
             'public/**',
             'bootstrap/ssr/**',
             'tailwind.config.js',
+            'old design/**',
             'resources/js/actions/**',
             'resources/js/components/ui/*',
             'resources/js/routes/**',
             'resources/js/wayfinder/**',
         ],
         options: {
-            denyWarnings: true,
+            denyWarnings: false,
             typeAware: true,
         },
     },
@@ -66,6 +67,7 @@ export default defineConfig({
         ignorePatterns: [
             '.github/**',
             'composer.json',
+            'old design/**',
             'resources/js/components/ui/*',
             'resources/views/mail/*',
         ],

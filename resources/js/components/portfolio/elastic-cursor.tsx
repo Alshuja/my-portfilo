@@ -9,7 +9,10 @@ export function ElasticCursor() {
 
     useEffect(() => {
         // Disable on touch-only devices
-        if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) {
+        if (
+            typeof window === 'undefined' ||
+            window.matchMedia('(pointer: coarse)').matches
+        ) {
             return;
         }
 
@@ -27,7 +30,9 @@ export function ElasticCursor() {
             // Check if hovering an interactive element
             const target = e.target as HTMLElement | null;
             if (target) {
-                const isInteractive = target.closest('a, button, input, textarea, select, [role="button"], .tilt-card, .avatar-frame, .interactive');
+                const isInteractive = target.closest(
+                    'a, button, input, textarea, select, [role="button"], .tilt-card, .avatar-frame, .interactive',
+                );
                 setIsHovered(!!isInteractive);
             }
         };
@@ -61,10 +66,15 @@ export function ElasticCursor() {
             rafId = requestAnimationFrame(render);
         };
 
-        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        window.addEventListener('mousemove', handleMouseMove, {
+            passive: true,
+        });
         window.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mouseup', handleMouseUp);
-        document.documentElement.addEventListener('mouseleave', handleMouseLeave);
+        document.documentElement.addEventListener(
+            'mouseleave',
+            handleMouseLeave,
+        );
 
         rafId = requestAnimationFrame(render);
 
@@ -72,7 +82,10 @@ export function ElasticCursor() {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mousedown', handleMouseDown);
             window.removeEventListener('mouseup', handleMouseUp);
-            document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
+            document.documentElement.removeEventListener(
+                'mouseleave',
+                handleMouseLeave,
+            );
             cancelAnimationFrame(rafId);
         };
     }, [isVisible, isHovered]);
@@ -84,20 +97,22 @@ export function ElasticCursor() {
             {/* Outer Elastic Jelly Ring */}
             <div
                 ref={cursorRef}
-                className={`fixed top-0 left-0 -ml-5 -mt-5 rounded-full border transition-all duration-150 ${
+                className={`fixed top-0 left-0 -mt-5 -ml-5 rounded-full border transition-all duration-150 ${
                     isHovered
                         ? 'size-12 border-primary/80 bg-primary/10 shadow-[0_0_20px_rgba(215,25,22,0.4)]'
                         : isClicking
-                        ? 'size-7 border-primary bg-primary/20 scale-90'
-                        : 'size-10 border-foreground/30 bg-primary/5'
+                          ? 'size-7 scale-90 border-primary bg-primary/20'
+                          : 'size-10 border-foreground/30 bg-primary/5'
                 }`}
             />
 
             {/* Inner Precision Point */}
             <div
                 ref={dotRef}
-                className={`fixed top-0 left-0 -ml-1 -mt-1 rounded-full transition-transform duration-75 ${
-                    isClicking ? 'size-2.5 bg-primary -ml-1.5 -mt-1.5' : 'size-2 bg-primary'
+                className={`fixed top-0 left-0 -mt-1 -ml-1 rounded-full transition-transform duration-75 ${
+                    isClicking
+                        ? '-mt-1.5 -ml-1.5 size-2.5 bg-primary'
+                        : 'size-2 bg-primary'
                 }`}
             />
         </div>

@@ -42,7 +42,10 @@ import { PortfolioLayout } from '@/layouts/portfolio-layout';
 import { ProjectModal } from '@/components/portfolio/project-modal';
 import { CertificateModal } from '@/components/portfolio/certificate-modal';
 import { ArticleModal } from '@/components/portfolio/article-modal';
-import { playClickSound, playMechanicalPress } from '@/components/portfolio/sound-effects';
+import {
+    playClickSound,
+    playMechanicalPress,
+} from '@/components/portfolio/sound-effects';
 import { TiltCard } from '@/components/portfolio/tilt-card';
 import { fireConfetti } from '@/components/portfolio/confetti';
 import { Spline3dScene } from '@/components/portfolio/spline-3d-scene';
@@ -66,10 +69,10 @@ interface WelcomeProps {
     allProjects: Project[];
     services?: Service[];
     testimonials?: Testimonial[];
-    skills: Skill[];
-    certificates: Certificate[];
-    journey: Journey[];
-    recentArticles: Article[];
+    skills?: Skill[];
+    certificates?: Certificate[];
+    journey?: Journey[];
+    recentArticles?: Article[];
     settings: ProfileSettings;
     stats: {
         projects: number;
@@ -98,15 +101,27 @@ export default function Welcome({
     settings,
     stats,
 }: WelcomeProps) {
-    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(
+        null,
+    );
     const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
-    const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+    const [selectedArticle, setSelectedArticle] = useState<Article | null>(
+        null,
+    );
     const [projectCategory, setProjectCategory] = useState<string>('all');
     const [activeSkillTab, setActiveSkillTab] = useState<string>('data-ai');
     const [activeBlogTag, setActiveBlogTag] = useState<string>('all');
 
     // Contact Form with Inertia useForm
-    const { data, setData, post, processing, reset, errors, recentlySuccessful } = useForm({
+    const {
+        data,
+        setData,
+        post,
+        processing,
+        reset,
+        errors,
+        recentlySuccessful,
+    } = useForm({
         name: '',
         email: '',
         phone: '',
@@ -127,9 +142,10 @@ export default function Welcome({
     };
 
     // Filter projects
-    const filteredProjects = projectCategory === 'all'
-        ? allProjects
-        : allProjects.filter((p) => p.category === projectCategory);
+    const filteredProjects =
+        projectCategory === 'all'
+            ? allProjects
+            : allProjects.filter((p) => p.category === projectCategory);
 
     const projectTabs = [
         { id: 'all', label: 'جميع المشاريع' },
@@ -140,244 +156,436 @@ export default function Welcome({
     ];
 
     // Detailed skills categorization fallback data matching original design exactly
-    const detailedSkillsMap: Record<string, Array<{ name: string; level: number; label: string; icon: string }>> = {
+    const detailedSkillsMap: Record<
+        string,
+        Array<{ name: string; level: number; label: string; icon: string }>
+    > = {
         'data-ai': [
-            { name: 'Python (Data & AI)', level: 92, label: 'متقدم', icon: 'Python' },
-            { name: 'Data Analysis & Visualization', level: 90, label: 'متقدم', icon: 'Data' },
-            { name: 'Machine Learning Models', level: 82, label: 'جيد جداً', icon: 'ML' },
+            {
+                name: 'Python (Data & AI)',
+                level: 92,
+                label: 'متقدم',
+                icon: 'Python',
+            },
+            {
+                name: 'Data Analysis & Visualization',
+                level: 90,
+                label: 'متقدم',
+                icon: 'Data',
+            },
+            {
+                name: 'Machine Learning Models',
+                level: 82,
+                label: 'جيد جداً',
+                icon: 'ML',
+            },
             { name: 'pandas & NumPy', level: 88, label: 'متقدم', icon: 'Lib' },
-            { name: 'Power BI & Advanced Excel', level: 85, label: 'متقدم', icon: 'BI' },
-            { name: 'Data Storytelling & Insights', level: 86, label: 'جيد جداً', icon: 'Viz' },
+            {
+                name: 'Power BI & Advanced Excel',
+                level: 85,
+                label: 'متقدم',
+                icon: 'BI',
+            },
+            {
+                name: 'Data Storytelling & Insights',
+                level: 86,
+                label: 'جيد جداً',
+                icon: 'Viz',
+            },
         ],
-        'programming': [
-            { name: 'C++ & OOP & Data Structures', level: 85, label: 'متقدم', icon: 'C++' },
-            { name: 'PHP & Laravel Framework', level: 80, label: 'جيد جداً', icon: 'PHP' },
-            { name: 'JavaScript (ES6+)', level: 78, label: 'جيد جداً', icon: 'JS' },
-            { name: 'HTML5 & CSS3 & Responsive UI', level: 90, label: 'متقدم', icon: 'UI' },
-            { name: 'RESTful APIs & Integrations', level: 82, label: 'جيد جداً', icon: 'API' },
-            { name: 'Software Architecture', level: 80, label: 'جيد جداً', icon: 'Arch' },
+        programming: [
+            {
+                name: 'C++ & OOP & Data Structures',
+                level: 85,
+                label: 'متقدم',
+                icon: 'C++',
+            },
+            {
+                name: 'PHP & Laravel Framework',
+                level: 80,
+                label: 'جيد جداً',
+                icon: 'PHP',
+            },
+            {
+                name: 'JavaScript (ES6+)',
+                level: 78,
+                label: 'جيد جداً',
+                icon: 'JS',
+            },
+            {
+                name: 'HTML5 & CSS3 & Responsive UI',
+                level: 90,
+                label: 'متقدم',
+                icon: 'UI',
+            },
+            {
+                name: 'RESTful APIs & Integrations',
+                level: 82,
+                label: 'جيد جداً',
+                icon: 'API',
+            },
+            {
+                name: 'Software Architecture',
+                level: 80,
+                label: 'جيد جداً',
+                icon: 'Arch',
+            },
         ],
-        'mobile': [
-            { name: 'Flutter Development', level: 85, label: 'متقدم', icon: 'Flutter' },
-            { name: 'Dart Programming', level: 84, label: 'متقدم', icon: 'Dart' },
-            { name: 'UI/UX Implementation', level: 85, label: 'متقدم', icon: 'UX' },
-            { name: 'State Management (Provider / GetX)', level: 78, label: 'جيد جداً', icon: 'State' },
+        mobile: [
+            {
+                name: 'Flutter Development',
+                level: 85,
+                label: 'متقدم',
+                icon: 'Flutter',
+            },
+            {
+                name: 'Dart Programming',
+                level: 84,
+                label: 'متقدم',
+                icon: 'Dart',
+            },
+            {
+                name: 'UI/UX Implementation',
+                level: 85,
+                label: 'متقدم',
+                icon: 'UX',
+            },
+            {
+                name: 'State Management (Provider / GetX)',
+                level: 78,
+                label: 'جيد جداً',
+                icon: 'State',
+            },
         ],
-        'tools': [
-            { name: 'SQL & Relational DB (MySQL / PostgreSQL)', level: 85, label: 'متقدم', icon: 'DB' },
-            { name: 'Git & GitHub Version Control', level: 84, label: 'جيد جداً', icon: 'Git' },
-            { name: 'VPS & Linux Server Basics', level: 75, label: 'جيد', icon: 'Linux' },
-            { name: 'Figma UI Design Basics', level: 78, label: 'جيد جداً', icon: 'Figma' },
+        tools: [
+            {
+                name: 'SQL & Relational DB (MySQL / PostgreSQL)',
+                level: 85,
+                label: 'متقدم',
+                icon: 'DB',
+            },
+            {
+                name: 'Git & GitHub Version Control',
+                level: 84,
+                label: 'جيد جداً',
+                icon: 'Git',
+            },
+            {
+                name: 'VPS & Linux Server Basics',
+                level: 75,
+                label: 'جيد',
+                icon: 'Linux',
+            },
+            {
+                name: 'Figma UI Design Basics',
+                level: 78,
+                label: 'جيد جداً',
+                icon: 'Figma',
+            },
         ],
     };
 
     // Fallback Services if empty
-    const displayServices: Service[] = services.length > 0 ? services : [
-        {
-            id: 1,
-            title: 'علوم البيانات والذكاء الاصطناعي',
-            slug: 'data-ai',
-            short_description: 'تحليل البيانات الاستكشافي، معالجة وتنظيف مجموعات البيانات الكبيرة، بناء وتدريب نماذج التعلم الآلي، وتصميم لوحات تحكم تفاعلية عبر Power BI لدعم اتخاذ القرار.',
-            detailed_description: 'تحليل البيانات الاستكشافي، معالجة وتنظيف مجموعات البيانات الكبيرة، بناء وتدريب نماذج التعلم الآلي، وتصميم لوحات تحكم تفاعلية عبر Power BI لدعم اتخاذ القرار.',
-            icon: 'brain',
-            features: ['Exploratory Data Analysis', 'Machine Learning Models', 'Power BI Dashboards', 'Predictive Modeling'],
-            order: 1,
-        },
-        {
-            id: 2,
-            title: 'تطوير تطبيقات الموبايل (Flutter)',
-            slug: 'mobile',
-            short_description: 'بناء تطبيقات هواتف ذكية عصرية لنظامي Android و iOS باستخدام Flutter و Dart، مع التركيز على التصميم السلس، الأداء الفائق، والربط المحكم مع الـ APIs.',
-            detailed_description: 'بناء تطبيقات هواتف ذكية عصرية لنظامي Android و iOS باستخدام Flutter و Dart، مع التركيز على التصميم السلس، الأداء الفائق، والربط المحكم مع الـ APIs.',
-            icon: 'smartphone',
-            features: ['Cross-Platform Apps', 'Clean Architecture & BLoC', 'Responsive Adaptive UI', 'Secure Offline Storage'],
-            order: 2,
-        },
-        {
-            id: 3,
-            title: 'تطوير الويب والأنظمة الخلفية (Laravel)',
-            slug: 'backend',
-            short_description: 'هندسة أنظمة الويب والخوادم وقواعد البيانات، وبناء واجهات البرمجة RESTful APIs الآمنة والسريعة، مع تطبيق أفضل ممارسات الحماية وهندسة البرمجيات.',
-            detailed_description: 'هندسة أنظمة الويب والخوادم وقواعد البيانات، وبناء واجهات البرمجة RESTful APIs الآمنة والسريعة، مع تطبيق أفضل ممارسات الحماية وهندسة البرمجيات.',
-            icon: 'server',
-            features: ['RESTful APIs', 'Database Optimization', 'Authentication & Guards', 'Cloud Microservices'],
-            order: 3,
-        },
-        {
-            id: 4,
-            title: 'تصميم تجربة وواجهة المستخدم UI/UX',
-            slug: 'ui-ux',
-            short_description: 'تحويل الأفكار إلى مخططات ونماذج تفاعلية أنيقة تركز على سهولة الاستخدام وتوافقها مع المعايير العالمية لجاذبية التصميم وسرعة الاستجابة.',
-            detailed_description: 'تحويل الأفكار إلى مخططات ونماذج تفاعلية أنيقة تركز على سهولة الاستخدام وتوافقها مع المعايير العالمية لجاذبية التصميم وسرعة الاستجابة.',
-            icon: 'layers',
-            features: ['Interactive Prototypes', 'Modern Aesthetic Systems', 'User Journey Mapping', 'Figma to Code Accuracy'],
-            order: 4,
-        },
-        {
-            id: 5,
-            title: 'تصميم وإدارة قواعد البيانات',
-            slug: 'database',
-            short_description: 'تصميم مخططات قواعد البيانات العلائقية (MySQL / PostgreSQL) وغير العلائقية (MongoDB)، وتحسين سرعة الاستعلامات والفهارس لتناسب الأنظمة الكبيرة.',
-            detailed_description: 'تصميم مخططات قواعد البيانات العلائقية (MySQL / PostgreSQL) وغير العلائقية (MongoDB)، وتحسين سرعة الاستعلامات والفهارس لتناسب الأنظمة الكبيرة.',
-            icon: 'database',
-            features: ['Schema Architecture', 'Indexing & Query Tuning', 'Data Migration Pipelines', 'Redis In-Memory Caching'],
-            order: 5,
-        },
-        {
-            id: 6,
-            title: 'الاستشارات التقنية وتطوير المنتجات',
-            slug: 'consulting',
-            short_description: 'مساعدة رواد الأعمال والشركات الناشئة في تحويل الأفكار إلى منتجات رقمية قابلة للنمو (MVPs)، واختيار البنية التقنية الأمثل لتحقيق النجاح والتوسع.',
-            detailed_description: 'مساعدة رواد الأعمال والشركات الناشئة في تحويل الأفكار إلى منتجات رقمية قابلة للنمو (MVPs)، واختيار البنية التقنية الأمثل لتحقيق النجاح والتوسع.',
-            icon: 'zap',
-            features: ['MVP Feasibility Studies', 'Tech Stack Selection', 'Code Audit & Refactoring', 'Scalability Roadmap'],
-            order: 6,
-        },
-    ];
+    const displayServices: Service[] =
+        services.length > 0
+            ? services
+            : [
+                  {
+                      id: 1,
+                      title: 'علوم البيانات والذكاء الاصطناعي',
+                      slug: 'data-ai',
+                      short_description:
+                          'تحليل البيانات الاستكشافي، معالجة وتنظيف مجموعات البيانات الكبيرة، بناء وتدريب نماذج التعلم الآلي، وتصميم لوحات تحكم تفاعلية عبر Power BI لدعم اتخاذ القرار.',
+                      detailed_description:
+                          'تحليل البيانات الاستكشافي، معالجة وتنظيف مجموعات البيانات الكبيرة، بناء وتدريب نماذج التعلم الآلي، وتصميم لوحات تحكم تفاعلية عبر Power BI لدعم اتخاذ القرار.',
+                      icon: 'brain',
+                      features: [
+                          'Exploratory Data Analysis',
+                          'Machine Learning Models',
+                          'Power BI Dashboards',
+                          'Predictive Modeling',
+                      ],
+                      order: 1,
+                  },
+                  {
+                      id: 2,
+                      title: 'تطوير تطبيقات الموبايل (Flutter)',
+                      slug: 'mobile',
+                      short_description:
+                          'بناء تطبيقات هواتف ذكية عصرية لنظامي Android و iOS باستخدام Flutter و Dart، مع التركيز على التصميم السلس، الأداء الفائق، والربط المحكم مع الـ APIs.',
+                      detailed_description:
+                          'بناء تطبيقات هواتف ذكية عصرية لنظامي Android و iOS باستخدام Flutter و Dart، مع التركيز على التصميم السلس، الأداء الفائق، والربط المحكم مع الـ APIs.',
+                      icon: 'smartphone',
+                      features: [
+                          'Cross-Platform Apps',
+                          'Clean Architecture & BLoC',
+                          'Responsive Adaptive UI',
+                          'Secure Offline Storage',
+                      ],
+                      order: 2,
+                  },
+                  {
+                      id: 3,
+                      title: 'تطوير الويب والأنظمة الخلفية (Laravel)',
+                      slug: 'backend',
+                      short_description:
+                          'هندسة أنظمة الويب والخوادم وقواعد البيانات، وبناء واجهات البرمجة RESTful APIs الآمنة والسريعة، مع تطبيق أفضل ممارسات الحماية وهندسة البرمجيات.',
+                      detailed_description:
+                          'هندسة أنظمة الويب والخوادم وقواعد البيانات، وبناء واجهات البرمجة RESTful APIs الآمنة والسريعة، مع تطبيق أفضل ممارسات الحماية وهندسة البرمجيات.',
+                      icon: 'server',
+                      features: [
+                          'RESTful APIs',
+                          'Database Optimization',
+                          'Authentication & Guards',
+                          'Cloud Microservices',
+                      ],
+                      order: 3,
+                  },
+                  {
+                      id: 4,
+                      title: 'تصميم تجربة وواجهة المستخدم UI/UX',
+                      slug: 'ui-ux',
+                      short_description:
+                          'تحويل الأفكار إلى مخططات ونماذج تفاعلية أنيقة تركز على سهولة الاستخدام وتوافقها مع المعايير العالمية لجاذبية التصميم وسرعة الاستجابة.',
+                      detailed_description:
+                          'تحويل الأفكار إلى مخططات ونماذج تفاعلية أنيقة تركز على سهولة الاستخدام وتوافقها مع المعايير العالمية لجاذبية التصميم وسرعة الاستجابة.',
+                      icon: 'layers',
+                      features: [
+                          'Interactive Prototypes',
+                          'Modern Aesthetic Systems',
+                          'User Journey Mapping',
+                          'Figma to Code Accuracy',
+                      ],
+                      order: 4,
+                  },
+                  {
+                      id: 5,
+                      title: 'تصميم وإدارة قواعد البيانات',
+                      slug: 'database',
+                      short_description:
+                          'تصميم مخططات قواعد البيانات العلائقية (MySQL / PostgreSQL) وغير العلائقية (MongoDB)، وتحسين سرعة الاستعلامات والفهارس لتناسب الأنظمة الكبيرة.',
+                      detailed_description:
+                          'تصميم مخططات قواعد البيانات العلائقية (MySQL / PostgreSQL) وغير العلائقية (MongoDB)، وتحسين سرعة الاستعلامات والفهارس لتناسب الأنظمة الكبيرة.',
+                      icon: 'database',
+                      features: [
+                          'Schema Architecture',
+                          'Indexing & Query Tuning',
+                          'Data Migration Pipelines',
+                          'Redis In-Memory Caching',
+                      ],
+                      order: 5,
+                  },
+                  {
+                      id: 6,
+                      title: 'الاستشارات التقنية وتطوير المنتجات',
+                      slug: 'consulting',
+                      short_description:
+                          'مساعدة رواد الأعمال والشركات الناشئة في تحويل الأفكار إلى منتجات رقمية قابلة للنمو (MVPs)، واختيار البنية التقنية الأمثل لتحقيق النجاح والتوسع.',
+                      detailed_description:
+                          'مساعدة رواد الأعمال والشركات الناشئة في تحويل الأفكار إلى منتجات رقمية قابلة للنمو (MVPs)، واختيار البنية التقنية الأمثل لتحقيق النجاح والتوسع.',
+                      icon: 'zap',
+                      features: [
+                          'MVP Feasibility Studies',
+                          'Tech Stack Selection',
+                          'Code Audit & Refactoring',
+                          'Scalability Roadmap',
+                      ],
+                      order: 6,
+                  },
+              ];
 
     // Fallback Journey Milestones if empty
-    const displayJourney = journey.length > 0 ? journey : [
-        {
-            id: 1,
-            title: 'تطوير منصة سندباد ومحفظة ريال الرقمية',
-            role: 'Full-Stack & Flutter Mobile Developer',
-            date_range: '2024 - 2025',
-            category: 'work',
-            category_label: 'عمل ومشاريع',
-            icon: 'rocket',
-            description: 'المشاركة في هندسة المنصة متعددة التجار "سندباد" (Laravel & Flutter) وتطوير تطبيق "محفظة ريال" للخدمات المالية الرقمية وتطبيق نماذج التنبؤ الذكية بالمبيعات.',
-            order: 1,
-        },
-        {
-            id: 2,
-            title: 'التخصص في علوم البيانات والذكاء الاصطناعي التوليدي',
-            role: 'Data Science & Machine Learning Enthusiast',
-            date_range: '2023 - 2024',
-            category: 'learning',
-            category_label: 'مسار تخصصي',
-            icon: 'brain',
-            description: 'إنجاز معسكرات وشهادات معتمدة في مكتبات بايثون (pandas, NumPy, Scikit-Learn)، وبناء لوحات المؤشرات بـ Power BI، ودراسة معمارية النماذج اللغوية الكبيرة LLMs.',
-            order: 2,
-        },
-        {
-            id: 3,
-            title: 'تأسيس مبادرة "فكرة مبرمج" (Programmer Idea)',
-            role: 'Founder & Tech Lead',
-            date_range: '2023 - مستمر',
-            category: 'community',
-            category_label: 'مبادرة مجتمعية',
-            icon: 'lightbulb',
-            description: 'إطلاق قنوات ومنصة فكرة مبرمج لتعليم البرمجة وتبسيط العلوم التقنية باللغة العربية، وتقديم شروحات عملية في مسارات بايثون وفلاتر وتطوير الويب.',
-            order: 3,
-        },
-        {
-            id: 4,
-            title: 'دراسة علوم الحاسوب وتقنية المعلومات — جامعة إب',
-            role: 'المستوى الرابع (بكالوريوس تقنية معلومات)',
-            date_range: '2021 - الآن',
-            category: 'education',
-            category_label: 'تعليم أكاديمي',
-            icon: 'graduation-cap',
-            description: 'دراسة متعمقة في هياكل البيانات (Data Structures)، الخوارزميات، البرمجة كائنية التوجه (OOP بـ C++)، قواعد البيانات العلائقية، وهندسة البرمجيات مع التكريم الأكاديمي.',
-            order: 4,
-        },
-    ];
+    const displayJourney =
+        journey.length > 0
+            ? journey
+            : [
+                  {
+                      id: 1,
+                      title: 'تطوير منصة سندباد ومحفظة ريال الرقمية',
+                      role: 'Full-Stack & Flutter Mobile Developer',
+                      date_range: '2024 - 2025',
+                      category: 'work',
+                      category_label: 'عمل ومشاريع',
+                      icon: 'rocket',
+                      description:
+                          'المشاركة في هندسة المنصة متعددة التجار "سندباد" (Laravel & Flutter) وتطوير تطبيق "محفظة ريال" للخدمات المالية الرقمية وتطبيق نماذج التنبؤ الذكية بالمبيعات.',
+                      order: 1,
+                  },
+                  {
+                      id: 2,
+                      title: 'التخصص في علوم البيانات والذكاء الاصطناعي التوليدي',
+                      role: 'Data Science & Machine Learning Enthusiast',
+                      date_range: '2023 - 2024',
+                      category: 'learning',
+                      category_label: 'مسار تخصصي',
+                      icon: 'brain',
+                      description:
+                          'إنجاز معسكرات وشهادات معتمدة في مكتبات بايثون (pandas, NumPy, Scikit-Learn)، وبناء لوحات المؤشرات بـ Power BI، ودراسة معمارية النماذج اللغوية الكبيرة LLMs.',
+                      order: 2,
+                  },
+                  {
+                      id: 3,
+                      title: 'تأسيس مبادرة "فكرة مبرمج" (Programmer Idea)',
+                      role: 'Founder & Tech Lead',
+                      date_range: '2023 - مستمر',
+                      category: 'community',
+                      category_label: 'مبادرة مجتمعية',
+                      icon: 'lightbulb',
+                      description:
+                          'إطلاق قنوات ومنصة فكرة مبرمج لتعليم البرمجة وتبسيط العلوم التقنية باللغة العربية، وتقديم شروحات عملية في مسارات بايثون وفلاتر وتطوير الويب.',
+                      order: 3,
+                  },
+                  {
+                      id: 4,
+                      title: 'دراسة علوم الحاسوب وتقنية المعلومات — جامعة إب',
+                      role: 'المستوى الرابع (بكالوريوس تقنية معلومات)',
+                      date_range: '2021 - الآن',
+                      category: 'education',
+                      category_label: 'تعليم أكاديمي',
+                      icon: 'graduation-cap',
+                      description:
+                          'دراسة متعمقة في هياكل البيانات (Data Structures)، الخوارزميات، البرمجة كائنية التوجه (OOP بـ C++)، قواعد البيانات العلائقية، وهندسة البرمجيات مع التكريم الأكاديمي.',
+                      order: 4,
+                  },
+              ];
 
     // Fallback Certificates if empty
-    const displayCertificates = certificates.length > 0 ? certificates : [
-        {
-            id: 1,
-            title: 'Python for Data Science, AI & Development',
-            issuer: 'IBM / Coursera',
-            date: '2024',
-            category: 'data-ai',
-            category_label: 'علوم البيانات والذكاء الاصطناعي',
-            image: '/images/project-1.png',
-            credential_url: 'https://coursera.org',
-            description: 'شهادة احترافية معتمدة في برمجة Python المتقدمة، معالجة البيانات بمكتبات pandas و NumPy، واستدعاء نماذج الذكاء الاصطناعي.',
-            order: 1,
-        },
-        {
-            id: 2,
-            title: 'تكريم التميز الأكاديمي — كلية الحاسوب',
-            issuer: 'جامعة إب (Ibb University)',
-            date: '2024',
-            category: 'academic',
-            category_label: 'تكريم أكاديمي',
-            image: '/images/project-2.jpg',
-            credential_url: '#',
-            description: 'تكريم رسمي من رئاسة قسم علوم الحاسوب وتقنية المعلومات بجامعة إب تقديراً للتفوق الأكاديمي والمبادرات التقنية الطلابية.',
-            order: 2,
-        },
-        {
-            id: 3,
-            title: 'Machine Learning Models & Data Analytics',
-            issuer: 'DeepLearning.AI',
-            date: '2024',
-            category: 'data-ai',
-            category_label: 'تعلم الآلة والتحليلات',
-            image: '/images/project-4.png',
-            credential_url: 'https://coursera.org',
-            description: 'بناء وتدريب وتقييم نماذج التعلم الآلي الخطي والتصنيفي والتجميعي، وتطبيقها على مجموعات بيانات واقعية.',
-            order: 3,
-        },
-        {
-            id: 4,
-            title: 'Power BI Data Analyst Associate',
-            issuer: 'Microsoft Certified Partner',
-            date: '2023',
-            category: 'data-ai',
-            category_label: 'ذكاء الأعمال',
-            image: '/images/project-3.png',
-            credential_url: '#',
-            description: 'إتقان نمذجة البيانات، دوال DAX المتقدمة، وبناء لوحات المؤشرات التفاعلية وربط مصادر البيانات المتعددة.',
-            order: 4,
-        },
-    ];
+    const displayCertificates =
+        certificates.length > 0
+            ? certificates
+            : [
+                  {
+                      id: 1,
+                      title: 'Python for Data Science, AI & Development',
+                      issuer: 'IBM / Coursera',
+                      date: '2024',
+                      category: 'data-ai',
+                      category_label: 'علوم البيانات والذكاء الاصطناعي',
+                      image: '/images/project-1.png',
+                      credential_url: 'https://coursera.org',
+                      description:
+                          'شهادة احترافية معتمدة في برمجة Python المتقدمة، معالجة البيانات بمكتبات pandas و NumPy، واستدعاء نماذج الذكاء الاصطناعي.',
+                      order: 1,
+                  },
+                  {
+                      id: 2,
+                      title: 'تكريم التميز الأكاديمي — كلية الحاسوب',
+                      issuer: 'جامعة إب (Ibb University)',
+                      date: '2024',
+                      category: 'academic',
+                      category_label: 'تكريم أكاديمي',
+                      image: '/images/project-2.jpg',
+                      credential_url: '#',
+                      description:
+                          'تكريم رسمي من رئاسة قسم علوم الحاسوب وتقنية المعلومات بجامعة إب تقديراً للتفوق الأكاديمي والمبادرات التقنية الطلابية.',
+                      order: 2,
+                  },
+                  {
+                      id: 3,
+                      title: 'Machine Learning Models & Data Analytics',
+                      issuer: 'DeepLearning.AI',
+                      date: '2024',
+                      category: 'data-ai',
+                      category_label: 'تعلم الآلة والتحليلات',
+                      image: '/images/project-4.png',
+                      credential_url: 'https://coursera.org',
+                      description:
+                          'بناء وتدريب وتقييم نماذج التعلم الآلي الخطي والتصنيفي والتجميعي، وتطبيقها على مجموعات بيانات واقعية.',
+                      order: 3,
+                  },
+                  {
+                      id: 4,
+                      title: 'Power BI Data Analyst Associate',
+                      issuer: 'Microsoft Certified Partner',
+                      date: '2023',
+                      category: 'data-ai',
+                      category_label: 'ذكاء الأعمال',
+                      image: '/images/project-3.png',
+                      credential_url: '#',
+                      description:
+                          'إتقان نمذجة البيانات، دوال DAX المتقدمة، وبناء لوحات المؤشرات التفاعلية وربط مصادر البيانات المتعددة.',
+                      order: 4,
+                  },
+              ];
 
     // Fallback Testimonials if empty
-    const displayTestimonials: Testimonial[] = testimonials.length > 0 ? testimonials : [
-        {
-            id: 1,
-            name: 'م. أحمد العريقي',
-            role: 'مدير مشروع تقني',
-            company: 'شريك تجاري',
-            text: 'عبدالرحمن مبرمج استثنائي يتمتع بعقلية هندسية منظمة وشغف غير عادي بالتفاصيل، ساهم بشكل ملموس في بناء المنصة وتطوير واجهات التطبيق بأعلى جودة واحترافية.',
-            rating: 5,
-            order: 1,
-        },
-        {
-            id: 2,
-            name: 'ياسر الحميري',
-            role: 'طالب علوم حاسوب',
-            company: 'عضو مجتمع فكرة مبرمج',
-            text: 'محتوى فكرة مبرمج الذي يقدمه عبدالرحمن كان له أثر كبير في فهمي لعلوم البيانات وبايثون. طريقته في التبسيط والعمق البرمجي جعلت المفاهيم المعقدة سهلة وممتعة.',
-            rating: 5,
-            order: 2,
-        },
-        {
-            id: 3,
-            name: 'م. ساهر قائد',
-            role: 'مهندس برمجيات',
-            company: 'زميل دراسة',
-            text: 'التعامل مع عبدالرحمن في مشاريع الـ Flutter و Laravel يعطيك اطمئناناً كاملاً. التزام بالمواعيد، كود نظيف وقابل للتطوير، وفهم عميق لاحتياجات العميل الحقيقية.',
-            rating: 5,
-            order: 3,
-        },
-    ];
+    const displayTestimonials: Testimonial[] =
+        testimonials.length > 0
+            ? testimonials
+            : [
+                  {
+                      id: 1,
+                      name: 'م. أحمد العريقي',
+                      role: 'مدير مشروع تقني',
+                      company: 'شريك تجاري',
+                      text: 'عبدالرحمن مبرمج استثنائي يتمتع بعقلية هندسية منظمة وشغف غير عادي بالتفاصيل، ساهم بشكل ملموس في بناء المنصة وتطوير واجهات التطبيق بأعلى جودة واحترافية.',
+                      rating: 5,
+                      order: 1,
+                  },
+                  {
+                      id: 2,
+                      name: 'ياسر الحميري',
+                      role: 'طالب علوم حاسوب',
+                      company: 'عضو مجتمع فكرة مبرمج',
+                      text: 'محتوى فكرة مبرمج الذي يقدمه عبدالرحمن كان له أثر كبير في فهمي لعلوم البيانات وبايثون. طريقته في التبسيط والعمق البرمجي جعلت المفاهيم المعقدة سهلة وممتعة.',
+                      rating: 5,
+                      order: 2,
+                  },
+                  {
+                      id: 3,
+                      name: 'م. ساهر قائد',
+                      role: 'مهندس برمجيات',
+                      company: 'زميل دراسة',
+                      text: 'التعامل مع عبدالرحمن في مشاريع الـ Flutter و Laravel يعطيك اطمئناناً كاملاً. التزام بالمواعيد، كود نظيف وقابل للتطوير، وفهم عميق لاحتياجات العميل الحقيقية.',
+                      rating: 5,
+                      order: 3,
+                  },
+              ];
 
     // Hot Topics for Blog
     const hotTopics = [
-        { title: 'الذكاء الاصطناعي وتعلم الآلة', count: '24 مقالاً وشرحاً', image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=700&auto=format&fit=crop', filter: 'ذكاء' },
-        { title: 'بايثون وهندسة البيانات', count: '38 مقالاً وشرحاً', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=700&auto=format&fit=crop', filter: 'بايثون' },
-        { title: 'تطوير تطبيقات الموبايل بـ Flutter', count: '19 مقالاً وشرحاً', image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=700&auto=format&fit=crop', filter: 'flutter' },
-        { title: 'تطوير الويب والـ Full-Stack', count: '27 مقالاً وشرحاً', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=700&auto=format&fit=crop', filter: 'ويب' },
-        { title: 'معمارية البرمجيات والخوارزميات', count: '16 مقالاً وشرحاً', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=700&auto=format&fit=crop', filter: 'معمارية' },
-        { title: 'ريادة الأعمال والمنتجات الرقمية', count: '12 مقالاً وشرحاً', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop', filter: 'ريادة' },
+        {
+            title: 'الذكاء الاصطناعي وتعلم الآلة',
+            count: '24 مقالاً وشرحاً',
+            image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=700&auto=format&fit=crop',
+            filter: 'ذكاء',
+        },
+        {
+            title: 'بايثون وهندسة البيانات',
+            count: '38 مقالاً وشرحاً',
+            image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=700&auto=format&fit=crop',
+            filter: 'بايثون',
+        },
+        {
+            title: 'تطوير تطبيقات الموبايل بـ Flutter',
+            count: '19 مقالاً وشرحاً',
+            image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=700&auto=format&fit=crop',
+            filter: 'flutter',
+        },
+        {
+            title: 'تطوير الويب والـ Full-Stack',
+            count: '27 مقالاً وشرحاً',
+            image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=700&auto=format&fit=crop',
+            filter: 'ويب',
+        },
+        {
+            title: 'معمارية البرمجيات والخوارزميات',
+            count: '16 مقالاً وشرحاً',
+            image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=700&auto=format&fit=crop',
+            filter: 'معمارية',
+        },
+        {
+            title: 'ريادة الأعمال والمنتجات الرقمية',
+            count: '12 مقالاً وشرحاً',
+            image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=700&auto=format&fit=crop',
+            filter: 'ريادة',
+        },
     ];
 
     // Sanitize experience years to remove trailing plus or non-numeric characters
-    const rawExpYears = settings.experience_years ? String(settings.experience_years) : '3';
+    const rawExpYears = settings.experience_years
+        ? String(settings.experience_years)
+        : '3';
     const expYears = rawExpYears.replace(/[^0-9]/g, '') || '3';
 
     return (
@@ -417,17 +625,31 @@ export default function Welcome({
                     <div className="hero-content">
                         {/* LEFT SIDE: Image Section (Column 1 in Desktop & Tablet) */}
                         <div className="hero-image-col image-section">
-                            <TiltCard maxTilt={8} className="w-full max-w-[420px]">
+                            <TiltCard
+                                maxTilt={8}
+                                className="w-full max-w-[420px]"
+                            >
                                 <div className="avatar-frame">
                                     <div className="image-glow" />
 
                                     <img
-                                        src={settings.hero_image || '/images/profile-hero.png'}
-                                        alt={settings.name || 'عبدالرحمن عادل الشجاع'}
+                                        src={
+                                            settings.hero_image ||
+                                            '/images/profile-hero.png'
+                                        }
+                                        alt={
+                                            settings.name ||
+                                            'عبدالرحمن عادل الشجاع'
+                                        }
                                         onError={(e) => {
                                             const target = e.currentTarget;
-                                            if (!target.src.includes('main-img.jpg')) {
-                                                target.src = '/images/main-img.jpg';
+                                            if (
+                                                !target.src.includes(
+                                                    'main-img.jpg',
+                                                )
+                                            ) {
+                                                target.src =
+                                                    '/images/main-img.jpg';
                                             }
                                         }}
                                         className="avatar-img signature-frame-img"
@@ -435,8 +657,12 @@ export default function Welcome({
 
                                     {/* Experience floating badge */}
                                     <div className="image-badge-experience">
-                                        <span className="badge-number">+{expYears}</span>
-                                        <span className="badge-text">سنوات في البرمجة والبيانات</span>
+                                        <span className="badge-number">
+                                            +{expYears}
+                                        </span>
+                                        <span className="badge-text">
+                                            سنوات في البرمجة والبيانات
+                                        </span>
                                     </div>
                                 </div>
                             </TiltCard>
@@ -447,23 +673,30 @@ export default function Welcome({
                             {/* Status Badge */}
                             <div className="status-badge">
                                 <span className="pulse-dot"></span>
-                                <span>{settings.status_badge || 'متاح للعمل الحر وتطوير المشاريع البرمجية'}</span>
+                                <span>
+                                    {settings.status_badge ||
+                                        'متاح للعمل الحر وتطوير المشاريع البرمجية'}
+                                </span>
                             </div>
 
                             {/* Hello Greeting & Main Heading */}
                             <div className="hero-title-group">
-                                <span className="hello">
-                                    مرحباً بك، أنا
-                                </span>
+                                <span className="hello">مرحباً بك، أنا</span>
                                 <h1 className="hero-name">
-                                    عبدالرحمن <span className="text-gradient">عادل الشجاع</span>
+                                    عبدالرحمن{' '}
+                                    <span className="text-gradient">
+                                        عادل الشجاع
+                                    </span>
                                 </h1>
                             </div>
 
                             {/* Role Badge */}
                             <div className="role-badge">
-                                <Terminal className="size-4.5 text-primary shrink-0" />
-                                <span>{settings.role_title || 'Computer Science & IT · Data & AI · Software Development'}</span>
+                                <Terminal className="size-4.5 shrink-0 text-primary" />
+                                <span>
+                                    {settings.role_title ||
+                                        'Computer Science & IT · Data & AI · Software Development'}
+                                </span>
                             </div>
 
                             {/* Hero Description */}
@@ -508,7 +741,9 @@ export default function Welcome({
 
                             {/* Social Hero (8 direct channels) */}
                             <div className="social-hero">
-                                <span className="social-label">تابعني وتواصل معي:</span>
+                                <span className="social-label">
+                                    تابعني وتواصل معي:
+                                </span>
                                 <div className="social-links">
                                     <a
                                         href={`https://wa.me/${(settings.whatsapp_1 || '+967773853853').replace(/\+/g, '')}`}
@@ -520,7 +755,10 @@ export default function Welcome({
                                         <Phone className="size-4" />
                                     </a>
                                     <a
-                                        href={settings.telegram || 'https://t.me/Alshuja_ai'}
+                                        href={
+                                            settings.telegram ||
+                                            'https://t.me/Alshuja_ai'
+                                        }
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         title="Telegram شخصي"
@@ -538,7 +776,10 @@ export default function Welcome({
                                         <BookOpen className="size-4" />
                                     </a>
                                     <a
-                                        href={settings.instagram || 'https://www.instagram.com/alshujaa'}
+                                        href={
+                                            settings.instagram ||
+                                            'https://www.instagram.com/alshujaa'
+                                        }
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         title="Instagram"
@@ -565,7 +806,10 @@ export default function Welcome({
                                         <Globe className="size-4" />
                                     </a>
                                     <a
-                                        href={settings.github || 'https://github.com/alshujaa'}
+                                        href={
+                                            settings.github ||
+                                            'https://github.com/alshujaa'
+                                        }
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         title="GitHub"
@@ -603,42 +847,59 @@ export default function Welcome({
                     <div className="about-card-wrapper">
                         <div className="about-grid">
                             {/* Image Column */}
-                            <div className="about-image-col flex justify-center items-center">
+                            <div className="about-image-col flex items-center justify-center">
                                 <div className="avatar-frame max-w-xs sm:max-w-sm">
                                     <div className="image-glow" />
                                     <img
-                                        src={settings.about_image || settings.hero_image || '/images/profile-hero.png'}
-                                        alt={settings.name || 'عبدالرحمن عادل الشجاع'}
+                                        src={
+                                            settings.about_image ||
+                                            settings.hero_image ||
+                                            '/images/profile-hero.png'
+                                        }
+                                        alt={
+                                            settings.name ||
+                                            'عبدالرحمن عادل الشجاع'
+                                        }
                                         onError={(e) => {
                                             const target = e.currentTarget;
-                                            if (!target.src.includes('main-img.jpg')) {
-                                                target.src = '/images/main-img.jpg';
+                                            if (
+                                                !target.src.includes(
+                                                    'main-img.jpg',
+                                                )
+                                            ) {
+                                                target.src =
+                                                    '/images/main-img.jpg';
                                             }
                                         }}
                                         className="avatar-img signature-frame-img"
                                     />
                                     <div className="badge-exp">
                                         <span className="num">+{expYears}</span>
-                                        <span className="txt">سنوات شغف وبناء برمجيات</span>
+                                        <span className="txt">
+                                            سنوات شغف وبناء برمجيات
+                                        </span>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Text Column */}
-                            <div className="about-text-col text-right space-y-4">
-                                <span className="subtitle font-bold text-primary text-sm sm:text-base">
+                            <div className="about-text-col space-y-4 text-right">
+                                <span className="subtitle text-sm font-bold text-primary sm:text-base">
                                     شغف بالابتكار والحلول العملية
                                 </span>
-                                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground">
-                                    مهندس ومطور <span className="text-gradient">يحوّل الأفكار إلى منتجات رقمية</span>
+                                <h2 className="text-2xl font-black text-foreground sm:text-3xl lg:text-4xl">
+                                    مهندس ومطور{' '}
+                                    <span className="text-gradient">
+                                        يحوّل الأفكار إلى منتجات رقمية
+                                    </span>
                                 </h2>
 
-                                <p className="lead-text text-sm sm:text-base text-foreground font-medium leading-relaxed">
+                                <p className="lead-text text-sm leading-relaxed font-medium text-foreground sm:text-base">
                                     {settings.about_lead ||
                                         'أنا عبدالرحمن عادل الشجاع، طالب في جامعة إب بكلية الحاسوب وتقنية المعلومات (المستوى الرابع). أؤمن بأن التقنية والبيانات هما القوة المحركة لصناعة التغيير، ولذلك كرست وقتي لتعلم وتطبيق أحدث مهارات علم البيانات، ونماذج الذكاء الاصطناعي، وهندسة البرمجيات.'}
                                 </p>
 
-                                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                                     {settings.about_bio ||
                                         'أسست منصة ومبادرة "فكرة مبرمج" (Programmer Idea) لتبسيط علوم البرمجة والذكاء الاصطناعي وإثراء المحتوى التقني العربي، كما شاركت في بناء وتطوير مشاريع حقيقية وناجحة كمنصة "سندباد" (Sinbad) للتجارة الإلكترونية وتطبيق "محفظة ريال" (Riyal Wallet).'}
                                 </p>
@@ -648,10 +909,13 @@ export default function Welcome({
                                     <TiltCard maxTilt={10}>
                                         <div className="highlight-item">
                                             <div className="card-glare" />
-                                            <GraduationCap className="size-6 text-primary shrink-0" />
+                                            <GraduationCap className="size-6 shrink-0 text-primary" />
                                             <div>
                                                 <strong>جامعة إب</strong>
-                                                <span>علوم حاسوب وتكنولوجيا معلومات (المستوى 4)</span>
+                                                <span>
+                                                    علوم حاسوب وتكنولوجيا
+                                                    معلومات (المستوى 4)
+                                                </span>
                                             </div>
                                         </div>
                                     </TiltCard>
@@ -659,10 +923,13 @@ export default function Welcome({
                                     <TiltCard maxTilt={10}>
                                         <div className="highlight-item">
                                             <div className="card-glare" />
-                                            <Brain className="size-6 text-primary shrink-0" />
+                                            <Brain className="size-6 shrink-0 text-primary" />
                                             <div>
                                                 <strong>Data & AI</strong>
-                                                <span>نماذج تعلم الآلة وتحليل البيانات ببايثون</span>
+                                                <span>
+                                                    نماذج تعلم الآلة وتحليل
+                                                    البيانات ببايثون
+                                                </span>
                                             </div>
                                         </div>
                                     </TiltCard>
@@ -670,10 +937,13 @@ export default function Welcome({
                                     <TiltCard maxTilt={10}>
                                         <div className="highlight-item">
                                             <div className="card-glare" />
-                                            <Smartphone className="size-6 text-primary shrink-0" />
+                                            <Smartphone className="size-6 shrink-0 text-primary" />
                                             <div>
                                                 <strong>Flutter Apps</strong>
-                                                <span>تطبيقات هواتف ذكية Android & iOS</span>
+                                                <span>
+                                                    تطبيقات هواتف ذكية Android &
+                                                    iOS
+                                                </span>
                                             </div>
                                         </div>
                                     </TiltCard>
@@ -681,10 +951,13 @@ export default function Welcome({
                                     <TiltCard maxTilt={10}>
                                         <div className="highlight-item">
                                             <div className="card-glare" />
-                                            <Rocket className="size-6 text-primary shrink-0" />
+                                            <Rocket className="size-6 shrink-0 text-primary" />
                                             <div>
                                                 <strong>فكرة مبرمج</strong>
-                                                <span>مبادرة ومجتمع تقني لتعليم البرمجة</span>
+                                                <span>
+                                                    مبادرة ومجتمع تقني لتعليم
+                                                    البرمجة
+                                                </span>
                                             </div>
                                         </div>
                                     </TiltCard>
@@ -707,7 +980,9 @@ export default function Welcome({
 
                                     <a
                                         href="#contact"
-                                        onClick={() => playClickSound(650, 0.03)}
+                                        onClick={() =>
+                                            playClickSound(650, 0.03)
+                                        }
                                         className="btn btn-outline"
                                     >
                                         <Send className="size-4" />
@@ -723,10 +998,12 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 3. SKILLS & 3D STAGE SECTION (#skills)                         */}
             {/* ============================================================== */}
-            <section className="skills py-20 relative" id="skills">
+            <section className="skills relative py-20" id="skills">
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
-                        <span className="subtitle">قدراتي وكفاءتي البرمجية</span>
+                        <span className="subtitle">
+                            قدراتي وكفاءتي البرمجية
+                        </span>
                         <h2 className="heading">
                             المهارات والبيئة <span>ثلاثية الأبعاد (3D)</span>
                         </h2>
@@ -735,20 +1012,26 @@ export default function Welcome({
 
                     {/* 3D Spline Interactive Showcase & Tech Wall */}
                     <div className="skills-3d-stage space-y-12">
-                        <div className="stage-header max-w-3xl mx-auto text-center space-y-3">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-primary/10 text-primary border border-primary/20">
+                        <div className="stage-header mx-auto max-w-3xl space-y-3 text-center">
+                            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-xs font-bold text-primary">
                                 <span className="pulse-dot"></span>
                                 <Box className="size-4" />
-                                <span>مجسم لوحة المفاتيح والتقنيات التفاعلي (Interactive 3D Stage)</span>
+                                <span>
+                                    مجسم لوحة المفاتيح والتقنيات التفاعلي
+                                    (Interactive 3D Stage)
+                                </span>
                             </div>
-                            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                                <MousePointer className="size-3.5 inline ml-1 text-primary" />
-                                <strong>تجربة تفاعلية حية:</strong> اسحب وحرّك الماوس للتنقل ثلاثي الأبعاد داخل المشهد، واضغط على مفاتيح لوحة المفاتيح لتجربة المؤثرات الصوتية والميكانيكية الحقيقية.
+                            <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                                <MousePointer className="ml-1 inline size-3.5 text-primary" />
+                                <strong>تجربة تفاعلية حية:</strong> اسحب وحرّك
+                                الماوس للتنقل ثلاثي الأبعاد داخل المشهد، واضغط على
+                                مفاتيح لوحة المفاتيح لتجربة المؤثرات الصوتية
+                                والميكانيكية الحقيقية.
                             </p>
                         </div>
 
                         {/* Spline 3D Scene */}
-                        <div className="max-w-5xl mx-auto">
+                        <div className="mx-auto max-w-5xl">
                             <Spline3dScene
                                 url="/assets/3d/skills-keyboard.spline"
                                 height="540px"
@@ -761,12 +1044,12 @@ export default function Welcome({
                     </div>
 
                     {/* Detailed Skill Tabs with Progress Bars */}
-                    <div className="mt-20 pt-12 border-t border-border/70">
-                        <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
+                    <div className="mt-20 border-t border-border/70 pt-12">
+                        <div className="mx-auto mb-8 max-w-2xl space-y-2 text-center">
                             <h3 className="text-2xl font-bold text-foreground">
                                 تفصيل المهارات ومستوى الإتقان
                             </h3>
-                            <p className="text-xs sm:text-sm text-muted-foreground">
+                            <p className="text-xs text-muted-foreground sm:text-sm">
                                 قياس دقيق لنسبة الكفاءة في كل مجال ومكتبة برمجية
                             </p>
                         </div>
@@ -819,26 +1102,36 @@ export default function Welcome({
                         </div>
 
                         {/* Tab Content Cards */}
-                        <div className="skills-grid max-w-5xl mx-auto">
-                            {(detailedSkillsMap[activeSkillTab] || []).map((skillItem) => (
-                                <div key={skillItem.name} className="skill-box tilt-card">
-                                    <div className="card-glare" />
-                                    <div className="skill-info">
-                                        <span className="skill-name">
-                                            <span className="size-6 rounded-md bg-primary/10 text-primary flex items-center justify-center font-mono text-[10px] font-bold">
-                                                {skillItem.icon}
+                        <div className="skills-grid mx-auto max-w-5xl">
+                            {(detailedSkillsMap[activeSkillTab] || []).map(
+                                (skillItem) => (
+                                    <div
+                                        key={skillItem.name}
+                                        className="skill-box tilt-card"
+                                    >
+                                        <div className="card-glare" />
+                                        <div className="skill-info">
+                                            <span className="skill-name">
+                                                <span className="flex size-6 items-center justify-center rounded-md bg-primary/10 font-mono text-[10px] font-bold text-primary">
+                                                    {skillItem.icon}
+                                                </span>
+                                                {skillItem.name}
                                             </span>
-                                            {skillItem.name}
-                                        </span>
-                                        <span className="skill-level">
-                                            {skillItem.level}% · {skillItem.label}
-                                        </span>
+                                            <span className="skill-level">
+                                                {skillItem.level}% ·{' '}
+                                                {skillItem.label}
+                                            </span>
+                                        </div>
+                                        <div className="progress-bar">
+                                            <span
+                                                style={{
+                                                    width: `${skillItem.level}%`,
+                                                }}
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="progress-bar">
-                                        <span style={{ width: `${skillItem.level}%` }} />
-                                    </div>
-                                </div>
-                            ))}
+                                ),
+                            )}
                         </div>
                     </div>
                 </div>
@@ -847,7 +1140,10 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 4. STATS COUNTER SECTION (#stats)                              */}
             {/* ============================================================== */}
-            <section className="stats-section bg-muted/20 border-y border-border/60" id="stats">
+            <section
+                className="stats-section border-y border-border/60 bg-muted/20"
+                id="stats"
+            >
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="stats-grid">
                         <TiltCard maxTilt={10}>
@@ -857,7 +1153,9 @@ export default function Welcome({
                                     <Calendar className="size-6" />
                                 </div>
                                 <div className="stat-value">+{expYears}</div>
-                                <div className="stat-label">سنوات شغف وبناء برمجيات</div>
+                                <div className="stat-label">
+                                    سنوات شغف وبناء برمجيات
+                                </div>
                             </div>
                         </TiltCard>
 
@@ -867,8 +1165,12 @@ export default function Welcome({
                                 <div className="stat-icon">
                                     <Code className="size-6" />
                                 </div>
-                                <div className="stat-value">+{stats.projects || 15}</div>
-                                <div className="stat-label">مشاريع ومنصات رقمية</div>
+                                <div className="stat-value">
+                                    +{stats.projects || 15}
+                                </div>
+                                <div className="stat-label">
+                                    مشاريع ومنصات رقمية
+                                </div>
                             </div>
                         </TiltCard>
 
@@ -879,7 +1181,9 @@ export default function Welcome({
                                     <GraduationCap className="size-6" />
                                 </div>
                                 <div className="stat-value">+10,000</div>
-                                <div className="stat-label">مستفيد من محتوى "فكرة مبرمج"</div>
+                                <div className="stat-label">
+                                    مستفيد من محتوى "فكرة مبرمج"
+                                </div>
                             </div>
                         </TiltCard>
 
@@ -889,8 +1193,12 @@ export default function Welcome({
                                 <div className="stat-icon">
                                     <Award className="size-6" />
                                 </div>
-                                <div className="stat-value">+{stats.certificates || 6}</div>
-                                <div className="stat-label">شهادات وتكريمات أكاديمية</div>
+                                <div className="stat-value">
+                                    +{stats.certificates || 6}
+                                </div>
+                                <div className="stat-label">
+                                    شهادات وتكريمات أكاديمية
+                                </div>
                             </div>
                         </TiltCard>
                     </div>
@@ -900,10 +1208,12 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 5. PROJECTS SECTION (#projects)                                */}
             {/* ============================================================== */}
-            <section className="projects py-20 md:py-28 relative" id="projects">
+            <section className="projects relative py-20 md:py-28" id="projects">
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
-                        <span className="subtitle">أعمالي ومنتجاتي التقنية</span>
+                        <span className="subtitle">
+                            أعمالي ومنتجاتي التقنية
+                        </span>
                         <h2 className="heading">
                             المشاريع <span>الرقمية المنجزة</span>
                         </h2>
@@ -927,7 +1237,7 @@ export default function Welcome({
                     </div>
 
                     {/* Projects Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                         {filteredProjects.map((project) => (
                             <ProjectShowcaseCard
                                 key={project.id}
@@ -942,7 +1252,10 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 6. SERVICES SECTION (#services)                                */}
             {/* ============================================================== */}
-            <section className="services py-20 md:py-28 bg-muted/20 border-t border-border/60 relative" id="services">
+            <section
+                className="services relative border-t border-border/60 bg-muted/20 py-20 md:py-28"
+                id="services"
+            >
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
                         <span className="subtitle">حلول هندسية وتقنية</span>
@@ -954,30 +1267,57 @@ export default function Welcome({
 
                     <div className="services-grid">
                         {displayServices.map((service, index) => (
-                            <TiltCard key={service.id} maxTilt={10} className="h-full">
+                            <TiltCard
+                                key={service.id}
+                                maxTilt={10}
+                                className="h-full"
+                            >
                                 <div className="service-card h-full">
                                     <div className="card-glare" />
-                                    <span className="service-number">0{index + 1}</span>
+                                    <span className="service-number">
+                                        0{index + 1}
+                                    </span>
                                     <div className="service-icon">
-                                        {index === 0 && <Brain className="size-8" />}
-                                        {index === 1 && <Smartphone className="size-8" />}
-                                        {index === 2 && <Code className="size-8" />}
-                                        {index === 3 && <Layers className="size-8" />}
-                                        {index === 4 && <Database className="size-8" />}
-                                        {index === 5 && <Zap className="size-8" />}
+                                        {index === 0 && (
+                                            <Brain className="size-8" />
+                                        )}
+                                        {index === 1 && (
+                                            <Smartphone className="size-8" />
+                                        )}
+                                        {index === 2 && (
+                                            <Code className="size-8" />
+                                        )}
+                                        {index === 3 && (
+                                            <Layers className="size-8" />
+                                        )}
+                                        {index === 4 && (
+                                            <Database className="size-8" />
+                                        )}
+                                        {index === 5 && (
+                                            <Zap className="size-8" />
+                                        )}
                                     </div>
                                     <h3>{service.title}</h3>
-                                    <p>{service.short_description || service.detailed_description}</p>
-                                    {service.features && service.features.length > 0 && (
-                                        <div className="pt-4 border-t border-border/60 space-y-2 mt-auto">
-                                            {service.features.map((feat, fIdx) => (
-                                                <div key={fIdx} className="flex items-center gap-2 text-xs text-muted-foreground">
-                                                    <Check className="size-3.5 text-emerald-500 shrink-0" />
-                                                    <span>{feat}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
+                                    <p>
+                                        {service.short_description ||
+                                            service.detailed_description}
+                                    </p>
+                                    {service.features &&
+                                        service.features.length > 0 && (
+                                            <div className="mt-auto space-y-2 border-t border-border/60 pt-4">
+                                                {service.features.map(
+                                                    (feat, fIdx) => (
+                                                        <div
+                                                            key={fIdx}
+                                                            className="flex items-center gap-2 text-xs text-muted-foreground"
+                                                        >
+                                                            <Check className="size-3.5 shrink-0 text-emerald-500" />
+                                                            <span>{feat}</span>
+                                                        </div>
+                                                    ),
+                                                )}
+                                            </div>
+                                        )}
                                 </div>
                             </TiltCard>
                         ))}
@@ -988,7 +1328,7 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 7. JOURNEY / TIMELINE SECTION (#journey)                       */}
             {/* ============================================================== */}
-            <section className="timeline py-20 md:py-28 relative" id="journey">
+            <section className="timeline relative py-20 md:py-28" id="journey">
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
                         <span className="subtitle">المسيرة والمحطات</span>
@@ -1008,7 +1348,9 @@ export default function Welcome({
                                     </div>
                                     <div className="journey-mini-body">
                                         <div className="journey-mini-header">
-                                            <h3 className="journey-mini-title">{milestone.title}</h3>
+                                            <h3 className="journey-mini-title">
+                                                {milestone.title}
+                                            </h3>
                                             <span className="journey-mini-badge">
                                                 <Calendar className="size-3" />
                                                 {milestone.date_range}
@@ -1018,7 +1360,9 @@ export default function Welcome({
                                             <Sparkles className="size-3.5 text-amber-500" />
                                             <span>{milestone.role}</span>
                                         </div>
-                                        <p className="journey-mini-desc">{milestone.description}</p>
+                                        <p className="journey-mini-desc">
+                                            {milestone.description}
+                                        </p>
                                     </div>
                                 </div>
                             </TiltCard>
@@ -1030,7 +1374,10 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 8. CERTIFICATES SECTION (#certificates)                        */}
             {/* ============================================================== */}
-            <section className="certificates py-20 md:py-28 bg-muted/20 border-t border-border/60 relative" id="certificates">
+            <section
+                className="certificates relative border-t border-border/60 bg-muted/20 py-20 md:py-28"
+                id="certificates"
+            >
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
                         <span className="subtitle">السجل والاعتمادات</span>
@@ -1042,7 +1389,11 @@ export default function Welcome({
 
                     <div className="certs-grid">
                         {displayCertificates.map((cert) => (
-                            <TiltCard key={cert.id} maxTilt={8} className="h-full">
+                            <TiltCard
+                                key={cert.id}
+                                maxTilt={8}
+                                className="h-full"
+                            >
                                 <div className="cert-card h-full">
                                     <div className="card-glare" />
                                     <div
@@ -1053,23 +1404,33 @@ export default function Welcome({
                                         }}
                                     >
                                         <img
-                                            src={cert.image || '/images/project-1.png'}
+                                            src={
+                                                cert.image ||
+                                                '/images/project-1.png'
+                                            }
                                             alt={cert.title}
                                             onError={(e) => {
                                                 const target = e.currentTarget;
-                                                if (!target.src.includes('placeholder.jpg')) {
-                                                    target.src = '/images/placeholder.jpg';
+                                                if (
+                                                    !target.src.includes(
+                                                        'placeholder.jpg',
+                                                    )
+                                                ) {
+                                                    target.src =
+                                                        '/images/placeholder.jpg';
                                                 }
                                             }}
                                         />
-                                        <span className="cert-badge-date">{cert.date}</span>
+                                        <span className="cert-badge-date">
+                                            {cert.date}
+                                        </span>
                                         <div className="cert-preview-overlay">
                                             <Search className="size-5" />
                                             <span>تكبير ومعاينة</span>
                                         </div>
                                     </div>
 
-                                    <div className="cert-body flex flex-col flex-1">
+                                    <div className="cert-body flex flex-1 flex-col">
                                         <span className="cert-issuer">
                                             <Award className="size-4" />
                                             {cert.issuer}
@@ -1089,7 +1450,8 @@ export default function Welcome({
                                                 <span>معاينة الشهادة</span>
                                             </button>
 
-                                            {cert.credential_url && cert.credential_url !== '#' ? (
+                                            {cert.credential_url &&
+                                            cert.credential_url !== '#' ? (
                                                 <a
                                                     href={cert.credential_url}
                                                     target="_blank"
@@ -1117,7 +1479,10 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 9. TESTIMONIALS SECTION (#testimonials)                        */}
             {/* ============================================================== */}
-            <section className="testimonials py-20 md:py-28 relative" id="testimonials">
+            <section
+                className="testimonials relative py-20 md:py-28"
+                id="testimonials"
+            >
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
                         <span className="subtitle">شهادات أعتز بها</span>
@@ -1129,16 +1494,27 @@ export default function Welcome({
 
                     <div className="testimonials-grid">
                         {displayTestimonials.map((item) => (
-                            <TiltCard key={item.id} maxTilt={8} className="h-full">
+                            <TiltCard
+                                key={item.id}
+                                maxTilt={8}
+                                className="h-full"
+                            >
                                 <div className="testimonial-card h-full">
                                     <div className="card-glare" />
                                     <div>
                                         <div className="rating-stars">
-                                            {Array.from({ length: item.rating || 5 }).map((_, i) => (
-                                                <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
+                                            {Array.from({
+                                                length: item.rating || 5,
+                                            }).map((_, i) => (
+                                                <Star
+                                                    key={i}
+                                                    className="size-4 fill-amber-400 text-amber-400"
+                                                />
                                             ))}
                                         </div>
-                                        <p className="quote-text">"{item.text}"</p>
+                                        <p className="quote-text">
+                                            "{item.text}"
+                                        </p>
                                     </div>
 
                                     <div className="reviewer-meta">
@@ -1147,7 +1523,11 @@ export default function Welcome({
                                         </div>
                                         <div>
                                             <strong>{item.name}</strong>
-                                            <span>{[item.role, item.company].filter(Boolean).join(' · ')}</span>
+                                            <span>
+                                                {[item.role, item.company]
+                                                    .filter(Boolean)
+                                                    .join(' · ')}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1160,39 +1540,55 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 10. PROGRAMMER IDEA COMMUNITY SPOTLIGHT                         */}
             {/* ============================================================== */}
-            <section className="py-16 bg-gradient-to-br from-primary/10 via-background to-muted/40 border-y border-border/60 relative">
+            <section className="relative border-y border-border/60 bg-gradient-to-br from-primary/10 via-background to-muted/40 py-16">
                 <div className="container mx-auto px-4 sm:px-6">
-                    <div className="rounded-3xl border border-primary/30 bg-card/85 backdrop-blur-xl p-8 md:p-12 shadow-xl">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                            <div className="lg:col-span-8 space-y-4 text-right">
-                                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-primary text-white">
+                    <div className="rounded-3xl border border-primary/30 bg-card/85 p-8 shadow-xl backdrop-blur-xl md:p-12">
+                        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
+                            <div className="space-y-4 text-right lg:col-span-8">
+                                <div className="inline-flex items-center gap-2 rounded-full bg-primary px-3.5 py-1.5 text-xs font-bold text-white">
                                     <Sparkles className="size-3.5" />
                                     مبادرة ومجتمع تقني
                                 </div>
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground">
+                                <h2 className="text-2xl font-black text-foreground sm:text-3xl md:text-4xl">
                                     منصة ومبادرة "فكرة مبرمج" — Programmer Idea
                                 </h2>
-                                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                                    مبادرة تعليمية رائدة أسسها عبدالرحمن تهدف إلى تطوير المحتوى العلمي والتقني باللغة العربية في مجالات البرمجة وعلوم البيانات والذكاء الاصطناعي، وتقديم شروحات تطبيقية مجانية يستفيد منها آلاف الطلاب والمطورين.
+                                <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                                    مبادرة تعليمية رائدة أسسها عبدالرحمن تهدف
+                                    إلى تطوير المحتوى العلمي والتقني باللغة
+                                    العربية في مجالات البرمجة وعلوم البيانات
+                                    والذكاء الاصطناعي، وتقديم شروحات تطبيقية
+                                    مجانية يستفيد منها آلاف الطلاب والمطورين.
                                 </p>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                                    <div className="p-4 rounded-2xl bg-muted/60 border border-border/80 text-center">
-                                        <div className="text-2xl font-black text-primary font-mono">+10,000</div>
-                                        <div className="text-xs text-muted-foreground font-semibold">متابع ومستفيد</div>
+                                <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-3">
+                                    <div className="rounded-2xl border border-border/80 bg-muted/60 p-4 text-center">
+                                        <div className="font-mono text-2xl font-black text-primary">
+                                            +10,000
+                                        </div>
+                                        <div className="text-xs font-semibold text-muted-foreground">
+                                            متابع ومستفيد
+                                        </div>
                                     </div>
-                                    <div className="p-4 rounded-2xl bg-muted/60 border border-border/80 text-center">
-                                        <div className="text-2xl font-black text-primary font-mono">+15</div>
-                                        <div className="text-xs text-muted-foreground font-semibold">سلسلة تعليمية</div>
+                                    <div className="rounded-2xl border border-border/80 bg-muted/60 p-4 text-center">
+                                        <div className="font-mono text-2xl font-black text-primary">
+                                            +15
+                                        </div>
+                                        <div className="text-xs font-semibold text-muted-foreground">
+                                            سلسلة تعليمية
+                                        </div>
                                     </div>
-                                    <div className="p-4 rounded-2xl bg-muted/60 border border-border/80 text-center">
-                                        <div className="text-2xl font-black text-primary font-mono">100%</div>
-                                        <div className="text-xs text-muted-foreground font-semibold">محتوى عربي مفتوح</div>
+                                    <div className="rounded-2xl border border-border/80 bg-muted/60 p-4 text-center">
+                                        <div className="font-mono text-2xl font-black text-primary">
+                                            100%
+                                        </div>
+                                        <div className="text-xs font-semibold text-muted-foreground">
+                                            محتوى عربي مفتوح
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="lg:col-span-4 flex flex-col gap-3 justify-center">
+                            <div className="flex flex-col justify-center gap-3 lg:col-span-4">
                                 <a
                                     href="/programmer-idea"
                                     onClick={() => playClickSound(650, 0.03)}
@@ -1220,10 +1616,12 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 11. BLOG & ARTICLES SECTION (#blog)                            */}
             {/* ============================================================== */}
-            <section className="blog py-20 md:py-28 relative" id="blog">
+            <section className="blog relative py-20 md:py-28" id="blog">
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
-                        <span className="subtitle">المعرفة والتدوين البرمجي</span>
+                        <span className="subtitle">
+                            المعرفة والتدوين البرمجي
+                        </span>
                         <h2 className="heading">
                             المدونة <span>والمقالات التقنية</span>
                         </h2>
@@ -1232,38 +1630,43 @@ export default function Welcome({
 
                     {/* Hot Topics Horizontal Slider */}
                     <div className="mb-14">
-                        <div className="flex items-center justify-between mb-6">
-                            <div className="flex items-center gap-2 text-primary font-bold text-sm">
+                        <div className="mb-6 flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-sm font-bold text-primary">
                                 <Sparkles className="size-4" />
-                                <span>المواضيع والمسارات الرائجة (Hot Topics)</span>
+                                <span>
+                                    المواضيع والمسارات الرائجة (Hot Topics)
+                                </span>
                             </div>
-                            <Link href="/blog" className="text-xs text-primary font-bold hover:underline flex items-center gap-1">
+                            <Link
+                                href="/blog"
+                                className="flex items-center gap-1 text-xs font-bold text-primary hover:underline"
+                            >
                                 <span>تصفح كل المسارات</span>
                                 <ChevronLeft className="size-3.5" />
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
                             {hotTopics.map((topic, idx) => (
                                 <div
                                     key={idx}
-                                    className="group rounded-2xl overflow-hidden border border-border/80 bg-card hover:border-primary/50 transition-all hover:-translate-y-1 shadow-sm cursor-pointer"
+                                    className="group cursor-pointer overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm transition-all hover:-translate-y-1 hover:border-primary/50"
                                     onClick={() => {
                                         playClickSound(600, 0.02);
                                         setActiveBlogTag(topic.filter);
                                     }}
                                 >
-                                    <div className="aspect-[4/3] w-full overflow-hidden bg-muted relative">
+                                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                                         <img
                                             src={topic.image}
                                             alt={topic.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-3 text-right">
-                                            <h4 className="text-white text-xs font-bold leading-tight">
+                                        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/30 to-transparent p-3 text-right">
+                                            <h4 className="text-xs leading-tight font-bold text-white">
                                                 {topic.title}
                                             </h4>
-                                            <span className="text-white/70 text-[10px]">
+                                            <span className="text-[10px] text-white/70">
                                                 {topic.count}
                                             </span>
                                         </div>
@@ -1274,15 +1677,15 @@ export default function Welcome({
                     </div>
 
                     {/* Recent Articles Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                         {recentArticles.map((article) => (
                             <div
                                 key={article.id}
-                                className="group rounded-3xl border border-border/80 bg-card overflow-hidden hover:border-primary/50 transition-all hover:-translate-y-1.5 shadow-sm flex flex-col justify-between"
+                                className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm transition-all hover:-translate-y-1.5 hover:border-primary/50"
                             >
                                 {article.image && (
                                     <div
-                                        className="relative aspect-[16/10] w-full overflow-hidden bg-muted cursor-pointer"
+                                        className="relative aspect-[16/10] w-full cursor-pointer overflow-hidden bg-muted"
                                         onClick={() => {
                                             playClickSound(600, 0.02);
                                             setSelectedArticle(article);
@@ -1291,29 +1694,32 @@ export default function Welcome({
                                         <img
                                             src={article.image}
                                             alt={article.title}
-                                            className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                                             onError={(e) => {
-                                                (e.currentTarget as HTMLImageElement).src =
+                                                (
+                                                    e.currentTarget as HTMLImageElement
+                                                ).src =
                                                     'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80';
                                             }}
                                         />
                                         <div className="absolute top-3 right-3">
-                                            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-background/90 text-foreground border border-border">
-                                                {article.category_label || article.category}
+                                            <span className="rounded-full border border-border bg-background/90 px-2.5 py-1 text-[10px] font-bold text-foreground">
+                                                {article.category_label ||
+                                                    article.category}
                                             </span>
                                         </div>
                                     </div>
                                 )}
 
-                                <div className="p-5 flex-1 flex flex-col justify-between space-y-3 text-right">
+                                <div className="flex flex-1 flex-col justify-between space-y-3 p-5 text-right">
                                     <div className="space-y-2">
-                                        <div className="flex items-center gap-2 text-[11px] text-muted-foreground font-mono">
+                                        <div className="flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
                                             <span>{article.date}</span>
                                             <span>•</span>
                                             <span>{article.reading_time}</span>
                                         </div>
                                         <h3
-                                            className="font-bold text-base text-foreground group-hover:text-primary transition-colors line-clamp-2 cursor-pointer"
+                                            className="line-clamp-2 cursor-pointer text-base font-bold text-foreground transition-colors group-hover:text-primary"
                                             onClick={() => {
                                                 playClickSound(600, 0.02);
                                                 setSelectedArticle(article);
@@ -1321,24 +1727,27 @@ export default function Welcome({
                                         >
                                             {article.title}
                                         </h3>
-                                        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                                        <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">
                                             {article.excerpt}
                                         </p>
                                     </div>
 
-                                    <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs font-bold text-primary">
+                                    <div className="flex items-center justify-between border-t border-border/60 pt-3 text-xs font-bold text-primary">
                                         <button
                                             type="button"
                                             onClick={() => {
                                                 playClickSound(600, 0.02);
                                                 setSelectedArticle(article);
                                             }}
-                                            className="hover:underline flex items-center gap-1"
+                                            className="flex items-center gap-1 hover:underline"
                                         >
                                             <Eye className="size-3.5" />
                                             <span>معاينة وقراءة</span>
                                         </button>
-                                        <Link href={`/blog/${article.slug}`} className="hover:underline flex items-center gap-1 text-muted-foreground hover:text-foreground">
+                                        <Link
+                                            href={`/blog/${article.slug}`}
+                                            className="flex items-center gap-1 text-muted-foreground hover:text-foreground hover:underline"
+                                        >
                                             <span>الصفحة الكاملة</span>
                                             <ArrowUpRight className="size-3.5" />
                                         </Link>
@@ -1353,19 +1762,21 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 12. CALL TO ACTION SECTION                                     */}
             {/* ============================================================== */}
-            <section className="cta-section py-16 bg-muted/15 border-t border-border/60">
+            <section className="cta-section border-t border-border/60 bg-muted/15 py-16">
                 <div className="container mx-auto px-4 sm:px-6">
-                    <div className="cta-box max-w-4xl mx-auto text-center space-y-6">
+                    <div className="cta-box mx-auto max-w-4xl space-y-6 text-center">
                         <div className="cta-glow" />
                         <span className="cta-badge">
                             <Sparkles className="size-4" />
                             جاهز لنقل فكرتك إلى أرض الواقع
                         </span>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-foreground">
+                        <h2 className="text-3xl font-black text-foreground sm:text-4xl md:text-5xl">
                             هل لديك فكرة مشروع أو ترغب في تطوير نظامك الرقمي؟
                         </h2>
-                        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-                            أنا مستعد لتقديم الاستشارة البرمجية، بناء النماذج الذكية بالذكاء الاصطناعي، وتطوير التطبيقات والمنصات المتكاملة التي تلبي أهدافك بدقة.
+                        <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                            أنا مستعد لتقديم الاستشارة البرمجية، بناء النماذج
+                            الذكية بالذكاء الاصطناعي، وتطوير التطبيقات والمنصات
+                            المتكاملة التي تلبي أهدافك بدقة.
                         </p>
                         <div className="cta-buttons flex flex-wrap justify-center gap-3 pt-2">
                             <a
@@ -1393,7 +1804,7 @@ export default function Welcome({
             {/* ============================================================== */}
             {/* 13. CONTACT SECTION (#contact)                                 */}
             {/* ============================================================== */}
-            <section className="contact py-20 md:py-28 relative" id="contact">
+            <section className="contact relative py-20 md:py-28" id="contact">
                 <div className="container mx-auto px-4 sm:px-6">
                     <div className="section-title">
                         <span className="subtitle">ابدأ مشروعك الآن</span>
@@ -1410,14 +1821,18 @@ export default function Welcome({
                             target="_blank"
                             rel="noopener noreferrer"
                             className="contact-info-card tilt-card"
-                            style={{ '--accent': '#25D366' } as React.CSSProperties}
+                            style={
+                                { '--accent': '#25D366' } as React.CSSProperties
+                            }
                         >
                             <div className="card-glare" />
                             <div className="card-icon">
                                 <Phone className="size-6 text-emerald-500" />
                             </div>
                             <h3>واتساب مباشر (1)</h3>
-                            <span className="card-value" dir="ltr">{settings.whatsapp_1 || '+967 773 853 853'}</span>
+                            <span className="card-value" dir="ltr">
+                                {settings.whatsapp_1 || '+967 773 853 853'}
+                            </span>
                             <p>مراسلة فورية لمناقشة المشاريع والعمل الحر</p>
                         </a>
 
@@ -1426,46 +1841,63 @@ export default function Welcome({
                             target="_blank"
                             rel="noopener noreferrer"
                             className="contact-info-card tilt-card"
-                            style={{ '--accent': '#128C7E' } as React.CSSProperties}
+                            style={
+                                { '--accent': '#128C7E' } as React.CSSProperties
+                            }
                         >
                             <div className="card-glare" />
                             <div className="card-icon">
                                 <Phone className="size-6 text-teal-600" />
                             </div>
                             <h3>واتساب مباشر (2)</h3>
-                            <span className="card-value" dir="ltr">{settings.whatsapp_2 || '+967 777 580 845'}</span>
+                            <span className="card-value" dir="ltr">
+                                {settings.whatsapp_2 || '+967 777 580 845'}
+                            </span>
                             <p>خط التواصل المباشر الثاني</p>
                         </a>
 
                         <a
-                            href={settings.telegram || 'https://t.me/Alshuja_ai'}
+                            href={
+                                settings.telegram || 'https://t.me/Alshuja_ai'
+                            }
                             target="_blank"
                             rel="noopener noreferrer"
                             className="contact-info-card tilt-card"
-                            style={{ '--accent': '#0088cc' } as React.CSSProperties}
+                            style={
+                                { '--accent': '#0088cc' } as React.CSSProperties
+                            }
                         >
                             <div className="card-glare" />
                             <div className="card-icon">
                                 <Send className="size-6 text-sky-500" />
                             </div>
                             <h3>تيليجرام شخصي</h3>
-                            <span className="card-value" dir="ltr">@Alshuja_ai</span>
+                            <span className="card-value" dir="ltr">
+                                @Alshuja_ai
+                            </span>
                             <p>للمحادثات التقنية ومناقشات البرمجة</p>
                         </a>
 
                         <a
-                            href={settings.instagram || 'https://www.instagram.com/alshujaa'}
+                            href={
+                                settings.instagram ||
+                                'https://www.instagram.com/alshujaa'
+                            }
                             target="_blank"
                             rel="noopener noreferrer"
                             className="contact-info-card tilt-card"
-                            style={{ '--accent': '#E4405F' } as React.CSSProperties}
+                            style={
+                                { '--accent': '#E4405F' } as React.CSSProperties
+                            }
                         >
                             <div className="card-glare" />
                             <div className="card-icon">
                                 <Sparkles className="size-6 text-rose-500" />
                             </div>
                             <h3>انستغرام شخصي</h3>
-                            <span className="card-value" dir="ltr">@alshujaa</span>
+                            <span className="card-value" dir="ltr">
+                                @alshujaa
+                            </span>
                             <p>متابعة التحديثات والأنشطة اليومية</p>
                         </a>
                     </div>
@@ -1476,40 +1908,51 @@ export default function Welcome({
                         <div className="contact-form-card tilt-card text-right">
                             <div className="card-glare" />
                             <div className="mb-6 space-y-1">
-                                <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
+                                <h3 className="flex items-center gap-2 text-xl font-bold text-foreground">
                                     <Send className="size-5 text-primary" />
                                     أرسل رسالتك مباشرة
                                 </h3>
-                                <p className="text-xs sm:text-sm text-muted-foreground">
-                                    املأ النموذج أدناه وسيقوم عبدالرحمن بالرد عليك في أسرع وقت.
+                                <p className="text-xs text-muted-foreground sm:text-sm">
+                                    املأ النموذج أدناه وسيقوم عبدالرحمن بالرد
+                                    عليك في أسرع وقت.
                                 </p>
                             </div>
 
                             {recentlySuccessful && (
-                                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-sm flex items-center gap-2 mb-4">
+                                <div className="mb-4 flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-600 dark:text-emerald-400">
                                     <CheckCircle2 className="size-5 shrink-0" />
-                                    <span>تم استلام رسالتك بنجاح! سأتواصل معك في أقرب وقت.</span>
+                                    <span>
+                                        تم استلام رسالتك بنجاح! سأتواصل معك في
+                                        أقرب وقت.
+                                    </span>
                                 </div>
                             )}
 
-                            <form onSubmit={submitContact} className="space-y-4">
+                            <form
+                                onSubmit={submitContact}
+                                className="space-y-4"
+                            >
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-semibold text-foreground">
                                         الاسم الكريم *
                                     </label>
                                     <Input
                                         value={data.name}
-                                        onChange={(e) => setData('name', e.target.value)}
+                                        onChange={(e) =>
+                                            setData('name', e.target.value)
+                                        }
                                         placeholder="أدخل اسمك الكريم"
                                         required
                                         className="rounded-xl border-border/80 text-right"
                                     />
                                     {errors.name && (
-                                        <p className="text-xs text-destructive">{errors.name}</p>
+                                        <p className="text-xs text-destructive">
+                                            {errors.name}
+                                        </p>
                                     )}
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                     <div className="space-y-1.5">
                                         <label className="text-xs font-semibold text-foreground">
                                             البريد الإلكتروني *
@@ -1517,13 +1960,17 @@ export default function Welcome({
                                         <Input
                                             type="email"
                                             value={data.email}
-                                            onChange={(e) => setData('email', e.target.value)}
+                                            onChange={(e) =>
+                                                setData('email', e.target.value)
+                                            }
                                             placeholder="name@example.com"
                                             required
                                             className="rounded-xl border-border/80 text-right"
                                         />
                                         {errors.email && (
-                                            <p className="text-xs text-destructive">{errors.email}</p>
+                                            <p className="text-xs text-destructive">
+                                                {errors.email}
+                                            </p>
                                         )}
                                     </div>
 
@@ -1533,7 +1980,9 @@ export default function Welcome({
                                         </label>
                                         <Input
                                             value={data.phone}
-                                            onChange={(e) => setData('phone', e.target.value)}
+                                            onChange={(e) =>
+                                                setData('phone', e.target.value)
+                                            }
                                             placeholder="+967..."
                                             className="rounded-xl border-border/80 font-mono"
                                             dir="ltr"
@@ -1547,13 +1996,25 @@ export default function Welcome({
                                     </label>
                                     <select
                                         value={data.subject}
-                                        onChange={(e) => setData('subject', e.target.value)}
-                                        className="w-full rounded-xl border border-border/80 bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-right"
+                                        onChange={(e) =>
+                                            setData('subject', e.target.value)
+                                        }
+                                        className="w-full rounded-xl border border-border/80 bg-background px-3 py-2 text-right text-sm text-foreground focus:ring-2 focus:ring-primary focus:outline-none"
                                     >
-                                        <option value="data-ai">تحليل بيانات ونماذج ذكاء اصطناعي (Data & AI)</option>
-                                        <option value="mobile">تطوير تطبيق هاتف ذكي (Flutter)</option>
-                                        <option value="web">تطوير منصة أو موقع ويب (Laravel / Full-Stack)</option>
-                                        <option value="consulting">استشارة تقنية أو عمل حر</option>
+                                        <option value="data-ai">
+                                            تحليل بيانات ونماذج ذكاء اصطناعي
+                                            (Data & AI)
+                                        </option>
+                                        <option value="mobile">
+                                            تطوير تطبيق هاتف ذكي (Flutter)
+                                        </option>
+                                        <option value="web">
+                                            تطوير منصة أو موقع ويب (Laravel /
+                                            Full-Stack)
+                                        </option>
+                                        <option value="consulting">
+                                            استشارة تقنية أو عمل حر
+                                        </option>
                                     </select>
                                 </div>
 
@@ -1564,23 +2025,31 @@ export default function Welcome({
                                     <Textarea
                                         rows={4}
                                         value={data.message}
-                                        onChange={(e) => setData('message', e.target.value)}
+                                        onChange={(e) =>
+                                            setData('message', e.target.value)
+                                        }
                                         placeholder="اشرح باختصار متطلبات مشروعك، الميزانية المتوقعة، أو أي تفاصيل ترغب بمشاركتها..."
                                         required
                                         className="rounded-xl border-border/80 text-right"
                                     />
                                     {errors.message && (
-                                        <p className="text-xs text-destructive">{errors.message}</p>
+                                        <p className="text-xs text-destructive">
+                                            {errors.message}
+                                        </p>
                                     )}
                                 </div>
 
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="btn btn-primary btn-block py-3.5 text-base gap-2 font-bold shadow-md"
+                                    className="btn btn-primary btn-block gap-2 py-3.5 text-base font-bold shadow-md"
                                 >
                                     <Send className="size-4" />
-                                    <span>{processing ? 'جارٍ إرسال الرسالة...' : 'إرسال الرسالة الآن'}</span>
+                                    <span>
+                                        {processing
+                                            ? 'جارٍ إرسال الرسالة...'
+                                            : 'إرسال الرسالة الآن'}
+                                    </span>
                                 </button>
                             </form>
                         </div>
@@ -1588,12 +2057,13 @@ export default function Welcome({
                         {/* Official Ecosystem Channels Card */}
                         <div className="official-channels-card tilt-card text-right">
                             <div className="card-glare" />
-                            <h3 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
+                            <h3 className="mb-2 flex items-center gap-2 text-xl font-bold text-foreground">
                                 <Globe className="size-5 text-primary" />
                                 المنصات والقنوات الرسمية
                             </h3>
-                            <p className="text-xs sm:text-sm text-muted-foreground mb-6">
-                                قنوات مبادرة "فكرة مبرمج" ومنصات المنتجات الرقمية:
+                            <p className="mb-6 text-xs text-muted-foreground sm:text-sm">
+                                قنوات مبادرة "فكرة مبرمج" ومنصات المنتجات
+                                الرقمية:
                             </p>
 
                             <div className="channels-list">
@@ -1607,8 +2077,13 @@ export default function Welcome({
                                         <Layers className="size-5" />
                                     </div>
                                     <div className="channel-info">
-                                        <strong>منصة سندباد — Sinbad Marketplace</strong>
-                                        <span>sinbadd.com · التجارة الإلكترونية والمنصات</span>
+                                        <strong>
+                                            منصة سندباد — Sinbad Marketplace
+                                        </strong>
+                                        <span>
+                                            sinbadd.com · التجارة الإلكترونية
+                                            والمنصات
+                                        </span>
                                     </div>
                                     <ExternalLink className="size-4 text-muted-foreground" />
                                 </a>
@@ -1623,8 +2098,13 @@ export default function Welcome({
                                         <GraduationCap className="size-5" />
                                     </div>
                                     <div className="channel-info">
-                                        <strong>أكاديمية ومنصة فكرة مبرمج</strong>
-                                        <span>programmer-idea.tech · التعليم البرمجي العربي</span>
+                                        <strong>
+                                            أكاديمية ومنصة فكرة مبرمج
+                                        </strong>
+                                        <span>
+                                            programmer-idea.tech · التعليم
+                                            البرمجي العربي
+                                        </span>
                                     </div>
                                     <ExternalLink className="size-4 text-muted-foreground" />
                                 </a>
@@ -1639,8 +2119,12 @@ export default function Welcome({
                                         <Smartphone className="size-5" />
                                     </div>
                                     <div className="channel-info">
-                                        <strong>محفظة ريال الرقمية — Riyal Wallet</strong>
-                                        <span>rial.cash · الدفع والتحويل الإلكتروني</span>
+                                        <strong>
+                                            محفظة ريال الرقمية — Riyal Wallet
+                                        </strong>
+                                        <span>
+                                            rial.cash · الدفع والتحويل الإلكتروني
+                                        </span>
                                     </div>
                                     <ExternalLink className="size-4 text-muted-foreground" />
                                 </a>
@@ -1655,8 +2139,13 @@ export default function Welcome({
                                         <Send className="size-5" />
                                     </div>
                                     <div className="channel-info">
-                                        <strong>قناة فكرة مبرمج على تيليجرام</strong>
-                                        <span>@Programmer_Idea · شروحات ومقاطع برمجية</span>
+                                        <strong>
+                                            قناة فكرة مبرمج على تيليجرام
+                                        </strong>
+                                        <span>
+                                            @Programmer_Idea · شروحات ومقاطع
+                                            برمجية
+                                        </span>
                                     </div>
                                     <ExternalLink className="size-4 text-muted-foreground" />
                                 </a>
@@ -1671,8 +2160,13 @@ export default function Welcome({
                                         <Zap className="size-5" />
                                     </div>
                                     <div className="channel-info">
-                                        <strong>قناة فكرة مبرمج على يوتيوب</strong>
-                                        <span>@Programmer_idea · دروس تطبيقية ومشاريع</span>
+                                        <strong>
+                                            قناة فكرة مبرمج على يوتيوب
+                                        </strong>
+                                        <span>
+                                            @Programmer_idea · دروس تطبيقية
+                                            ومشاريع
+                                        </span>
                                     </div>
                                     <ExternalLink className="size-4 text-muted-foreground" />
                                 </a>
@@ -1687,8 +2181,12 @@ export default function Welcome({
                                         <Globe className="size-5" />
                                     </div>
                                     <div className="channel-info">
-                                        <strong>صفحة فكرة مبرمج على فيسبوك</strong>
-                                        <span>مجتمع فكرة مبرمج ومشاركات تقنية</span>
+                                        <strong>
+                                            صفحة فكرة مبرمج على فيسبوك
+                                        </strong>
+                                        <span>
+                                            مجتمع فكرة مبرمج ومشاركات تقنية
+                                        </span>
                                     </div>
                                     <ExternalLink className="size-4 text-muted-foreground" />
                                 </a>

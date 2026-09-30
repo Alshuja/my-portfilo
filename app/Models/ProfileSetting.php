@@ -27,7 +27,7 @@ class ProfileSetting extends Model
     /**
      * Set a setting value by key.
      */
-    public static function setValue(string $key, ?string $value): static
+    public static function setValue(string $key, ?string $value): self
     {
         return static::updateOrCreate(['key' => $key], ['value' => $value]);
     }

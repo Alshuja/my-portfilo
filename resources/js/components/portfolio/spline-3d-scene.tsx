@@ -1,6 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
-import { Sparkles, RotateCcw, Volume2, VolumeX, Maximize2, Minimize2, Loader2, Cpu, Terminal } from 'lucide-react';
-import { isSoundEnabled, toggleSound, playMechanicalPress, playMechanicalRelease, playClickSound } from './sound-effects';
+import {
+    Sparkles,
+    RotateCcw,
+    Volume2,
+    VolumeX,
+    Maximize2,
+    Minimize2,
+    Loader2,
+    Cpu,
+    Terminal,
+} from 'lucide-react';
+import {
+    isSoundEnabled,
+    toggleSound,
+    playMechanicalPress,
+    playMechanicalRelease,
+    playClickSound,
+} from './sound-effects';
 
 interface Spline3dSceneProps {
     url?: string;
@@ -29,13 +45,18 @@ export function Spline3dScene({
         setSoundOn(isSoundEnabled());
 
         // Check if spline-viewer is already registered
-        if (typeof window !== 'undefined' && customElements.get('spline-viewer')) {
+        if (
+            typeof window !== 'undefined' &&
+            customElements.get('spline-viewer')
+        ) {
             setScriptReady(true);
             return;
         }
 
         // Dynamically load the official Spline Viewer web component
-        const existingScript = document.querySelector('script[src*="spline-viewer"]');
+        const existingScript = document.querySelector(
+            'script[src*="spline-viewer"]',
+        );
         if (existingScript) {
             existingScript.addEventListener('load', () => setScriptReady(true));
             // In case it was already loaded
@@ -45,11 +66,14 @@ export function Spline3dScene({
 
         const script = document.createElement('script');
         script.type = 'module';
-        script.src = 'https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js';
+        script.src =
+            'https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js';
         script.async = true;
         script.onload = () => setScriptReady(true);
         script.onerror = () => {
-            console.warn('Spline viewer script failed to load from CDN. Using interactive fallback.');
+            console.warn(
+                'Spline viewer script failed to load from CDN. Using interactive fallback.',
+            );
             setHasError(true);
         };
         document.head.appendChild(script);
@@ -60,7 +84,12 @@ export function Spline3dScene({
         const handleKeyDown = (e: KeyboardEvent) => {
             // Ignore if typing in form inputs
             const target = e.target as HTMLElement;
-            if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+            if (
+                target &&
+                (target.tagName === 'INPUT' ||
+                    target.tagName === 'TEXTAREA' ||
+                    target.isContentEditable)
+            ) {
                 return;
             }
             playMechanicalPress();
@@ -68,7 +97,12 @@ export function Spline3dScene({
 
         const handleKeyUp = (e: KeyboardEvent) => {
             const target = e.target as HTMLElement;
-            if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+            if (
+                target &&
+                (target.tagName === 'INPUT' ||
+                    target.tagName === 'TEXTAREA' ||
+                    target.isContentEditable)
+            ) {
                 return;
             }
             playMechanicalRelease();
@@ -91,9 +125,15 @@ export function Spline3dScene({
         if (!containerRef.current) return;
         playClickSound(800, 0.03);
         if (!document.fullscreenElement) {
-            containerRef.current.requestFullscreen().then(() => setIsFullscreen(true)).catch(() => {});
+            containerRef.current
+                .requestFullscreen()
+                .then(() => setIsFullscreen(true))
+                .catch(() => {});
         } else {
-            document.exitFullscreen().then(() => setIsFullscreen(false)).catch(() => {});
+            document
+                .exitFullscreen()
+                .then(() => setIsFullscreen(false))
+                .catch(() => {});
         }
     };
 
@@ -107,39 +147,53 @@ export function Spline3dScene({
     return (
         <div
             ref={containerRef}
-            className={`relative rounded-3xl overflow-hidden border border-border/80 bg-card/60 backdrop-blur-xl shadow-2xl transition-all duration-300 ${
+            className={`relative overflow-hidden rounded-3xl border border-border/80 bg-card/60 shadow-2xl backdrop-blur-xl transition-all duration-300 ${
                 isFullscreen ? 'fixed inset-0 z-50 rounded-none border-0' : ''
             } ${className}`}
             style={{ height: isFullscreen ? '100vh' : height }}
         >
             {/* Ambient Lighting Gradients */}
-            <div className="absolute top-0 right-1/4 size-72 rounded-full bg-red-600/15 blur-3xl pointer-events-none -z-10" />
-            <div className="absolute bottom-0 left-1/4 size-72 rounded-full bg-orange-500/10 blur-3xl pointer-events-none -z-10" />
+            <div className="pointer-events-none absolute top-0 right-1/4 -z-10 size-72 rounded-full bg-red-600/15 blur-3xl" />
+            <div className="pointer-events-none absolute bottom-0 left-1/4 -z-10 size-72 rounded-full bg-orange-500/10 blur-3xl" />
 
             {/* Top Interactive Controls Bar */}
             {showControls && (
-                <div className="absolute top-4 inset-x-4 flex items-center justify-between z-20 pointer-events-none">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-background/85 backdrop-blur-md border border-border/80 shadow-md text-xs font-semibold text-foreground pointer-events-auto">
-                        <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="text-[11px] font-mono text-primary font-bold">3D WebGL Engine</span>
-                        <span className="text-muted-foreground hidden sm:inline">|</span>
-                        <span className="text-[11px] text-muted-foreground hidden sm:inline">{hintText}</span>
+                <div className="pointer-events-none absolute inset-x-4 top-4 z-20 flex items-center justify-between">
+                    <div className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/85 px-3.5 py-1.5 text-xs font-semibold text-foreground shadow-md backdrop-blur-md">
+                        <span className="size-2 animate-pulse rounded-full bg-emerald-500" />
+                        <span className="font-mono text-[11px] font-bold text-primary">
+                            3D WebGL Engine
+                        </span>
+                        <span className="hidden text-muted-foreground sm:inline">
+                            |
+                        </span>
+                        <span className="hidden text-[11px] text-muted-foreground sm:inline">
+                            {hintText}
+                        </span>
                     </div>
 
-                    <div className="flex items-center gap-2 pointer-events-auto">
+                    <div className="pointer-events-auto flex items-center gap-2">
                         <button
                             type="button"
                             onClick={handleSoundToggle}
-                            className="size-9 rounded-xl bg-background/85 hover:bg-secondary backdrop-blur-md border border-border/80 flex items-center justify-center text-foreground hover:text-primary transition-all shadow-md"
-                            title={soundOn ? 'كتم المؤثرات الصوتية' : 'تفعيل المؤثرات الميكانيكية'}
+                            className="flex size-9 items-center justify-center rounded-xl border border-border/80 bg-background/85 text-foreground shadow-md backdrop-blur-md transition-all hover:bg-secondary hover:text-primary"
+                            title={
+                                soundOn
+                                    ? 'كتم المؤثرات الصوتية'
+                                    : 'تفعيل المؤثرات الميكانيكية'
+                            }
                         >
-                            {soundOn ? <Volume2 className="size-4 text-primary" /> : <VolumeX className="size-4 text-muted-foreground" />}
+                            {soundOn ? (
+                                <Volume2 className="size-4 text-primary" />
+                            ) : (
+                                <VolumeX className="size-4 text-muted-foreground" />
+                            )}
                         </button>
 
                         <button
                             type="button"
                             onClick={handleResetCamera}
-                            className="size-9 rounded-xl bg-background/85 hover:bg-secondary backdrop-blur-md border border-border/80 flex items-center justify-center text-foreground hover:text-primary transition-all shadow-md"
+                            className="flex size-9 items-center justify-center rounded-xl border border-border/80 bg-background/85 text-foreground shadow-md backdrop-blur-md transition-all hover:bg-secondary hover:text-primary"
                             title="إعادة ضبط زاوية الكاميرا"
                         >
                             <RotateCcw className="size-4" />
@@ -148,10 +202,14 @@ export function Spline3dScene({
                         <button
                             type="button"
                             onClick={handleFullscreenToggle}
-                            className="size-9 rounded-xl bg-background/85 hover:bg-secondary backdrop-blur-md border border-border/80 flex items-center justify-center text-foreground hover:text-primary transition-all shadow-md"
+                            className="flex size-9 items-center justify-center rounded-xl border border-border/80 bg-background/85 text-foreground shadow-md backdrop-blur-md transition-all hover:bg-secondary hover:text-primary"
                             title={isFullscreen ? 'تصغير' : 'ملء الشاشة'}
                         >
-                            {isFullscreen ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+                            {isFullscreen ? (
+                                <Minimize2 className="size-4" />
+                            ) : (
+                                <Maximize2 className="size-4" />
+                            )}
                         </button>
                     </div>
                 </div>
@@ -160,7 +218,7 @@ export function Spline3dScene({
             {/* Spline Viewer 3D Custom Element */}
             {scriptReady && !hasError ? (
                 <div
-                    className="size-full flex items-center justify-center"
+                    className="flex size-full items-center justify-center"
                     onMouseDown={() => playMechanicalPress()}
                     onMouseUp={() => playMechanicalRelease()}
                 >
@@ -169,34 +227,51 @@ export function Spline3dScene({
                         ref={(el: HTMLElement | null) => {
                             viewerRef.current = el;
                             if (el && !viewerLoaded) {
-                                el.addEventListener('load', () => setViewerLoaded(true));
+                                el.addEventListener('load', () =>
+                                    setViewerLoaded(true),
+                                );
                             }
                         }}
                         url={url}
                         loading-anim-type="spinner-small-dark"
-                        style={{ width: '100%', height: '100%', display: 'block' }}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            display: 'block',
+                        }}
                     />
                 </div>
             ) : hasError ? (
                 /* Fallback 3D Visual Experience if CDN is blocked or WebGL fails */
-                <div className="size-full flex flex-col items-center justify-center p-8 text-center space-y-4">
-                    <div className="size-20 rounded-3xl bg-gradient-to-tr from-primary to-orange-500 text-white flex items-center justify-center shadow-2xl shadow-primary/30 animate-pulse">
+                <div className="flex size-full flex-col items-center justify-center space-y-4 p-8 text-center">
+                    <div className="flex size-20 animate-pulse items-center justify-center rounded-3xl bg-gradient-to-tr from-primary to-orange-500 text-white shadow-2xl shadow-primary/30">
                         <Cpu className="size-10" />
                     </div>
-                    <div className="space-y-1.5 max-w-md">
-                        <h4 className="text-lg font-black text-foreground">مجسم لوحة المفاتيح ثلاثية الأبعاد</h4>
-                        <p className="text-xs text-muted-foreground leading-relaxed">
-                            نموذج تفاعلي متقدم بتقنية Spline & WebGL 2.0. اضغط على أي زر في لوحة مفاتيحك لسماع النقر الميكانيكي الحقيقي.
+                    <div className="max-w-md space-y-1.5">
+                        <h4 className="text-lg font-black text-foreground">
+                            مجسم لوحة المفاتيح ثلاثية الأبعاد
+                        </h4>
+                        <p className="text-xs leading-relaxed text-muted-foreground">
+                            نموذج تفاعلي متقدم بتقنية Spline & WebGL 2.0. اضغط
+                            على أي زر في لوحة مفاتيحك لسماع النقر الميكانيكي
+                            الحقيقي.
                         </p>
                     </div>
-                    <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 pt-2">
-                        {['Python', 'Flutter', 'Laravel', 'React', 'Docker', 'AI'].map((key) => (
+                    <div className="grid grid-cols-4 gap-2 pt-2 sm:grid-cols-6">
+                        {[
+                            'Python',
+                            'Flutter',
+                            'Laravel',
+                            'React',
+                            'Docker',
+                            'AI',
+                        ].map((key) => (
                             <button
                                 key={key}
                                 type="button"
                                 onMouseDown={() => playMechanicalPress()}
                                 onMouseUp={() => playMechanicalRelease()}
-                                className="px-3 py-2 rounded-xl bg-secondary/80 border border-primary/20 hover:border-primary hover:bg-primary/10 text-xs font-mono font-bold text-foreground transition-all active:translate-y-1 shadow-sm"
+                                className="rounded-xl border border-primary/20 bg-secondary/80 px-3 py-2 font-mono text-xs font-bold text-foreground shadow-sm transition-all hover:border-primary hover:bg-primary/10 active:translate-y-1"
                             >
                                 {key}
                             </button>
@@ -205,19 +280,21 @@ export function Spline3dScene({
                 </div>
             ) : (
                 /* Loading State */
-                <div className="size-full flex flex-col items-center justify-center space-y-3 text-muted-foreground">
-                    <Loader2 className="size-8 text-primary animate-spin" />
-                    <span className="text-xs font-mono font-semibold">جارٍ تهيئة المحرك ثلاثي الأبعاد...</span>
+                <div className="flex size-full flex-col items-center justify-center space-y-3 text-muted-foreground">
+                    <Loader2 className="size-8 animate-spin text-primary" />
+                    <span className="font-mono text-xs font-semibold">
+                        جارٍ تهيئة المحرك ثلاثي الأبعاد...
+                    </span>
                 </div>
             )}
 
             {/* Bottom Telemetry Bar */}
-            <div className="absolute bottom-3 inset-x-4 flex items-center justify-between pointer-events-none text-[11px] text-muted-foreground font-mono">
+            <div className="pointer-events-none absolute inset-x-4 bottom-3 flex items-center justify-between font-mono text-[11px] text-muted-foreground">
                 <div className="flex items-center gap-2">
                     <span className="size-2 rounded-full bg-primary" />
                     <span>Skills 3D Model · Spline Engine</span>
                 </div>
-                <div className="hidden sm:flex items-center gap-3">
+                <div className="hidden items-center gap-3 sm:flex">
                     <span>60 FPS</span>
                     <span>•</span>
                     <span>Mechanical Audio Sync</span>

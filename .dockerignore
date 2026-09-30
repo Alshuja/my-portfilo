@@ -1,0 +1,23 @@
+node_modules
+vendor
+.git
+.github
+.env
+.env.*
+!.env.example
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+old design
+.phpunit.cache
+.phpunit.result.cache
+.agents
+.claude
+.cursor
+.mcp.json
+npm-debug.log
+pnpm-debug.log
+yarn-error.log
+Homestead.json
+Homestead.yaml

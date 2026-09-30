@@ -75,31 +75,35 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
     };
 
     return (
-        <div className="flex flex-col gap-6 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:p-8">
             <Head title="إدارة المهارات والتقنيات" />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <div className="flex flex-col justify-between gap-4 rounded-3xl border border-border/80 bg-card p-6 shadow-sm sm:flex-row sm:items-center">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                    <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
                         <Cpu className="size-6 text-primary" />
                         إدارة المهارات والتقنيات
                     </h1>
                     <p className="text-xs text-muted-foreground">
-                        تحكم بالمهارات التقنية ومستويات الإتقان وألوان المؤشرات ({skills.length} مهارة مسجلة).
+                        تحكم بالمهارات التقنية ومستويات الإتقان وألوان المؤشرات (
+                        {skills.length} مهارة مسجلة).
                     </p>
                 </div>
 
-                <Button onClick={openAddModal} className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold gap-2 shadow-md">
+                <Button
+                    onClick={openAddModal}
+                    className="gap-2 rounded-xl bg-primary font-bold text-primary-foreground shadow-md hover:bg-primary/90"
+                >
                     <PlusCircle className="size-4" />
                     إضافة مهارة جديدة
                 </Button>
             </div>
 
             {/* Skills Table */}
-            <div className="rounded-3xl border border-border/80 bg-card overflow-hidden shadow-sm">
+            <div className="overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-right text-xs">
-                        <thead className="bg-muted/50 border-b border-border/80 font-bold text-muted-foreground">
+                        <thead className="border-b border-border/80 bg-muted/50 font-bold text-muted-foreground">
                             <tr>
                                 <th className="p-4">اسم المهارة</th>
                                 <th className="p-4">المسار التقني</th>
@@ -110,27 +114,40 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
                         </thead>
                         <tbody className="divide-y divide-border/60">
                             {skills.map((skill) => (
-                                <tr key={skill.id} className="hover:bg-muted/30 transition-colors">
+                                <tr
+                                    key={skill.id}
+                                    className="transition-colors hover:bg-muted/30"
+                                >
                                     <td className="p-4 font-bold text-foreground">
                                         <div className="flex items-center gap-2.5">
                                             <span
-                                                className="size-3 rounded-full shrink-0"
-                                                style={{ backgroundColor: skill.color }}
+                                                className="size-3 shrink-0 rounded-full"
+                                                style={{
+                                                    backgroundColor:
+                                                        skill.color,
+                                                }}
                                             />
                                             <span>{skill.name}</span>
                                         </div>
                                     </td>
                                     <td className="p-4">
-                                        <Badge variant="outline" className="text-[10px]">
+                                        <Badge
+                                            variant="outline"
+                                            className="text-[10px]"
+                                        >
                                             {skill.category}
                                         </Badge>
                                     </td>
                                     <td className="p-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-24 h-2 rounded-full bg-muted overflow-hidden">
+                                            <div className="h-2 w-24 overflow-hidden rounded-full bg-muted">
                                                 <div
                                                     className="h-full rounded-full"
-                                                    style={{ width: `${skill.level}%`, backgroundColor: skill.color }}
+                                                    style={{
+                                                        width: `${skill.level}%`,
+                                                        backgroundColor:
+                                                            skill.color,
+                                                    }}
                                                 />
                                             </div>
                                             <span className="font-mono font-bold text-muted-foreground">
@@ -146,7 +163,9 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => openEditModal(skill)}
+                                                onClick={() =>
+                                                    openEditModal(skill)
+                                                }
                                                 className="size-8 rounded-lg"
                                             >
                                                 <Edit3 className="size-3.5 text-primary" />
@@ -154,7 +173,9 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => handleDelete(skill.id)}
+                                                onClick={() =>
+                                                    handleDelete(skill.id)
+                                                }
                                                 className="size-8 rounded-lg hover:text-destructive"
                                             >
                                                 <Trash2 className="size-3.5" />
@@ -170,10 +191,12 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
 
             {/* Modal */}
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogContent className="max-w-md p-6 rounded-3xl">
-                    <DialogHeader className="text-right space-y-1">
+                <DialogContent className="max-w-md rounded-3xl p-6">
+                    <DialogHeader className="space-y-1 text-right">
                         <DialogTitle className="text-lg font-bold">
-                            {editingSkill ? 'تعديل المهارة' : 'إضافة مهارة جديدة'}
+                            {editingSkill
+                                ? 'تعديل المهارة'
+                                : 'إضافة مهارة جديدة'}
                         </DialogTitle>
                         <DialogDescription className="text-xs text-muted-foreground">
                             أدخل اسم المهارة والمسار ونسبة الإتقان.
@@ -182,57 +205,87 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
 
                     <form onSubmit={handleSubmit} className="space-y-4 pt-2">
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">اسم المهارة *</label>
+                            <label className="text-xs font-semibold">
+                                اسم المهارة *
+                            </label>
                             <Input
                                 value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
+                                onChange={(e) =>
+                                    setData('name', e.target.value)
+                                }
                                 placeholder="مثال: PyTorch & Deep Learning"
                                 required
                                 className="rounded-xl"
                             />
-                            {errors.name && <p className="text-xs text-destructive">{errors.name}</p>}
+                            {errors.name && (
+                                <p className="text-xs text-destructive">
+                                    {errors.name}
+                                </p>
+                            )}
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">المسار التقني *</label>
+                            <label className="text-xs font-semibold">
+                                المسار التقني *
+                            </label>
                             <select
                                 value={data.category}
-                                onChange={(e) => setData('category', e.target.value)}
-                                className="w-full h-9 rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
+                                onChange={(e) =>
+                                    setData('category', e.target.value)
+                                }
+                                className="h-9 w-full rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
                             >
-                                <option value="data-ai">البيانات والذكاء الاصطناعي</option>
-                                <option value="programming">البرمجة وتطوير الويب</option>
-                                <option value="mobile">تطبيقات الهواتف الذكية</option>
-                                <option value="tools">الأدوات وقواعد البيانات</option>
+                                <option value="data-ai">
+                                    البيانات والذكاء الاصطناعي
+                                </option>
+                                <option value="programming">
+                                    البرمجة وتطوير الويب
+                                </option>
+                                <option value="mobile">
+                                    تطبيقات الهواتف الذكية
+                                </option>
+                                <option value="tools">
+                                    الأدوات وقواعد البيانات
+                                </option>
                             </select>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">نسبة الإتقان (1-100%) *</label>
+                                <label className="text-xs font-semibold">
+                                    نسبة الإتقان (1-100%) *
+                                </label>
                                 <Input
                                     type="number"
                                     min="1"
                                     max="100"
                                     value={data.level}
-                                    onChange={(e) => setData('level', Number(e.target.value))}
+                                    onChange={(e) =>
+                                        setData('level', Number(e.target.value))
+                                    }
                                     required
                                     className="rounded-xl"
                                 />
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">اللون النيوني *</label>
+                                <label className="text-xs font-semibold">
+                                    اللون النيوني *
+                                </label>
                                 <div className="flex items-center gap-2">
                                     <input
                                         type="color"
                                         value={data.color}
-                                        onChange={(e) => setData('color', e.target.value)}
-                                        className="size-9 rounded-lg border border-border p-0.5 cursor-pointer bg-transparent"
+                                        onChange={(e) =>
+                                            setData('color', e.target.value)
+                                        }
+                                        className="size-9 cursor-pointer rounded-lg border border-border bg-transparent p-0.5"
                                     />
                                     <Input
                                         value={data.color}
-                                        onChange={(e) => setData('color', e.target.value)}
+                                        onChange={(e) =>
+                                            setData('color', e.target.value)
+                                        }
                                         className="rounded-xl font-mono text-xs"
                                         dir="ltr"
                                     />
@@ -240,7 +293,7 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+                        <div className="flex items-center justify-end gap-3 border-t border-border pt-4">
                             <Button
                                 type="button"
                                 variant="ghost"
@@ -252,9 +305,13 @@ export default function AdminSkills({ skills }: AdminSkillsProps) {
                             <Button
                                 type="submit"
                                 disabled={processing}
-                                className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
+                                className="rounded-xl bg-primary font-bold text-primary-foreground hover:bg-primary/90"
                             >
-                                {processing ? 'جارٍ الحفظ...' : editingSkill ? 'حفظ التعديلات' : 'إضافة المهارة'}
+                                {processing
+                                    ? 'جارٍ الحفظ...'
+                                    : editingSkill
+                                      ? 'حفظ التعديلات'
+                                      : 'إضافة المهارة'}
                             </Button>
                         </div>
                     </form>

@@ -72,10 +72,14 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
             description: project.description,
             tags: project.tags.join(', '),
             image: project.image || '',
-            gallery: Array.isArray(project.gallery) ? project.gallery.join('\n') : (project.gallery || ''),
+            gallery: Array.isArray(project.gallery)
+                ? project.gallery.join('\n')
+                : project.gallery || '',
             problem: project.problem || '',
             solution: project.solution || '',
-            features: Array.isArray(project.features) ? project.features.join('\n') : (project.features || ''),
+            features: Array.isArray(project.features)
+                ? project.features.join('\n')
+                : project.features || '',
             role: project.role || '',
             client: project.client || '',
             date_range: project.date_range,
@@ -114,36 +118,44 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
     };
 
     const handleToggleFeatured = (id: number) => {
-        router.patch(`/admin/projects/${id}/toggle-featured`, {}, { preserveScroll: true });
+        router.patch(
+            `/admin/projects/${id}/toggle-featured`,
+            {},
+            { preserveScroll: true },
+        );
     };
 
     return (
-        <div className="flex flex-col gap-6 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:p-8">
             <Head title="إدارة المشاريع والأعمال" />
 
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <div className="flex flex-col justify-between gap-4 rounded-3xl border border-border/80 bg-card p-6 shadow-sm sm:flex-row sm:items-center">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                    <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
                         <FolderGit2 className="size-6 text-primary" />
                         إدارة المشاريع البرمجية
                     </h1>
                     <p className="text-xs text-muted-foreground">
-                        أضف مشاريعك الجديدة أو عدّل القائمة الحالية (الإجمالي: {projects.length} مشروع).
+                        أضف مشاريعك الجديدة أو عدّل القائمة الحالية (الإجمالي:{' '}
+                        {projects.length} مشروع).
                     </p>
                 </div>
 
-                <Button onClick={openAddModal} className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold gap-2 shadow-md">
+                <Button
+                    onClick={openAddModal}
+                    className="gap-2 rounded-xl bg-primary font-bold text-primary-foreground shadow-md hover:bg-primary/90"
+                >
                     <PlusCircle className="size-4" />
                     إضافة مشروع جديد
                 </Button>
             </div>
 
             {/* Projects Table */}
-            <div className="rounded-3xl border border-border/80 bg-card overflow-hidden shadow-sm">
+            <div className="overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-right text-xs">
-                        <thead className="bg-muted/50 border-b border-border/80 font-bold text-muted-foreground">
+                        <thead className="border-b border-border/80 bg-muted/50 font-bold text-muted-foreground">
                             <tr>
                                 <th className="p-4">اسم المشروع</th>
                                 <th className="p-4">التصنيف</th>
@@ -155,26 +167,32 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                         </thead>
                         <tbody className="divide-y divide-border/60">
                             {projects.map((project) => (
-                                <tr key={project.id} className="hover:bg-muted/30 transition-colors">
+                                <tr
+                                    key={project.id}
+                                    className="transition-colors hover:bg-muted/30"
+                                >
                                     <td className="p-4 font-bold text-foreground">
                                         <div className="flex items-center gap-3">
                                             {project.image && (
                                                 <img
                                                     src={project.image}
                                                     alt=""
-                                                    className="size-10 rounded-lg object-cover bg-muted shrink-0"
+                                                    className="size-10 shrink-0 rounded-lg bg-muted object-cover"
                                                 />
                                             )}
                                             <div>
                                                 <div>{project.title}</div>
-                                                <div className="text-[10px] text-muted-foreground font-mono">
+                                                <div className="font-mono text-[10px] text-muted-foreground">
                                                     /{project.slug}
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="p-4">
-                                        <Badge variant="outline" className="text-[10px]">
+                                        <Badge
+                                            variant="outline"
+                                            className="text-[10px]"
+                                        >
                                             {project.category_label}
                                         </Badge>
                                     </td>
@@ -183,10 +201,12 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                                     </td>
                                     <td className="p-4">
                                         <button
-                                            onClick={() => handleToggleFeatured(project.id)}
-                                            className={`size-7 rounded-lg flex items-center justify-center transition-colors ${
+                                            onClick={() =>
+                                                handleToggleFeatured(project.id)
+                                            }
+                                            className={`flex size-7 items-center justify-center rounded-lg transition-colors ${
                                                 project.is_featured
-                                                    ? 'text-amber-500 bg-amber-500/10'
+                                                    ? 'bg-amber-500/10 text-amber-500'
                                                     : 'text-muted-foreground hover:bg-muted'
                                             }`}
                                             title="تبديل الحالة كمشروع مميز"
@@ -226,7 +246,7 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                                                 href={`/projects/${project.slug}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="size-8 rounded-lg inline-flex items-center justify-center hover:bg-muted text-muted-foreground hover:text-primary transition-colors"
+                                                className="inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-primary"
                                                 title="عرض صفحة المشروع العامة"
                                             >
                                                 <Eye className="size-3.5" />
@@ -234,7 +254,9 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => openEditModal(project)}
+                                                onClick={() =>
+                                                    openEditModal(project)
+                                                }
                                                 className="size-8 rounded-lg"
                                                 title="تعديل"
                                             >
@@ -243,7 +265,9 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => handleDelete(project.id)}
+                                                onClick={() =>
+                                                    handleDelete(project.id)
+                                                }
                                                 className="size-8 rounded-lg hover:text-destructive"
                                                 title="حذف"
                                             >
@@ -260,54 +284,77 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
 
             {/* Add / Edit Dialog Modal */}
             <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
-                <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-6 md:p-8 rounded-3xl">
-                    <DialogHeader className="text-right space-y-1">
+                <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto rounded-3xl p-6 md:p-8">
+                    <DialogHeader className="space-y-1 text-right">
                         <DialogTitle className="text-xl font-bold">
-                            {editingProject ? 'تعديل بيانات المشروع' : 'إضافة مشروع جديد'}
+                            {editingProject
+                                ? 'تعديل بيانات المشروع'
+                                : 'إضافة مشروع جديد'}
                         </DialogTitle>
                         <DialogDescription className="text-xs text-muted-foreground">
-                            أدخل تفاصيل المشروع والتقنيات ورابط المعاينة وصورة الغلاف.
+                            أدخل تفاصيل المشروع والتقنيات ورابط المعاينة وصورة
+                            الغلاف.
                         </DialogDescription>
                     </DialogHeader>
 
                     <form onSubmit={handleSubmit} className="space-y-4 pt-2">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">عنوان المشروع *</label>
+                                <label className="text-xs font-semibold">
+                                    عنوان المشروع *
+                                </label>
                                 <Input
                                     value={data.title}
-                                    onChange={(e) => setData('title', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('title', e.target.value)
+                                    }
                                     placeholder="مثال: منصة وتطبيق سندباد"
                                     required
                                     className="rounded-xl"
                                 />
-                                {errors.title && <p className="text-xs text-destructive">{errors.title}</p>}
+                                {errors.title && (
+                                    <p className="text-xs text-destructive">
+                                        {errors.title}
+                                    </p>
+                                )}
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">الرابط التعريفي (Slug) *</label>
+                                <label className="text-xs font-semibold">
+                                    الرابط التعريفي (Slug) *
+                                </label>
                                 <Input
                                     value={data.slug}
-                                    onChange={(e) => setData('slug', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('slug', e.target.value)
+                                    }
                                     placeholder="sinbad"
                                     className="rounded-xl font-mono text-xs"
                                     dir="ltr"
                                 />
-                                {errors.slug && <p className="text-xs text-destructive">{errors.slug}</p>}
+                                {errors.slug && (
+                                    <p className="text-xs text-destructive">
+                                        {errors.slug}
+                                    </p>
+                                )}
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">تصنيف المشروع *</label>
+                                <label className="text-xs font-semibold">
+                                    تصنيف المشروع *
+                                </label>
                                 <select
                                     value={data.category}
                                     onChange={(e) => {
                                         const val = e.target.value;
                                         const labels: Record<string, string> = {
-                                            platform: 'المنصات والتجارة الإلكترونية',
+                                            platform:
+                                                'المنصات والتجارة الإلكترونية',
                                             mobile: 'تطبيقات الهواتف (Flutter)',
-                                            'ai-data': 'الذكاء الاصطناعي وعلم البيانات',
+                                            'ai-data':
+                                                'الذكاء الاصطناعي وعلم البيانات',
                                             web: 'تطوير الويب والخوادم',
                                         };
                                         setData({
@@ -316,20 +363,32 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                                             category_label: labels[val] || val,
                                         });
                                     }}
-                                    className="w-full h-9 rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
+                                    className="h-9 w-full rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
                                 >
-                                    <option value="platform">المنصات والتجارة الإلكترونية</option>
-                                    <option value="mobile">تطبيقات الهواتف (Flutter)</option>
-                                    <option value="ai-data">الذكاء الاصطناعي وعلم البيانات</option>
-                                    <option value="web">تطوير الويب والخوادم</option>
+                                    <option value="platform">
+                                        المنصات والتجارة الإلكترونية
+                                    </option>
+                                    <option value="mobile">
+                                        تطبيقات الهواتف (Flutter)
+                                    </option>
+                                    <option value="ai-data">
+                                        الذكاء الاصطناعي وعلم البيانات
+                                    </option>
+                                    <option value="web">
+                                        تطوير الويب والخوادم
+                                    </option>
                                 </select>
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">تاريخ / سنة الإنجاز *</label>
+                                <label className="text-xs font-semibold">
+                                    تاريخ / سنة الإنجاز *
+                                </label>
                                 <Input
                                     value={data.date_range}
-                                    onChange={(e) => setData('date_range', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('date_range', e.target.value)
+                                    }
                                     placeholder="مثال: 2024 - 2025"
                                     required
                                     className="rounded-xl"
@@ -337,22 +396,30 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">الدور المنفّذ (Role)</label>
+                                <label className="text-xs font-semibold">
+                                    الدور المنفّذ (Role)
+                                </label>
                                 <Input
                                     value={data.role}
-                                    onChange={(e) => setData('role', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('role', e.target.value)
+                                    }
                                     placeholder="مثال: Lead Full-Stack & Mobile Developer"
                                     className="rounded-xl"
                                 />
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">الجهة / العميل (Client)</label>
+                                <label className="text-xs font-semibold">
+                                    الجهة / العميل (Client)
+                                </label>
                                 <Input
                                     value={data.client}
-                                    onChange={(e) => setData('client', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('client', e.target.value)
+                                    }
                                     placeholder="مثال: شركة سندباد للتجارة"
                                     className="rounded-xl"
                                 />
@@ -360,10 +427,14 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">التقنيات المستخدمة (مفصولة بفواصل) *</label>
+                            <label className="text-xs font-semibold">
+                                التقنيات المستخدمة (مفصولة بفواصل) *
+                            </label>
                             <Input
                                 value={data.tags}
-                                onChange={(e) => setData('tags', e.target.value)}
+                                onChange={(e) =>
+                                    setData('tags', e.target.value)
+                                }
                                 placeholder="Flutter, Laravel, PHP, MySQL, REST API"
                                 required
                                 className="rounded-xl"
@@ -371,10 +442,14 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">نبذة سريعة عن المشروع (تظهر في البطاقة) *</label>
+                            <label className="text-xs font-semibold">
+                                نبذة سريعة عن المشروع (تظهر في البطاقة) *
+                            </label>
                             <Input
                                 value={data.brief}
-                                onChange={(e) => setData('brief', e.target.value)}
+                                onChange={(e) =>
+                                    setData('brief', e.target.value)
+                                }
                                 placeholder="اكتب نبذة مختصرة من سطرين..."
                                 required
                                 className="rounded-xl"
@@ -382,18 +457,22 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">الوصف الكامل والمفصل *</label>
+                            <label className="text-xs font-semibold">
+                                الوصف الكامل والمفصل *
+                            </label>
                             <Textarea
                                 rows={3}
                                 value={data.description}
-                                onChange={(e) => setData('description', e.target.value)}
+                                onChange={(e) =>
+                                    setData('description', e.target.value)
+                                }
                                 placeholder="اشرح الحل التقني والمعمارية بالتفصيل..."
                                 required
                                 className="rounded-xl"
                             />
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-1">
                                 <label className="text-xs font-semibold text-rose-600 dark:text-rose-400">
                                     المشكلة والتحدي (The Problem Statement)
@@ -401,7 +480,9 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                                 <Textarea
                                     rows={3}
                                     value={data.problem}
-                                    onChange={(e) => setData('problem', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('problem', e.target.value)
+                                    }
                                     placeholder="ما هي المشكلة الواقعية التي كان يعاني منها المستخدمون أو السوق؟"
                                     className="rounded-xl"
                                 />
@@ -409,12 +490,15 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
 
                             <div className="space-y-1">
                                 <label className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                                    الحل المبتكر والمعمارية (The Solution & Architecture)
+                                    الحل المبتكر والمعمارية (The Solution &
+                                    Architecture)
                                 </label>
                                 <Textarea
                                     rows={3}
                                     value={data.solution}
-                                    onChange={(e) => setData('solution', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('solution', e.target.value)
+                                    }
                                     placeholder="كيف قمت بهندسة الحل تقنياً، وما هي الخوارزميات أو المعمارية المعتمدة؟"
                                     className="rounded-xl"
                                 />
@@ -423,13 +507,18 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
 
                         <div className="space-y-1">
                             <label className="text-xs font-semibold">
-                                أبرز المميزات والوظائف (اكتب كل ميزة في سطر منفصل)
+                                أبرز المميزات والوظائف (اكتب كل ميزة في سطر
+                                منفصل)
                             </label>
                             <Textarea
                                 rows={3}
                                 value={data.features}
-                                onChange={(e) => setData('features', e.target.value)}
-                                placeholder={'لوحة تحكم إدارية متكاملة\nتتبع حي للشحنات عبر الخرائط\nبوابات دفع إلكترونية متعددة'}
+                                onChange={(e) =>
+                                    setData('features', e.target.value)
+                                }
+                                placeholder={
+                                    'لوحة تحكم إدارية متكاملة\nتتبع حي للشحنات عبر الخرائط\nبوابات دفع إلكترونية متعددة'
+                                }
                                 className="rounded-xl text-xs"
                             />
                         </div>
@@ -449,19 +538,27 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                             <Textarea
                                 rows={3}
                                 value={data.gallery}
-                                onChange={(e) => setData('gallery', e.target.value)}
-                                placeholder={'https://images.unsplash.com/...\nhttps://images.unsplash.com/...'}
+                                onChange={(e) =>
+                                    setData('gallery', e.target.value)
+                                }
+                                placeholder={
+                                    'https://images.unsplash.com/...\nhttps://images.unsplash.com/...'
+                                }
                                 className="rounded-xl font-mono text-xs"
                                 dir="ltr"
                             />
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">رابط المعاينة الحية (Live URL)</label>
+                                <label className="text-xs font-semibold">
+                                    رابط المعاينة الحية (Live URL)
+                                </label>
                                 <Input
                                     value={data.live_url}
-                                    onChange={(e) => setData('live_url', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('live_url', e.target.value)
+                                    }
                                     placeholder="https://..."
                                     className="rounded-xl font-mono text-xs"
                                     dir="ltr"
@@ -469,10 +566,14 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">رابط مستودع GitHub</label>
+                                <label className="text-xs font-semibold">
+                                    رابط مستودع GitHub
+                                </label>
                                 <Input
                                     value={data.github_url}
-                                    onChange={(e) => setData('github_url', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('github_url', e.target.value)
+                                    }
                                     placeholder="https://github.com/..."
                                     className="rounded-xl font-mono text-xs"
                                     dir="ltr"
@@ -485,15 +586,20 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                                 type="checkbox"
                                 id="is_featured"
                                 checked={data.is_featured}
-                                onChange={(e) => setData('is_featured', e.target.checked)}
-                                className="rounded size-4 text-primary"
+                                onChange={(e) =>
+                                    setData('is_featured', e.target.checked)
+                                }
+                                className="size-4 rounded text-primary"
                             />
-                            <label htmlFor="is_featured" className="text-xs font-medium cursor-pointer">
+                            <label
+                                htmlFor="is_featured"
+                                className="cursor-pointer text-xs font-medium"
+                            >
                                 تعيين كمشروع مميز في الصفحة الرئيسية
                             </label>
                         </div>
 
-                        <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+                        <div className="flex items-center justify-end gap-3 border-t border-border pt-4">
                             <Button
                                 type="button"
                                 variant="ghost"
@@ -505,9 +611,13 @@ export default function AdminProjects({ projects }: AdminProjectsProps) {
                             <Button
                                 type="submit"
                                 disabled={processing}
-                                className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
+                                className="rounded-xl bg-primary font-bold text-primary-foreground hover:bg-primary/90"
                             >
-                                {processing ? 'جارٍ الحفظ...' : editingProject ? 'حفظ التعديلات' : 'إضافة المشروع'}
+                                {processing
+                                    ? 'جارٍ الحفظ...'
+                                    : editingProject
+                                      ? 'حفظ التعديلات'
+                                      : 'إضافة المشروع'}
                             </Button>
                         </div>
                     </form>

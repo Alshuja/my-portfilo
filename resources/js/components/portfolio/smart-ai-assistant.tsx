@@ -18,7 +18,11 @@ interface Message {
     link?: { url: string; label: string };
 }
 
-const KNOWLEDGE_BASE: Array<{ keywords: string[]; answer: string; link?: { url: string; label: string } }> = [
+const KNOWLEDGE_BASE: Array<{
+    keywords: string[];
+    answer: string;
+    link?: { url: string; label: string };
+}> = [
     {
         keywords: ['سندباد', 'sinbad', 'متجر', 'تجارة', 'سوق'],
         answer: 'مشروع "سندباد" (Sinbad Marketplace) هو منصة تجارة إلكترونية متعددة التجار وتطبيق هواتف ذكية متكامل، عمل فيه المهندس عبدالرحمن كـ Lead Full-Stack & Mobile Developer. النظام مبني باستخدام Laravel كـ Backend عالي الأداء مع تطبيقات هجينة بـ Flutter لنظامي Android و iOS، ويدعم تتبع الشحنات بالخرائط اللحظية وبوابات الدفع الإلكتروني.',
@@ -30,17 +34,44 @@ const KNOWLEDGE_BASE: Array<{ keywords: string[]; answer: string; link?: { url: 
         link: { url: '/projects/rial', label: 'استعراض صفحة محفظة ريال' },
     },
     {
-        keywords: ['فكرة مبرمج', 'مبرمج', 'مبادرة', 'مجتمع', 'تعليم', 'قناة', 'يوتيوب'],
+        keywords: [
+            'فكرة مبرمج',
+            'مبرمج',
+            'مبادرة',
+            'مجتمع',
+            'تعليم',
+            'قناة',
+            'يوتيوب',
+        ],
         answer: 'مبادرة "فكرة مبرمج" (Programmer Idea) هي منصة ومجتمع تقني أسسه م. عبدالرحمن عادل الشجاع لتبسيط علوم البرمجة وهندسة البرمجيات والذكاء الاصطناعي باللغة العربية، وقد استفاد منها أكثر من 10,000 طالب ومطور عبر قنوات التلجرام واليوتيوب والموقع الرسمي.',
         link: { url: '/programmer-idea', label: 'زيارة صفحة فكرة مبرمج' },
     },
     {
-        keywords: ['بايثون', 'python', 'ذكاء', 'ai', 'بيانات', 'تعلم', 'data', 'pandas', 'power bi'],
+        keywords: [
+            'بايثون',
+            'python',
+            'ذكاء',
+            'ai',
+            'بيانات',
+            'تعلم',
+            'data',
+            'pandas',
+            'power bi',
+        ],
         answer: 'يتخصص م. عبدالرحمن في علوم البيانات والذكاء الاصطناعي؛ حيث يتقن لغة بايثون ومكتبات التحليل الرياضي (NumPy, pandas, Matplotlib) ونماذج تعلم الآلة (Machine Learning عبر Scikit-Learn)، وبناء لوحات المؤشرات التفاعلية بـ Power BI، وحاصل على شهادة معتمدة من IBM في هذا المجال.',
         link: { url: '/skills', label: 'استعراض مصفوفة المهارات' },
     },
     {
-        keywords: ['تواصل', 'رقم', 'واتساب', 'ايميل', 'واتس', 'اتصال', 'phone', 'contact'],
+        keywords: [
+            'تواصل',
+            'رقم',
+            'واتساب',
+            'ايميل',
+            'واتس',
+            'اتصال',
+            'phone',
+            'contact',
+        ],
         answer: 'يمكنك التواصل المباشر مع م. عبدالرحمن عادل الشجاع عبر:\n• واتساب 1: +967 773 853 853\n• واتساب 2: +967 777 580 845\n• تيليجرام: @Alshuja_ai\n• أو عبر نموذج الرسائل في الموقع.',
         link: { url: '/contact', label: 'الانتقال لصفحة التواصل' },
     },
@@ -50,7 +81,15 @@ const KNOWLEDGE_BASE: Array<{ keywords: string[]; answer: string; link?: { url: 
         link: { url: '/about', label: 'استعراض السيرة والمسار' },
     },
     {
-        keywords: ['عمل', 'حر', 'مشروع', 'توظيف', 'سعر', 'برمجة تطبيق', 'freelance'],
+        keywords: [
+            'عمل',
+            'حر',
+            'مشروع',
+            'توظيف',
+            'سعر',
+            'برمجة تطبيق',
+            'freelance',
+        ],
         answer: 'نعم! م. عبدالرحمن متاح حالياً للعمل الحر، وتطوير المشاريع الرقمية الجديدة سواء تطبيقات هواتف بـ Flutter، منصات ويب بـ Laravel، أو حلول تحليل البيانات والذكاء الاصطناعي.',
         link: { url: '/contact', label: 'طلب مشروع الآن' },
     },
@@ -110,7 +149,10 @@ export function SmartAiAssistant() {
             id: String(Date.now()),
             sender: 'user',
             text: query,
-            time: new Date().toLocaleTimeString('ar-YE', { hour: '2-digit', minute: '2-digit' }),
+            time: new Date().toLocaleTimeString('ar-YE', {
+                hour: '2-digit',
+                minute: '2-digit',
+            }),
         };
 
         setMessages((prev) => [...prev, userMsg]);
@@ -120,7 +162,7 @@ export function SmartAiAssistant() {
         // Find answer in knowledge base
         const lower = query.toLowerCase();
         let matched = KNOWLEDGE_BASE.find((item) =>
-            item.keywords.some((k) => lower.includes(k.toLowerCase()))
+            item.keywords.some((k) => lower.includes(k.toLowerCase())),
         );
 
         setTimeout(() => {
@@ -130,7 +172,10 @@ export function SmartAiAssistant() {
                 id: String(Date.now() + 1),
                 sender: 'bot',
                 text: matched ? matched.answer : DEFAULT_ANSWER,
-                time: new Date().toLocaleTimeString('ar-YE', { hour: '2-digit', minute: '2-digit' }),
+                time: new Date().toLocaleTimeString('ar-YE', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                }),
                 link: matched?.link,
             };
             setMessages((prev) => [...prev, botMsg]);
@@ -145,13 +190,18 @@ export function SmartAiAssistant() {
     return (
         <>
             {/* ==================== FLOATING ACTION BUTTONS (FABs) ==================== */}
-            <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3" dir="ltr">
+            <div
+                className="fixed bottom-6 left-6 z-40 flex flex-col gap-3"
+                dir="ltr"
+            >
                 {/* Scroll To Top Button */}
                 <button
                     type="button"
                     onClick={scrollToTop}
-                    className={`size-12 rounded-full bg-card text-foreground border border-border/80 flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 hover:border-primary hover:text-primary ${
-                        showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+                    className={`flex size-12 items-center justify-center rounded-full border border-border/80 bg-card text-foreground shadow-lg transition-all duration-300 hover:scale-110 hover:border-primary hover:text-primary ${
+                        showScrollTop
+                            ? 'translate-y-0 opacity-100'
+                            : 'pointer-events-none translate-y-4 opacity-0'
                     }`}
                     title="العودة للأعلى"
                     aria-label="العودة للأعلى"
@@ -164,7 +214,7 @@ export function SmartAiAssistant() {
                     href="https://wa.me/967773853853?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%85.%20%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%D8%D8%AD%D9%85%D9%86%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D9%85%D9%86%D8%A7%D9%82%D8%B4%D8%A9%20%D9%85%D8%B4%D8%B1%D9%88%D8%B9%20%D8%AA%D9%82%D9%86%D9%8A"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="size-13 rounded-full bg-gradient-to-tr from-emerald-600 to-emerald-500 text-white flex items-center justify-center shadow-xl hover:scale-110 transition-all hover:shadow-emerald-500/30 group"
+                    className="group flex size-13 items-center justify-center rounded-full bg-gradient-to-tr from-emerald-600 to-emerald-500 text-white shadow-xl transition-all hover:scale-110 hover:shadow-emerald-500/30"
                     title="محادثة واتساب مباشرة"
                     aria-label="محادثة واتساب"
                 >
@@ -178,37 +228,37 @@ export function SmartAiAssistant() {
                         playClickSound(700, 0.03);
                         setIsOpen(!isOpen);
                     }}
-                    className="relative size-14 rounded-full bg-gradient-to-tr from-red-700 via-primary to-orange-500 text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-all hover:shadow-primary/40"
+                    className="relative flex size-14 items-center justify-center rounded-full bg-gradient-to-tr from-red-700 via-primary to-orange-500 text-white shadow-2xl transition-all hover:scale-110 hover:shadow-primary/40"
                     title="المساعد الذكي (AI Assistant)"
                     aria-label="المساعد الذكي"
                 >
                     <Bot className="size-6" />
-                    <span className="absolute -top-1 -right-1 px-1.5 py-0.5 rounded-full bg-white text-primary text-[10px] font-black shadow-md border border-primary/20">
+                    <span className="absolute -top-1 -right-1 rounded-full border border-primary/20 bg-white px-1.5 py-0.5 text-[10px] font-black text-primary shadow-md">
                         AI
                     </span>
-                    <span className="absolute inset-0 rounded-full bg-primary/25 animate-ping -z-10" />
+                    <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-primary/25" />
                 </button>
             </div>
 
             {/* ==================== SMART AI ASSISTANT CHAT WINDOW ==================== */}
             {isOpen && (
                 <div
-                    className="fixed bottom-24 left-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[520px] max-h-[calc(100vh-8rem)] rounded-3xl bg-card border border-border/80 shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+                    className="fixed bottom-24 left-6 z-50 flex h-[520px] max-h-[calc(100vh-8rem)] w-96 max-w-[calc(100vw-3rem)] animate-in flex-col overflow-hidden rounded-3xl border border-border/80 bg-card shadow-2xl duration-200 zoom-in-95 fade-in"
                     dir="rtl"
                 >
                     {/* Header */}
-                    <div className="p-4 bg-gradient-to-r from-red-700 via-primary to-orange-500 text-white flex items-center justify-between shadow-md">
+                    <div className="flex items-center justify-between bg-gradient-to-r from-red-700 via-primary to-orange-500 p-4 text-white shadow-md">
                         <div className="flex items-center gap-3">
-                            <div className="size-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-bold">
+                            <div className="flex size-10 items-center justify-center rounded-2xl bg-white/20 font-bold backdrop-blur-md">
                                 <Bot className="size-5" />
                             </div>
                             <div>
-                                <h4 className="text-sm font-bold flex items-center gap-1.5">
+                                <h4 className="flex items-center gap-1.5 text-sm font-bold">
                                     مساعد عبدالرحمن الذكي
                                     <Sparkles className="size-3 text-amber-300" />
                                 </h4>
-                                <div className="text-[11px] text-white/85 flex items-center gap-1.5">
-                                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                                <div className="flex items-center gap-1.5 text-[11px] text-white/85">
+                                    <span className="size-2 animate-pulse rounded-full bg-emerald-400" />
                                     متصل وجاهز للرد
                                 </div>
                             </div>
@@ -217,7 +267,7 @@ export function SmartAiAssistant() {
                         <button
                             type="button"
                             onClick={() => setIsOpen(false)}
-                            className="size-8 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition-colors"
+                            className="flex size-8 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/25"
                             aria-label="إغلاق نافذة المحادثة"
                         >
                             <X className="size-4 text-white" />
@@ -225,22 +275,27 @@ export function SmartAiAssistant() {
                     </div>
 
                     {/* Messages Body */}
-                    <div ref={chatBodyRef} className="flex-1 p-4 overflow-y-auto space-y-3 bg-muted/20">
+                    <div
+                        ref={chatBodyRef}
+                        className="flex-1 space-y-3 overflow-y-auto bg-muted/20 p-4"
+                    >
                         {messages.map((m) => (
                             <div
                                 key={m.id}
                                 className={`flex flex-col ${m.sender === 'user' ? 'items-start' : 'items-end'}`}
                             >
                                 <div
-                                    className={`p-3 rounded-2xl text-xs sm:text-sm leading-relaxed max-w-[85%] ${
+                                    className={`max-w-[85%] rounded-2xl p-3 text-xs leading-relaxed sm:text-sm ${
                                         m.sender === 'user'
-                                            ? 'bg-primary text-primary-foreground rounded-br-sm shadow-sm'
-                                            : 'bg-card text-foreground border border-border/80 rounded-bl-sm shadow-sm'
+                                            ? 'rounded-br-sm bg-primary text-primary-foreground shadow-sm'
+                                            : 'rounded-bl-sm border border-border/80 bg-card text-foreground shadow-sm'
                                     }`}
                                 >
-                                    <p className="whitespace-pre-line">{m.text}</p>
+                                    <p className="whitespace-pre-line">
+                                        {m.text}
+                                    </p>
                                     {m.link && (
-                                        <div className="mt-2 pt-2 border-t border-border/50">
+                                        <div className="mt-2 border-t border-border/50 pt-2">
                                             <a
                                                 href={m.link.url}
                                                 className="inline-flex items-center gap-1 text-[11px] font-bold text-primary hover:underline"
@@ -251,27 +306,29 @@ export function SmartAiAssistant() {
                                         </div>
                                     )}
                                 </div>
-                                <span className="text-[10px] text-muted-foreground mt-1 px-1">{m.time}</span>
+                                <span className="mt-1 px-1 text-[10px] text-muted-foreground">
+                                    {m.time}
+                                </span>
                             </div>
                         ))}
 
                         {isTyping && (
-                            <div className="flex items-end gap-1 p-2 bg-card rounded-2xl border border-border/60 max-w-24">
-                                <span className="size-2 rounded-full bg-primary animate-bounce [animation-delay:-0.3s]" />
-                                <span className="size-2 rounded-full bg-primary animate-bounce [animation-delay:-0.15s]" />
-                                <span className="size-2 rounded-full bg-primary animate-bounce" />
+                            <div className="flex max-w-24 items-end gap-1 rounded-2xl border border-border/60 bg-card p-2">
+                                <span className="size-2 animate-bounce rounded-full bg-primary [animation-delay:-0.3s]" />
+                                <span className="size-2 animate-bounce rounded-full bg-primary [animation-delay:-0.15s]" />
+                                <span className="size-2 animate-bounce rounded-full bg-primary" />
                             </div>
                         )}
                     </div>
 
                     {/* Quick Suggestion Chips */}
-                    <div className="p-2.5 bg-card border-t border-border/60 flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+                    <div className="flex scrollbar-none items-center gap-1.5 overflow-x-auto border-t border-border/60 bg-card p-2.5">
                         {SUGGESTIONS.map((s, idx) => (
                             <button
                                 key={idx}
                                 type="button"
                                 onClick={() => handleSendMessage(s)}
-                                className="px-2.5 py-1 rounded-full bg-muted/80 hover:bg-primary hover:text-white text-muted-foreground text-[11px] font-medium whitespace-nowrap transition-colors flex-shrink-0"
+                                className="flex-shrink-0 rounded-full bg-muted/80 px-2.5 py-1 text-[11px] font-medium whitespace-nowrap text-muted-foreground transition-colors hover:bg-primary hover:text-white"
                             >
                                 {s}
                             </button>
@@ -284,19 +341,19 @@ export function SmartAiAssistant() {
                             e.preventDefault();
                             handleSendMessage();
                         }}
-                        className="p-3 bg-card border-t border-border flex items-center gap-2"
+                        className="flex items-center gap-2 border-t border-border bg-card p-3"
                     >
                         <input
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="اكتب سؤالك هنا..."
-                            className="flex-1 h-9 px-3.5 rounded-full bg-muted/50 border border-border/80 text-xs text-foreground focus:outline-none focus:border-primary"
+                            className="h-9 flex-1 rounded-full border border-border/80 bg-muted/50 px-3.5 text-xs text-foreground focus:border-primary focus:outline-none"
                         />
                         <button
                             type="submit"
                             disabled={!input.trim()}
-                            className="size-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:opacity-90 disabled:opacity-40 transition-opacity flex-shrink-0"
+                            className="flex size-9 flex-shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
                             aria-label="إرسال"
                         >
                             <Send className="size-4 -scale-x-100" />

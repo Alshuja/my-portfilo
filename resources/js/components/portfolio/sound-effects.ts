@@ -11,7 +11,10 @@ let releaseAudio: HTMLAudioElement | null = null;
 
 export function isSoundEnabled(): boolean {
     if (typeof window === 'undefined') return false;
-    return soundEnabled || localStorage.getItem('alshujaa_sound_enabled') === 'true';
+    return (
+        soundEnabled ||
+        localStorage.getItem('alshujaa_sound_enabled') === 'true'
+    );
 }
 
 export function toggleSound(): boolean {
@@ -66,7 +69,10 @@ export function playClickSound(freq = 600, duration = 0.03): void {
 
 function playSyntheticClick(freq = 600, duration = 0.03): void {
     try {
-        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        const AudioContextClass =
+            window.AudioContext ||
+            (window as unknown as { webkitAudioContext: typeof AudioContext })
+                .webkitAudioContext;
         if (!audioCtx) {
             audioCtx = new AudioContextClass();
         }
@@ -79,10 +85,16 @@ function playSyntheticClick(freq = 600, duration = 0.03): void {
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + duration);
+        osc.frequency.exponentialRampToValueAtTime(
+            120,
+            audioCtx.currentTime + duration,
+        );
 
         gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audioCtx.currentTime + duration,
+        );
 
         osc.connect(gain);
         gain.connect(audioCtx.destination);

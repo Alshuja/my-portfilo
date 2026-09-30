@@ -28,12 +28,16 @@ export function TiltCard({
         const tiltX = (0.5 - y) * maxTilt * 2;
         const tiltY = (x - 0.5) * maxTilt * 2;
 
-        setTransform(`perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`);
+        setTransform(
+            `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`,
+        );
         setGlarePosition({ x: Math.round(x * 100), y: Math.round(y * 100) });
     };
 
     const handleMouseLeave = () => {
-        setTransform('perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)');
+        setTransform(
+            'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+        );
     };
 
     return (

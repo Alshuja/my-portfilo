@@ -15,11 +15,15 @@ export default function BlogPage({ articles }: BlogProps) {
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     const filtered = articles.filter((a) => {
-        const matchesCategory = selectedCategory === 'all' || a.category === selectedCategory;
+        const matchesCategory =
+            selectedCategory === 'all' || a.category === selectedCategory;
         const matchesSearch =
             a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             a.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            (a.tags && a.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase())));
+            (a.tags &&
+                a.tags.some((t) =>
+                    t.toLowerCase().includes(searchQuery.toLowerCase()),
+                ));
         return matchesCategory && matchesSearch;
     });
 
@@ -34,30 +38,35 @@ export default function BlogPage({ articles }: BlogProps) {
         <PortfolioLayout>
             <Head title="المدونة والمقالات التقنية" />
 
-            <div className="container mx-auto px-4 sm:px-6 py-16 md:py-24 space-y-12">
+            <div className="container mx-auto space-y-12 px-4 py-16 sm:px-6 md:py-24">
                 <div className="max-w-3xl space-y-4">
-                    <Badge variant="outline" className="text-primary border-primary/30 px-3 py-1 bg-primary/5">
+                    <Badge
+                        variant="outline"
+                        className="border-primary/30 bg-primary/5 px-3 py-1 text-primary"
+                    >
                         المعرفة والتدوين
                     </Badge>
-                    <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
+                    <h1 className="text-3xl font-black tracking-tight text-foreground sm:text-5xl">
                         المدونة والمقالات التقنية
                     </h1>
-                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                        مقالات وشروحات معمقة باللغة العربية في علم البيانات، الذكاء الاصطناعي التوليدي، معمارية تطبيقات Flutter، وبناء المنتجات الرقمية.
+                    <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                        مقالات وشروحات معمقة باللغة العربية في علم البيانات،
+                        الذكاء الاصطناعي التوليدي، معمارية تطبيقات Flutter، وبناء
+                        المنتجات الرقمية.
                     </p>
                 </div>
 
                 {/* Filter and Search Bar */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-card border border-border/80 shadow-sm">
+                <div className="flex flex-col justify-between gap-4 rounded-2xl border border-border/80 bg-card p-4 shadow-sm md:flex-row md:items-center">
                     <div className="flex flex-wrap items-center gap-2">
                         {categories.map((cat) => (
                             <button
                                 key={cat.id}
                                 onClick={() => setSelectedCategory(cat.id)}
-                                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                                className={`rounded-xl px-3.5 py-1.5 text-xs font-semibold transition-all ${
                                     selectedCategory === cat.id
                                         ? 'bg-primary text-primary-foreground shadow-sm'
-                                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                                 }`}
                             >
                                 {cat.label}
@@ -66,63 +75,65 @@ export default function BlogPage({ articles }: BlogProps) {
                     </div>
 
                     <div className="relative w-full md:w-72">
-                        <Search className="size-4 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                        <Search className="absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="بحث في المقالات والوسوم..."
-                            className="pr-9 rounded-xl border-border/80 text-xs"
+                            className="rounded-xl border-border/80 pr-9 text-xs"
                         />
                     </div>
                 </div>
 
                 {/* Articles Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {filtered.map((article) => (
                         <Link
                             key={article.id}
                             href={`/blog/${article.slug}`}
-                            className="group rounded-3xl border border-border/80 bg-card overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 flex flex-col justify-between"
+                            className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-border/80 bg-card transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-xl"
                         >
                             {article.image && (
                                 <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
                                     <img
                                         src={article.image}
                                         alt={article.title}
-                                        className="size-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         onError={(e) => {
-                                            (e.currentTarget as HTMLImageElement).src =
+                                            (
+                                                e.currentTarget as HTMLImageElement
+                                            ).src =
                                                 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80';
                                         }}
                                     />
                                     <div className="absolute top-3 right-3">
-                                        <Badge className="bg-background/90 text-foreground text-[10px] font-semibold border border-border">
+                                        <Badge className="border border-border bg-background/90 text-[10px] font-semibold text-foreground">
                                             {article.category_label}
                                         </Badge>
                                     </div>
                                 </div>
                             )}
 
-                            <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                            <div className="flex flex-1 flex-col justify-between space-y-4 p-6">
                                 <div className="space-y-2">
-                                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
+                                    <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
                                         <Calendar className="size-3 text-primary" />
                                         <span>{article.date}</span>
                                         <span>•</span>
                                         <Clock className="size-3 text-primary" />
                                         <span>{article.reading_time}</span>
                                     </div>
-                                    <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors leading-snug">
+                                    <h3 className="text-lg leading-snug font-bold text-foreground transition-colors group-hover:text-primary">
                                         {article.title}
                                     </h3>
-                                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                                    <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">
                                         {article.excerpt}
                                     </p>
                                 </div>
 
-                                <div className="pt-3 border-t border-border/60 text-xs font-bold text-primary flex items-center justify-between">
+                                <div className="flex items-center justify-between border-t border-border/60 pt-3 text-xs font-bold text-primary">
                                     <span>قراءة المقال كاملاً</span>
-                                    <ArrowUpRight className="size-3.5 group-hover:translate-x-[-2px] transition-transform" />
+                                    <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-[-2px]" />
                                 </div>
                             </div>
                         </Link>

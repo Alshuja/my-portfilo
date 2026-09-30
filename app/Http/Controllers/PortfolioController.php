@@ -23,7 +23,7 @@ class PortfolioController extends Controller
      */
     public function home(): Response
     {
-        $settings = ProfileSetting::all()->pluck('value', 'key');
+        $settings = ProfileSetting::pluck('value', 'key');
 
         return Inertia::render('welcome', [
             'featuredProjects' => Project::where('is_featured', true)->orderBy('order')->get(),
@@ -52,7 +52,7 @@ class PortfolioController extends Controller
      */
     public function about(): Response
     {
-        $settings = ProfileSetting::all()->pluck('value', 'key');
+        $settings = ProfileSetting::pluck('value', 'key');
 
         return Inertia::render('portfolio/about', [
             'settings' => $settings,
@@ -99,7 +99,7 @@ class PortfolioController extends Controller
      */
     public function cv(): Response
     {
-        $settings = ProfileSetting::all()->pluck('value', 'key');
+        $settings = ProfileSetting::pluck('value', 'key');
 
         return Inertia::render('portfolio/cv', [
             'settings' => $settings,
@@ -223,7 +223,7 @@ class PortfolioController extends Controller
      */
     public function programmerIdea(): Response
     {
-        $settings = ProfileSetting::all()->pluck('value', 'key');
+        $settings = ProfileSetting::pluck('value', 'key');
 
         return Inertia::render('portfolio/programmer-idea', [
             'settings' => $settings,
@@ -241,7 +241,7 @@ class PortfolioController extends Controller
      */
     public function contact(): Response
     {
-        $settings = ProfileSetting::all()->pluck('value', 'key');
+        $settings = ProfileSetting::pluck('value', 'key');
 
         return Inertia::render('portfolio/contact', [
             'settings' => $settings,

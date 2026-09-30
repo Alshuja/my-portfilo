@@ -5,8 +5,11 @@ export function ScrollProgress() {
 
     useEffect(() => {
         const handleScroll = () => {
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollTop =
+                window.scrollY || document.documentElement.scrollTop;
+            const docHeight =
+                document.documentElement.scrollHeight -
+                document.documentElement.clientHeight;
             const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             setProgress(Math.min(100, Math.max(0, scrolled)));
         };

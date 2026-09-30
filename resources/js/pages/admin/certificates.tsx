@@ -19,7 +19,9 @@ interface AdminCertificatesProps {
     certificates: Certificate[];
 }
 
-export default function AdminCertificates({ certificates }: AdminCertificatesProps) {
+export default function AdminCertificates({
+    certificates,
+}: AdminCertificatesProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingCert, setEditingCert] = useState<Certificate | null>(null);
 
@@ -78,36 +80,42 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
 
     const handleDelete = (id: number) => {
         if (confirm('هل أنت متأكد من حذف هذه الشهادة؟')) {
-            router.delete(`/admin/certificates/${id}`, { preserveScroll: true });
+            router.delete(`/admin/certificates/${id}`, {
+                preserveScroll: true,
+            });
         }
     };
 
     return (
-        <div className="flex flex-col gap-6 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:p-8">
             <Head title="إدارة الشهادات والجوائز" />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <div className="flex flex-col justify-between gap-4 rounded-3xl border border-border/80 bg-card p-6 shadow-sm sm:flex-row sm:items-center">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                    <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
                         <Award className="size-6 text-primary" />
                         إدارة الشهادات والجوائز
                     </h1>
                     <p className="text-xs text-muted-foreground">
-                        تحكم بقائمة الشهادات المعتمدة وروابط التحقق وصور الغلاف ({certificates.length} شهادة مسجلة).
+                        تحكم بقائمة الشهادات المعتمدة وروابط التحقق وصور الغلاف (
+                        {certificates.length} شهادة مسجلة).
                     </p>
                 </div>
 
-                <Button onClick={openAddModal} className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold gap-2 shadow-md">
+                <Button
+                    onClick={openAddModal}
+                    className="gap-2 rounded-xl bg-primary font-bold text-primary-foreground shadow-md hover:bg-primary/90"
+                >
                     <PlusCircle className="size-4" />
                     إضافة شهادة جديدة
                 </Button>
             </div>
 
             {/* Table */}
-            <div className="rounded-3xl border border-border/80 bg-card overflow-hidden shadow-sm">
+            <div className="overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-right text-xs">
-                        <thead className="bg-muted/50 border-b border-border/80 font-bold text-muted-foreground">
+                        <thead className="border-b border-border/80 bg-muted/50 font-bold text-muted-foreground">
                             <tr>
                                 <th className="p-4">عنوان الشهادة</th>
                                 <th className="p-4">الجهة المانحة</th>
@@ -119,23 +127,31 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                         </thead>
                         <tbody className="divide-y divide-border/60">
                             {certificates.map((cert) => (
-                                <tr key={cert.id} className="hover:bg-muted/30 transition-colors">
+                                <tr
+                                    key={cert.id}
+                                    className="transition-colors hover:bg-muted/30"
+                                >
                                     <td className="p-4 font-bold text-foreground">
                                         <div className="flex items-center gap-3">
                                             {cert.image && (
                                                 <img
                                                     src={cert.image}
                                                     alt=""
-                                                    className="size-10 rounded-lg object-cover bg-muted shrink-0"
+                                                    className="size-10 shrink-0 rounded-lg bg-muted object-cover"
                                                 />
                                             )}
                                             <span>{cert.title}</span>
                                         </div>
                                     </td>
                                     <td className="p-4">{cert.issuer}</td>
-                                    <td className="p-4 font-mono text-muted-foreground">{cert.date}</td>
+                                    <td className="p-4 font-mono text-muted-foreground">
+                                        {cert.date}
+                                    </td>
                                     <td className="p-4">
-                                        <Badge variant="outline" className="text-[10px]">
+                                        <Badge
+                                            variant="outline"
+                                            className="text-[10px]"
+                                        >
                                             {cert.category_label}
                                         </Badge>
                                     </td>
@@ -145,7 +161,7 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                                                 href={cert.credential_url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-primary hover:underline flex items-center gap-1"
+                                                className="flex items-center gap-1 text-primary hover:underline"
                                             >
                                                 <span>تحقق</span>
                                                 <ExternalLink className="size-3" />
@@ -157,7 +173,9 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => openEditModal(cert)}
+                                                onClick={() =>
+                                                    openEditModal(cert)
+                                                }
                                                 className="size-8 rounded-lg"
                                             >
                                                 <Edit3 className="size-3.5 text-primary" />
@@ -165,7 +183,9 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => handleDelete(cert.id)}
+                                                onClick={() =>
+                                                    handleDelete(cert.id)
+                                                }
                                                 className="size-8 rounded-lg hover:text-destructive"
                                             >
                                                 <Trash2 className="size-3.5" />
@@ -181,10 +201,12 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
 
             {/* Modal */}
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogContent className="max-w-lg p-6 rounded-3xl">
-                    <DialogHeader className="text-right space-y-1">
+                <DialogContent className="max-w-lg rounded-3xl p-6">
+                    <DialogHeader className="space-y-1 text-right">
                         <DialogTitle className="text-lg font-bold">
-                            {editingCert ? 'تعديل الشهادة' : 'إضافة شهادة جديدة'}
+                            {editingCert
+                                ? 'تعديل الشهادة'
+                                : 'إضافة شهادة جديدة'}
                         </DialogTitle>
                         <DialogDescription className="text-xs text-muted-foreground">
                             أدخل تفاصيل الشهادة والجهة المصدرة ورابط التحقق.
@@ -193,23 +215,35 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
 
                     <form onSubmit={handleSubmit} className="space-y-4 pt-2">
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">عنوان الشهادة أو التكريم *</label>
+                            <label className="text-xs font-semibold">
+                                عنوان الشهادة أو التكريم *
+                            </label>
                             <Input
                                 value={data.title}
-                                onChange={(e) => setData('title', e.target.value)}
+                                onChange={(e) =>
+                                    setData('title', e.target.value)
+                                }
                                 placeholder="مثال: Python for Data Science & AI"
                                 required
                                 className="rounded-xl"
                             />
-                            {errors.title && <p className="text-xs text-destructive">{errors.title}</p>}
+                            {errors.title && (
+                                <p className="text-xs text-destructive">
+                                    {errors.title}
+                                </p>
+                            )}
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">الجهة المانحة *</label>
+                                <label className="text-xs font-semibold">
+                                    الجهة المانحة *
+                                </label>
                                 <Input
                                     value={data.issuer}
-                                    onChange={(e) => setData('issuer', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('issuer', e.target.value)
+                                    }
                                     placeholder="IBM / جامعة إب"
                                     required
                                     className="rounded-xl"
@@ -217,10 +251,14 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">السنة / التاريخ *</label>
+                                <label className="text-xs font-semibold">
+                                    السنة / التاريخ *
+                                </label>
                                 <Input
                                     value={data.date}
-                                    onChange={(e) => setData('date', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('date', e.target.value)
+                                    }
                                     placeholder="2024"
                                     required
                                     className="rounded-xl"
@@ -229,14 +267,18 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">التصنيف *</label>
+                            <label className="text-xs font-semibold">
+                                التصنيف *
+                            </label>
                             <select
                                 value={data.category}
                                 onChange={(e) => {
                                     const val = e.target.value;
                                     const labels: Record<string, string> = {
-                                        'data-ai': 'علوم البيانات والذكاء الاصطناعي',
-                                        academic: 'التكريمات الأكاديمية والجامعية',
+                                        'data-ai':
+                                            'علوم البيانات والذكاء الاصطناعي',
+                                        academic:
+                                            'التكريمات الأكاديمية والجامعية',
                                         mobile: 'تطبيقات الهواتف الذكية',
                                         web: 'تطوير الويب والخوادم',
                                     };
@@ -246,12 +288,20 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                                         category_label: labels[val] || val,
                                     });
                                 }}
-                                className="w-full h-9 rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
+                                className="h-9 w-full rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
                             >
-                                <option value="data-ai">علوم البيانات والذكاء الاصطناعي</option>
-                                <option value="academic">التكريمات الأكاديمية والجامعية</option>
-                                <option value="mobile">تطبيقات الهواتف الذكية</option>
-                                <option value="web">تطوير الويب والخوادم</option>
+                                <option value="data-ai">
+                                    علوم البيانات والذكاء الاصطناعي
+                                </option>
+                                <option value="academic">
+                                    التكريمات الأكاديمية والجامعية
+                                </option>
+                                <option value="mobile">
+                                    تطبيقات الهواتف الذكية
+                                </option>
+                                <option value="web">
+                                    تطوير الويب والخوادم
+                                </option>
                             </select>
                         </div>
 
@@ -263,10 +313,14 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                         />
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">رابط التحقق الرسمي من الشهادة</label>
+                            <label className="text-xs font-semibold">
+                                رابط التحقق الرسمي من الشهادة
+                            </label>
                             <Input
                                 value={data.credential_url}
-                                onChange={(e) => setData('credential_url', e.target.value)}
+                                onChange={(e) =>
+                                    setData('credential_url', e.target.value)
+                                }
                                 placeholder="https://coursera.org/verify/..."
                                 className="rounded-xl font-mono text-xs"
                                 dir="ltr"
@@ -274,17 +328,21 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">نبذة مختصرة عن محتوى الشهادة</label>
+                            <label className="text-xs font-semibold">
+                                نبذة مختصرة عن محتوى الشهادة
+                            </label>
                             <Textarea
                                 rows={3}
                                 value={data.description}
-                                onChange={(e) => setData('description', e.target.value)}
+                                onChange={(e) =>
+                                    setData('description', e.target.value)
+                                }
                                 placeholder="اكتب المهارات المكتسبة..."
                                 className="rounded-xl"
                             />
                         </div>
 
-                        <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+                        <div className="flex items-center justify-end gap-3 border-t border-border pt-4">
                             <Button
                                 type="button"
                                 variant="ghost"
@@ -296,9 +354,13 @@ export default function AdminCertificates({ certificates }: AdminCertificatesPro
                             <Button
                                 type="submit"
                                 disabled={processing}
-                                className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
+                                className="rounded-xl bg-primary font-bold text-primary-foreground hover:bg-primary/90"
                             >
-                                {processing ? 'جارٍ الحفظ...' : editingCert ? 'حفظ التعديلات' : 'إضافة الشهادة'}
+                                {processing
+                                    ? 'جارٍ الحفظ...'
+                                    : editingCert
+                                      ? 'حفظ التعديلات'
+                                      : 'إضافة الشهادة'}
                             </Button>
                         </div>
                     </form>

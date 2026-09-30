@@ -70,13 +70,16 @@ export function AmbientBackground() {
         window.addEventListener('click', handleClick);
 
         // Density scaled for smooth 60fps performance across desktop & mobile
-        const particleCount = Math.min(Math.floor((width * height) / 18000), 80);
+        const particleCount = Math.min(
+            Math.floor((width * height) / 18000),
+            80,
+        );
         const particles: Particle[] = [];
 
         const colors = [
-            '215, 25, 22',   // Tech Crimson (#D71916)
-            '255, 106, 50',  // Fire Orange (#FF6A32)
-            '245, 158, 11',  // Amber Gold (#F59E0B)
+            '215, 25, 22', // Tech Crimson (#D71916)
+            '255, 106, 50', // Fire Orange (#FF6A32)
+            '245, 158, 11', // Amber Gold (#F59E0B)
         ];
 
         for (let i = 0; i < particleCount; i++) {
@@ -161,7 +164,9 @@ export function AmbientBackground() {
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
                     if (dist < connectionDistance) {
-                        const alpha = filamentOpacityFactor * (1 - dist / connectionDistance);
+                        const alpha =
+                            filamentOpacityFactor *
+                            (1 - dist / connectionDistance);
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
@@ -214,15 +219,15 @@ export function AmbientBackground() {
             {/* Ambient Flowing Neon / Velvet Mesh Orbs */}
             <div
                 aria-hidden="true"
-                className="animate-ambient-1 absolute -top-40 -right-40 size-[32rem] sm:size-[42rem] rounded-full bg-gradient-to-br from-[#D71916]/20 via-[#FF6A32]/10 to-transparent blur-3xl"
+                className="animate-ambient-1 absolute -top-40 -right-40 size-[32rem] rounded-full bg-gradient-to-br from-[#D71916]/20 via-[#FF6A32]/10 to-transparent blur-3xl sm:size-[42rem]"
             />
             <div
                 aria-hidden="true"
-                className="animate-ambient-2 absolute top-1/2 -left-48 size-[28rem] sm:size-[38rem] rounded-full bg-gradient-to-tr from-[#FF6A32]/15 via-[#F59E0B]/12 to-transparent blur-3xl"
+                className="animate-ambient-2 absolute top-1/2 -left-48 size-[28rem] rounded-full bg-gradient-to-tr from-[#FF6A32]/15 via-[#F59E0B]/12 to-transparent blur-3xl sm:size-[38rem]"
             />
             <div
                 aria-hidden="true"
-                className="animate-ambient-3 absolute -bottom-40 right-1/4 size-[30rem] sm:size-[40rem] rounded-full bg-gradient-to-t from-[#8E080B]/15 via-[#D71916]/10 to-transparent blur-3xl"
+                className="animate-ambient-3 absolute right-1/4 -bottom-40 size-[30rem] rounded-full bg-gradient-to-t from-[#8E080B]/15 via-[#D71916]/10 to-transparent blur-3xl sm:size-[40rem]"
             />
 
             {/* Interactive Constellation Canvas */}
@@ -230,7 +235,7 @@ export function AmbientBackground() {
                 id="particlesCanvas"
                 ref={canvasRef}
                 aria-hidden="true"
-                className="size-full opacity-85 dark:opacity-95 transition-opacity duration-700"
+                className="size-full opacity-85 transition-opacity duration-700 dark:opacity-95"
             />
         </div>
     );

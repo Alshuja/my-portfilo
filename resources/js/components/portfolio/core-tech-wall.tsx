@@ -31,7 +31,16 @@ const CORE_TECH_ITEMS: TechItem[] = [
         color: '#02569B',
         iconType: 'custom-svg',
         svgPath: (
-            <svg viewBox="0 0 24 24" className="tech-icon" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#02569B' }}>
+            <svg
+                viewBox="0 0 24 24"
+                className="tech-icon"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ color: '#02569B' }}
+            >
                 <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
                 <path d="M12 18h.01" />
             </svg>
@@ -45,7 +54,16 @@ const CORE_TECH_ITEMS: TechItem[] = [
         color: '#FF2D20',
         iconType: 'custom-svg',
         svgPath: (
-            <svg viewBox="0 0 24 24" className="tech-icon" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#FF2D20' }}>
+            <svg
+                viewBox="0 0 24 24"
+                className="tech-icon"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ color: '#FF2D20' }}
+            >
                 <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
                 <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
                 <line x1="6" x2="6.01" y1="6" y2="6" />
@@ -124,7 +142,16 @@ const CORE_TECH_ITEMS: TechItem[] = [
         color: '#D97706',
         iconType: 'custom-svg',
         svgPath: (
-            <svg viewBox="0 0 24 24" className="tech-icon" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#D97706' }}>
+            <svg
+                viewBox="0 0 24 24"
+                className="tech-icon"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ color: '#D97706' }}
+            >
                 <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
                 <path d="M22 12A10 10 0 0 0 12 2v10z" />
             </svg>
@@ -138,7 +165,16 @@ const CORE_TECH_ITEMS: TechItem[] = [
         color: '#F05032',
         iconType: 'custom-svg',
         svgPath: (
-            <svg viewBox="0 0 24 24" className="tech-icon" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#F05032' }}>
+            <svg
+                viewBox="0 0 24 24"
+                className="tech-icon"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ color: '#F05032' }}
+            >
                 <line x1="6" x2="6" y1="3" y2="15" />
                 <circle cx="18" cy="6" r="3" />
                 <circle cx="6" cy="18" r="3" />
@@ -173,7 +209,8 @@ function TechCardItem({ item }: { item: TechItem }) {
     const handleMouseLeave = () => {
         const card = cardRef.current;
         if (!card) return;
-        card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        card.style.transform =
+            'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0px)';
     };
 
     return (
@@ -198,7 +235,8 @@ function TechCardItem({ item }: { item: TechItem }) {
                     className="tech-icon"
                     onError={(e) => {
                         // Fallback in case SVG fails
-                        (e.currentTarget as HTMLImageElement).style.display = 'none';
+                        (e.currentTarget as HTMLImageElement).style.display =
+                            'none';
                     }}
                 />
             ) : (
@@ -214,7 +252,7 @@ function TechCardItem({ item }: { item: TechItem }) {
 
 export function CoreTechWall() {
     return (
-        <div className="w-full space-y-8 my-12">
+        <div className="my-12 w-full space-y-8">
             {/* Header matching original template */}
             <div className="tech-wall-header">
                 <h3 className="tech-wall-title">
@@ -223,9 +261,17 @@ export function CoreTechWall() {
                 </h3>
                 <p className="tech-wall-desc">
                     التقنيات والمكتبات المعتمدة في بناء مشاريع{' '}
-                    <strong className="text-foreground font-bold">سندباد</strong>،{' '}
-                    <strong className="text-foreground font-bold">محفظة ريال</strong>، ومنصة{' '}
-                    <strong className="text-foreground font-bold">فكرة مبرمج</strong>
+                    <strong className="font-bold text-foreground">
+                        سندباد
+                    </strong>
+                    ،{' '}
+                    <strong className="font-bold text-foreground">
+                        محفظة ريال
+                    </strong>
+                    ، ومنصة{' '}
+                    <strong className="font-bold text-foreground">
+                        فكرة مبرمج
+                    </strong>
                 </p>
             </div>
 

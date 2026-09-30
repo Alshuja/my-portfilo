@@ -16,7 +16,8 @@ interface Particle {
 }
 
 export function fireConfetti(originX?: number, originY?: number): void {
-    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+    if (typeof window === 'undefined' || typeof document === 'undefined')
+        return;
 
     const canvas = document.createElement('canvas');
     canvas.style.position = 'fixed';
@@ -39,7 +40,14 @@ export function fireConfetti(originX?: number, originY?: number): void {
     const startX = originX !== undefined ? originX : width / 2;
     const startY = originY !== undefined ? originY : height / 2;
 
-    const colors = ['#D71916', '#FF6A32', '#F59E0B', '#10B981', '#3B82F6', '#FFFFFF'];
+    const colors = [
+        '#D71916',
+        '#FF6A32',
+        '#F59E0B',
+        '#10B981',
+        '#3B82F6',
+        '#FFFFFF',
+    ];
     const particles: Particle[] = [];
     const count = 120;
 
@@ -76,7 +84,10 @@ export function fireConfetti(originX?: number, originY?: number): void {
 
         context.clearRect(0, 0, width, height);
 
-        const fadeRatio = elapsed > duration * 0.7 ? 1 - (elapsed - duration * 0.7) / (duration * 0.3) : 1;
+        const fadeRatio =
+            elapsed > duration * 0.7
+                ? 1 - (elapsed - duration * 0.7) / (duration * 0.3)
+                : 1;
 
         for (const p of particles) {
             p.x += p.vx;

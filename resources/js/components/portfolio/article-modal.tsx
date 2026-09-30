@@ -32,7 +32,12 @@ export function ArticleModal({ article, isOpen, onClose }: ArticleModalProps) {
     if (!isOpen || !article) return null;
 
     return (
-        <div className="custom-modal" role="dialog" aria-modal="true" onClick={onClose}>
+        <div
+            className="custom-modal"
+            role="dialog"
+            aria-modal="true"
+            onClick={onClose}
+        >
             <div
                 className="modal-container"
                 onClick={(e) => e.stopPropagation()}
@@ -51,11 +56,13 @@ export function ArticleModal({ article, isOpen, onClose }: ArticleModalProps) {
 
                 {/* Article Header */}
                 <div className="modal-header-section text-right">
-                    <span className="tag">{article.category_label || article.category}</span>
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground mb-3 leading-snug">
+                    <span className="tag">
+                        {article.category_label || article.category}
+                    </span>
+                    <h2 className="mb-3 text-2xl leading-snug font-extrabold text-foreground sm:text-3xl">
                         {article.title}
                     </h2>
-                    <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground font-mono">
+                    <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-muted-foreground">
                         <span className="flex items-center gap-1.5">
                             <User className="size-3.5 text-primary" />
                             {article.author || 'عبدالرحمن عادل الشجاع'}
@@ -79,7 +86,7 @@ export function ArticleModal({ article, isOpen, onClose }: ArticleModalProps) {
                         <img
                             src={article.image}
                             alt={article.title}
-                            className="w-full h-full object-cover"
+                            className="h-full w-full object-cover"
                             onError={(e) => {
                                 (e.currentTarget as HTMLImageElement).src =
                                     'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80';
@@ -89,18 +96,18 @@ export function ArticleModal({ article, isOpen, onClose }: ArticleModalProps) {
                 )}
 
                 {/* Body Content */}
-                <div className="modal-body-section text-right space-y-4">
-                    <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 text-foreground font-semibold text-sm leading-relaxed">
+                <div className="modal-body-section space-y-4 text-right">
+                    <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 text-sm leading-relaxed font-semibold text-foreground">
                         {article.excerpt}
                     </div>
 
-                    <div className="prose dark:prose-invert max-w-none text-muted-foreground text-sm sm:text-base leading-relaxed whitespace-pre-line">
+                    <div className="prose dark:prose-invert max-w-none text-sm leading-relaxed whitespace-pre-line text-muted-foreground sm:text-base">
                         {article.body || article.excerpt}
                     </div>
                 </div>
 
                 {/* Actions */}
-                <div className="modal-actions flex justify-between items-center mt-6 pt-4 border-t border-border">
+                <div className="modal-actions mt-6 flex items-center justify-between border-t border-border pt-4">
                     <Link
                         href={`/blog/${article.slug}`}
                         className="btn btn-primary"

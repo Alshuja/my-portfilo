@@ -10,16 +10,21 @@ interface ArticleProps {
     relatedArticles: Article[];
 }
 
-export default function ArticlePage({ article, relatedArticles }: ArticleProps) {
+export default function ArticlePage({
+    article,
+    relatedArticles,
+}: ArticleProps) {
     const handleShare = () => {
         if (navigator.share) {
-            navigator.share({
-                title: article.title,
-                text: article.excerpt,
-                url: window.location.href,
-            }).catch(() => {});
+            navigator
+                .share({
+                    title: article.title,
+                    text: article.excerpt,
+                    url: window.location.href,
+                })
+                .catch(() => {});
         } else {
-            navigator.clipboard.writeText(window.location.href);
+            void navigator.clipboard.writeText(window.location.href);
             alert('تم نسخ رابط المقال للمشاركة!');
         }
     };
@@ -31,10 +36,15 @@ export default function ArticlePage({ article, relatedArticles }: ArticleProps) 
                 <meta name="description" content={article.excerpt} />
             </Head>
 
-            <article className="container mx-auto px-4 sm:px-6 py-16 md:py-24 max-w-4xl space-y-10">
+            <article className="container mx-auto max-w-4xl space-y-10 px-4 py-16 sm:px-6 md:py-24">
                 {/* Back button */}
                 <div>
-                    <Button asChild variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
+                    <Button
+                        asChild
+                        variant="ghost"
+                        size="sm"
+                        className="gap-2 text-muted-foreground hover:text-foreground"
+                    >
                         <Link href="/blog">
                             <ArrowRight className="size-4" />
                             العودة إلى قائمة المقالات
@@ -45,10 +55,10 @@ export default function ArticlePage({ article, relatedArticles }: ArticleProps) 
                 {/* Article Header */}
                 <div className="space-y-4">
                     <div className="flex flex-wrap items-center gap-2">
-                        <Badge className="bg-primary text-primary-foreground font-semibold px-3 py-1">
+                        <Badge className="bg-primary px-3 py-1 font-semibold text-primary-foreground">
                             {article.category_label}
                         </Badge>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground font-mono mr-2">
+                        <div className="mr-2 flex items-center gap-3 font-mono text-xs text-muted-foreground">
                             <span className="flex items-center gap-1">
                                 <Calendar className="size-3.5 text-primary" />
                                 {article.date}
@@ -61,26 +71,35 @@ export default function ArticlePage({ article, relatedArticles }: ArticleProps) 
                         </div>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.25]">
+                    <h1 className="text-3xl leading-[1.25] font-black tracking-tight text-foreground sm:text-5xl">
                         {article.title}
                     </h1>
 
-                    <p className="text-base sm:text-lg text-muted-foreground font-medium leading-relaxed bg-muted/30 p-5 rounded-2xl border border-border/60">
+                    <p className="rounded-2xl border border-border/60 bg-muted/30 p-5 text-base leading-relaxed font-medium text-muted-foreground sm:text-lg">
                         {article.excerpt}
                     </p>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-border/60">
+                    <div className="flex items-center justify-between border-t border-border/60 pt-4">
                         <div className="flex items-center gap-3">
-                            <div className="size-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">
+                            <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 font-bold text-primary">
                                 <User className="size-5" />
                             </div>
                             <div>
-                                <div className="text-sm font-bold text-foreground">{article.author}</div>
-                                <div className="text-xs text-muted-foreground">كاتب ومبرمج</div>
+                                <div className="text-sm font-bold text-foreground">
+                                    {article.author}
+                                </div>
+                                <div className="text-xs text-muted-foreground">
+                                    كاتب ومبرمج
+                                </div>
                             </div>
                         </div>
 
-                        <Button variant="outline" size="sm" onClick={handleShare} className="gap-2 rounded-xl">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleShare}
+                            className="gap-2 rounded-xl"
+                        >
                             <Share2 className="size-3.5" />
                             مشاركة المقال
                         </Button>
@@ -89,7 +108,7 @@ export default function ArticlePage({ article, relatedArticles }: ArticleProps) 
 
                 {/* Article Cover Image */}
                 {article.image && (
-                    <div className="relative aspect-video w-full rounded-3xl overflow-hidden bg-muted border border-border/80 shadow-md">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-border/80 bg-muted shadow-md">
                         <img
                             src={article.image}
                             alt={article.title}
@@ -104,20 +123,24 @@ export default function ArticlePage({ article, relatedArticles }: ArticleProps) 
 
                 {/* Article Body Content */}
                 <div
-                    className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed font-sans space-y-6 pt-4"
+                    className="prose prose-lg dark:prose-invert max-w-none space-y-6 pt-4 font-sans leading-relaxed text-foreground/90"
                     dangerouslySetInnerHTML={{ __html: article.body }}
                 />
 
                 {/* Tags row */}
                 {article.tags && article.tags.length > 0 && (
-                    <div className="pt-6 border-t border-border/60 space-y-3">
-                        <span className="text-xs font-semibold text-muted-foreground flex items-center gap-1.5">
+                    <div className="space-y-3 border-t border-border/60 pt-6">
+                        <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                             <Tag className="size-3.5" />
                             الوسوم والكلمات المفتاحية:
                         </span>
                         <div className="flex flex-wrap gap-2">
                             {article.tags.map((tag, idx) => (
-                                <Badge key={idx} variant="secondary" className="px-3 py-1 font-mono text-xs">
+                                <Badge
+                                    key={idx}
+                                    variant="secondary"
+                                    className="px-3 py-1 font-mono text-xs"
+                                >
                                     #{tag}
                                 </Badge>
                             ))}
@@ -127,22 +150,24 @@ export default function ArticlePage({ article, relatedArticles }: ArticleProps) 
 
                 {/* Related Articles */}
                 {relatedArticles.length > 0 && (
-                    <div className="pt-12 border-t border-border/60 space-y-6">
+                    <div className="space-y-6 border-t border-border/60 pt-12">
                         <h3 className="text-2xl font-bold text-foreground">
                             مقالات ذات صلة
                         </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                             {relatedArticles.map((rel) => (
                                 <Link
                                     key={rel.id}
                                     href={`/blog/${rel.slug}`}
-                                    className="p-5 rounded-2xl border border-border/80 bg-card hover:border-primary/50 transition-all hover:-translate-y-1 space-y-2 block"
+                                    className="block space-y-2 rounded-2xl border border-border/80 bg-card p-5 transition-all hover:-translate-y-1 hover:border-primary/50"
                                 >
-                                    <div className="text-[10px] text-muted-foreground font-mono">{rel.date}</div>
-                                    <h4 className="font-bold text-sm text-foreground line-clamp-2">
+                                    <div className="font-mono text-[10px] text-muted-foreground">
+                                        {rel.date}
+                                    </div>
+                                    <h4 className="line-clamp-2 text-sm font-bold text-foreground">
                                         {rel.title}
                                     </h4>
-                                    <p className="text-xs text-muted-foreground line-clamp-2">
+                                    <p className="line-clamp-2 text-xs text-muted-foreground">
                                         {rel.excerpt}
                                     </p>
                                 </Link>

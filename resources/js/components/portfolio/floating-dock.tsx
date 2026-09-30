@@ -43,9 +43,11 @@ export function FloatingDock() {
 
     const handleOpenRadialMenu = () => {
         playClickSound(900, 0.03);
-        window.dispatchEvent(new CustomEvent('open-radial-menu', {
-            detail: { x: window.innerWidth / 2, y: window.innerHeight / 2 }
-        }));
+        window.dispatchEvent(
+            new CustomEvent('open-radial-menu', {
+                detail: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+            }),
+        );
     };
 
     const dockItems = [
@@ -100,7 +102,8 @@ export function FloatingDock() {
             color: soundOn ? 'text-primary' : 'text-muted-foreground',
         },
         {
-            title: resolvedAppearance === 'dark' ? 'الوضع الفاتح' : 'الوضع الليلي',
+            title:
+                resolvedAppearance === 'dark' ? 'الوضع الفاتح' : 'الوضع الليلي',
             icon: resolvedAppearance === 'dark' ? Sun : Moon,
             action: handleThemeToggle,
             isAction: true,
@@ -132,7 +135,7 @@ export function FloatingDock() {
     };
 
     return (
-        <div className="fixed bottom-6 inset-x-0 flex flex-col items-center justify-center z-40 pointer-events-none print:hidden">
+        <div className="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex flex-col items-center justify-center print:hidden">
             {/* Collapse / Expand Toggle Button */}
             <button
                 type="button"
@@ -140,10 +143,18 @@ export function FloatingDock() {
                     playClickSound(600, 0.02);
                     setIsCollapsed(!isCollapsed);
                 }}
-                className="mb-1 size-6 rounded-full bg-card/85 backdrop-blur-md border border-border/80 text-muted-foreground hover:text-foreground flex items-center justify-center shadow-md pointer-events-auto transition-transform hover:scale-110"
-                title={isCollapsed ? 'إظهار شريط التنقل ثلاثي الأبعاد' : 'إخفاء شريط التنقل'}
+                className="pointer-events-auto mb-1 flex size-6 items-center justify-center rounded-full border border-border/80 bg-card/85 text-muted-foreground shadow-md backdrop-blur-md transition-transform hover:scale-110 hover:text-foreground"
+                title={
+                    isCollapsed
+                        ? 'إظهار شريط التنقل ثلاثي الأبعاد'
+                        : 'إخفاء شريط التنقل'
+                }
             >
-                {isCollapsed ? <ChevronUp className="size-3.5" /> : <ChevronDown className="size-3.5" />}
+                {isCollapsed ? (
+                    <ChevronUp className="size-3.5" />
+                ) : (
+                    <ChevronDown className="size-3.5" />
+                )}
             </button>
 
             {!isCollapsed && (
@@ -151,16 +162,21 @@ export function FloatingDock() {
                     ref={dockRef}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
-                    className="relative flex items-end gap-2 px-4 py-2.5 rounded-3xl bg-card/80 dark:bg-[#1A0203]/90 backdrop-blur-2xl border border-primary/20 shadow-2xl shadow-black/30 pointer-events-auto transition-all duration-300"
+                    className="pointer-events-auto relative flex items-end gap-2 rounded-3xl border border-primary/20 bg-card/80 px-4 py-2.5 shadow-2xl shadow-black/30 backdrop-blur-2xl transition-all duration-300 dark:bg-[#1A0203]/90"
                 >
                     {/* Glowing Dock Underline Backdrop */}
-                    <div className="absolute inset-x-8 -bottom-1 h-2 bg-gradient-to-r from-transparent via-primary/40 to-transparent blur-sm pointer-events-none" />
+                    <div className="pointer-events-none absolute inset-x-8 -bottom-1 h-2 bg-gradient-to-r from-transparent via-primary/40 to-transparent blur-sm" />
 
                     {dockItems.map((item, idx) => {
                         const scale = getScale(idx);
                         const translateY = (scale - 1) * -16;
                         const isHovered = hoveredIdx === idx;
-                        const isActive = !item.isAction && item.href && (url === item.href || (item.href !== '/' && url.startsWith(item.href)));
+                        const isActive =
+                            !item.isAction &&
+                            item.href &&
+                            (url === item.href ||
+                                (item.href !== '/' &&
+                                    url.startsWith(item.href)));
 
                         const Icon = item.icon;
 
@@ -174,30 +190,33 @@ export function FloatingDock() {
                                 style={{
                                     transform: `translateY(${translateY}px) scale(${scale})`,
                                     transformOrigin: 'bottom center',
-                                    transition: mouseX === null ? 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+                                    transition:
+                                        mouseX === null
+                                            ? 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                                            : 'none',
                                 }}
                             >
                                 {/* 3D Tooltip */}
                                 {isHovered && (
-                                    <div
-                                        className="absolute -top-10 px-2.5 py-1 rounded-xl bg-background/95 backdrop-blur-md border border-border/80 shadow-xl text-[11px] font-bold text-foreground whitespace-nowrap z-50 pointer-events-none animate-in fade-in zoom-in-95 duration-150"
-                                    >
+                                    <div className="pointer-events-none absolute -top-10 z-50 animate-in rounded-xl border border-border/80 bg-background/95 px-2.5 py-1 text-[11px] font-bold whitespace-nowrap text-foreground shadow-xl backdrop-blur-md duration-150 zoom-in-95 fade-in">
                                         {item.title}
-                                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 size-2 bg-background border-r border-b border-border/80 rotate-45" />
+                                        <div className="absolute -bottom-1 left-1/2 size-2 -translate-x-1/2 rotate-45 border-r border-b border-border/80 bg-background" />
                                     </div>
                                 )}
 
                                 {/* Dock Icon Orb */}
                                 <div
-                                    className={`size-11 sm:size-12 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-md ${
+                                    className={`flex size-11 items-center justify-center rounded-2xl shadow-md transition-all duration-200 sm:size-12 ${
                                         isActive
-                                            ? 'bg-gradient-to-tr from-primary to-orange-500 text-white shadow-primary/30 ring-2 ring-primary/40'
+                                            ? 'bg-gradient-to-tr from-primary to-orange-500 text-white ring-2 shadow-primary/30 ring-primary/40'
                                             : isHovered
-                                            ? 'bg-secondary text-primary shadow-lg ring-1 ring-primary/30'
-                                            : 'bg-muted/70 hover:bg-muted text-foreground'
+                                              ? 'bg-secondary text-primary shadow-lg ring-1 ring-primary/30'
+                                              : 'bg-muted/70 text-foreground hover:bg-muted'
                                     }`}
                                 >
-                                    <Icon className={`size-5 sm:size-5.5 ${item.color || ''}`} />
+                                    <Icon
+                                        className={`size-5 sm:size-5.5 ${item.color || ''}`}
+                                    />
                                 </div>
 
                                 {/* Active Dot Indicator */}

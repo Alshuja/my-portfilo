@@ -11,14 +11,17 @@ export default function NotFound() {
         <PortfolioLayout>
             <Head title="404 — الصفحة غير موجودة | عبدالرحمن عادل الشجاع" />
 
-            <div dir="rtl" className="min-h-[85vh] flex flex-col items-center justify-center py-16 px-4 relative overflow-hidden">
+            <div
+                dir="rtl"
+                className="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-4 py-16"
+            >
                 {/* Background Ambient Glows */}
-                <div className="absolute top-1/4 right-1/4 size-96 rounded-full bg-primary/15 blur-3xl pointer-events-none -z-10" />
-                <div className="absolute bottom-1/4 left-1/4 size-96 rounded-full bg-orange-500/10 blur-3xl pointer-events-none -z-10" />
+                <div className="pointer-events-none absolute top-1/4 right-1/4 -z-10 size-96 rounded-full bg-primary/15 blur-3xl" />
+                <div className="pointer-events-none absolute bottom-1/4 left-1/4 -z-10 size-96 rounded-full bg-orange-500/10 blur-3xl" />
 
-                <div className="max-w-4xl w-full mx-auto space-y-10 text-center">
+                <div className="mx-auto w-full max-w-4xl space-y-10 text-center">
                     {/* 3D 404 Spline Model Viewport */}
-                    <div className="max-w-xl mx-auto">
+                    <div className="mx-auto max-w-xl">
                         <Spline3dScene
                             url="/assets/3d/404.spline"
                             height="380px"
@@ -27,16 +30,19 @@ export default function NotFound() {
                     </div>
 
                     {/* Headline and Error Message */}
-                    <div className="space-y-4 max-w-lg mx-auto">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-mono font-bold text-primary">
+                    <div className="mx-auto max-w-lg space-y-4">
+                        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1.5 font-mono text-xs font-bold text-primary">
                             <Terminal className="size-3.5" />
                             ERROR_CODE: 404_PAGE_NOT_FOUND
                         </div>
-                        <h1 className="text-4xl sm:text-6xl font-black text-foreground tracking-tight">
-                            عفواً، ضللت <span className="text-gradient">المسار!</span>
+                        <h1 className="text-4xl font-black tracking-tight text-foreground sm:text-6xl">
+                            عفواً، ضللت{' '}
+                            <span className="text-gradient">المسار!</span>
                         </h1>
-                        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                            الصفحة أو الرابط الذي تبحث عنه غير متوفر حالياً أو تم نقله. يمكنك العودة للصفحة الرئيسية أو استكشاف المشاريع والخدمات.
+                        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                            الصفحة أو الرابط الذي تبحث عنه غير متوفر حالياً أو تم
+                            نقله. يمكنك العودة للصفحة الرئيسية أو استكشاف
+                            المشاريع والخدمات.
                         </p>
                     </div>
 
@@ -49,7 +55,7 @@ export default function NotFound() {
                                 playClickSound(800, 0.04);
                                 fireConfetti();
                             }}
-                            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-lg shadow-primary/25 rounded-2xl gap-2"
+                            className="gap-2 rounded-2xl bg-primary font-bold text-primary-foreground shadow-lg shadow-primary/25 hover:bg-primary/90"
                         >
                             <Link href="/">
                                 <Home className="size-4" />
@@ -62,7 +68,7 @@ export default function NotFound() {
                             variant="outline"
                             size="lg"
                             onClick={() => playClickSound(650, 0.03)}
-                            className="border-border hover:bg-secondary font-semibold rounded-2xl gap-2"
+                            className="gap-2 rounded-2xl border-border font-semibold hover:bg-secondary"
                         >
                             <Link href="/projects">
                                 <Sparkles className="size-4 text-primary" />
@@ -75,7 +81,7 @@ export default function NotFound() {
                             variant="ghost"
                             size="lg"
                             onClick={() => playClickSound(650, 0.03)}
-                            className="text-muted-foreground hover:text-foreground font-semibold rounded-2xl gap-2"
+                            className="gap-2 rounded-2xl font-semibold text-muted-foreground hover:text-foreground"
                         >
                             <Link href="/services">
                                 <Compass className="size-4" />

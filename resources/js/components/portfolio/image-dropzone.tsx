@@ -1,5 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { UploadCloud, Image as ImageIcon, X, Loader2, Link2, Check } from 'lucide-react';
+import {
+    UploadCloud,
+    Image as ImageIcon,
+    X,
+    Loader2,
+    Link2,
+    Check,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -15,7 +22,11 @@ interface ImageDropzoneProps {
 /**
  * Compresses an image file client-side using HTML5 Canvas
  */
-async function compressImageFile(file: File, maxWidth = 1600, quality = 0.85): Promise<Blob> {
+async function compressImageFile(
+    file: File,
+    maxWidth = 1600,
+    quality = 0.85,
+): Promise<Blob> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -53,7 +64,7 @@ async function compressImageFile(file: File, maxWidth = 1600, quality = 0.85): P
                         }
                     },
                     'image/jpeg',
-                    quality
+                    quality,
                 );
             };
             img.onerror = () => reject(new Error('فشل قراءة الصورة'));
@@ -79,7 +90,9 @@ export function ImageDropzone({
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const getCsrfToken = () => {
-        const match = document.cookie.match(new RegExp('(^|;\\s*)(XSRF-TOKEN)=([^;]*)'));
+        const match = document.cookie.match(
+            new RegExp('(^|;\\s*)(XSRF-TOKEN)=([^;]*)'),
+        );
         return match ? decodeURIComponent(match[3]) : '';
     };
 
@@ -95,11 +108,19 @@ export function ImageDropzone({
 
         try {
             // Compress on client-side canvas
-            const compressedBlob = await compressImageFile(file, maxWidth, quality);
+            const compressedBlob = await compressImageFile(
+                file,
+                maxWidth,
+                quality,
+            );
             const compressedSizeKb = Math.round(compressedBlob.size / 1024);
 
             const formData = new FormData();
-            formData.append('image', compressedBlob, file.name.replace(/\.[^/.]+$/, '') + '.jpg');
+            formData.append(
+                'image',
+                compressedBlob,
+                file.name.replace(/\.[^/.]+$/, '') + '.jpg',
+            );
 
             const token = getCsrfToken();
             const response = await fetch('/admin/upload/image', {
@@ -119,7 +140,9 @@ export function ImageDropzone({
             const data = await response.json();
             if (data.url) {
                 onChange(data.url);
-                setStatsInfo(`تم ضغط الصورة بنجاح (${originalSizeKb}KB → ${compressedSizeKb}KB)`);
+                setStatsInfo(
+                    `تم ضغط الصورة بنجاح (${originalSizeKb}KB → ${compressedSizeKb}KB)`,
+                );
             }
         } catch (err: any) {
             setErrorMsg(err.message || 'حدث خطأ أثناء معالجة الصورة');
@@ -146,13 +169,13 @@ export function ImageDropzone({
         setIsDragging(false);
 
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            handleFileProcess(e.dataTransfer.files[0]);
+            void handleFileProcess(e.dataTransfer.files[0]);
         }
     };
 
     const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            handleFileProcess(e.target.files[0]);
+            void handleFileProcess(e.target.files[0]);
         }
     };
 
@@ -169,11 +192,13 @@ export function ImageDropzone({
     return (
         <div className="space-y-2">
             <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-foreground">{label}</label>
+                <label className="text-xs font-semibold text-foreground">
+                    {label}
+                </label>
                 <button
                     type="button"
                     onClick={() => setIsManualUrl(!isManualUrl)}
-                    className="text-[11px] text-primary hover:underline flex items-center gap-1"
+                    className="flex items-center gap-1 text-[11px] text-primary hover:underline"
                 >
                     <Link2 className="size-3" />
                     {isManualUrl ? 'استخدام السحب والإفلات' : 'إدخال رابط مباشر'}
@@ -207,8 +232,8 @@ export function ImageDropzone({
                 </div>
             ) : value ? (
                 /* Image Preview Mode */
-                <div className="relative rounded-2xl border border-border/80 bg-muted/30 p-2 overflow-hidden group">
-                    <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-muted flex items-center justify-center">
+                <div className="group relative overflow-hidden rounded-2xl border border-border/80 bg-muted/30 p-2">
+                    <div className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl bg-muted">
                         <img
                             src={value}
                             alt="معاينة الصورة"
@@ -218,13 +243,13 @@ export function ImageDropzone({
                                     'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80';
                             }}
                         />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
                             <Button
                                 type="button"
                                 variant="destructive"
                                 size="sm"
                                 onClick={clearImage}
-                                className="rounded-xl text-xs gap-1 font-bold shadow-lg"
+                                className="gap-1 rounded-xl text-xs font-bold shadow-lg"
                             >
                                 <X className="size-3.5" />
                                 إزالة الصورة
@@ -234,7 +259,7 @@ export function ImageDropzone({
                                 variant="secondary"
                                 size="sm"
                                 onClick={() => fileInputRef.current?.click()}
-                                className="rounded-xl text-xs gap-1 font-bold shadow-lg"
+                                className="gap-1 rounded-xl text-xs font-bold shadow-lg"
                             >
                                 <UploadCloud className="size-3.5" />
                                 استبدال
@@ -242,9 +267,15 @@ export function ImageDropzone({
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between pt-2 px-1 text-[11px] text-muted-foreground font-mono truncate">
-                        <span className="truncate max-w-[280px]" dir="ltr">{value}</span>
-                        {statsInfo && <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{statsInfo}</span>}
+                    <div className="flex items-center justify-between truncate px-1 pt-2 font-mono text-[11px] text-muted-foreground">
+                        <span className="max-w-[280px] truncate" dir="ltr">
+                            {value}
+                        </span>
+                        {statsInfo && (
+                            <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                                {statsInfo}
+                            </span>
+                        )}
                     </div>
                 </div>
             ) : (
@@ -253,11 +284,13 @@ export function ImageDropzone({
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
-                    onClick={() => !isUploading && fileInputRef.current?.click()}
-                    className={`relative rounded-2xl border-2 border-dashed p-6 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center gap-3 ${
+                    onClick={() =>
+                        !isUploading && fileInputRef.current?.click()
+                    }
+                    className={`relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-200 ${
                         isDragging
-                            ? 'border-primary bg-primary/10 scale-[1.01]'
-                            : 'border-border/80 hover:border-primary/50 hover:bg-muted/40 bg-card/60'
+                            ? 'scale-[1.01] border-primary bg-primary/10'
+                            : 'border-border/80 bg-card/60 hover:border-primary/50 hover:bg-muted/40'
                     }`}
                 >
                     <input
@@ -271,22 +304,27 @@ export function ImageDropzone({
                     {isUploading ? (
                         <div className="flex flex-col items-center gap-2 py-3 text-primary">
                             <Loader2 className="size-8 animate-spin" />
-                            <span className="text-xs font-semibold">جارٍ ضغط الصورة ورفعها بأعلى جودة...</span>
+                            <span className="text-xs font-semibold">
+                                جارٍ ضغط الصورة ورفعها بأعلى جودة...
+                            </span>
                         </div>
                     ) : (
                         <>
-                            <div className="size-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                            <div className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                                 <UploadCloud className="size-6" />
                             </div>
                             <div className="space-y-1">
                                 <p className="text-xs font-bold text-foreground">
-                                    اسحب وأفلت صورة المشروع هنا، أو <span className="text-primary underline">انقر للاختيار</span>
+                                    اسحب وأفلت صورة المشروع هنا، أو{' '}
+                                    <span className="text-primary underline">
+                                        انقر للاختيار
+                                    </span>
                                 </p>
                                 <p className="text-[11px] text-muted-foreground">
                                     {description}
                                 </p>
                             </div>
-                            <span className="px-2.5 py-0.5 rounded-full bg-muted text-[10px] font-mono text-muted-foreground">
+                            <span className="rounded-full bg-muted px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground">
                                 PNG · JPG · WebP · Max 10MB (ضغط تلقائي 60fps)
                             </span>
                         </>
@@ -295,7 +333,7 @@ export function ImageDropzone({
             )}
 
             {errorMsg && (
-                <p className="text-xs text-destructive font-medium pt-1">
+                <p className="pt-1 text-xs font-medium text-destructive">
                     {errorMsg}
                 </p>
             )}

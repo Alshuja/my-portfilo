@@ -80,31 +80,35 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
     };
 
     return (
-        <div className="flex flex-col gap-6 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:p-8">
             <Head title="إدارة المسار والمحطات" />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <div className="flex flex-col justify-between gap-4 rounded-3xl border border-border/80 bg-card p-6 shadow-sm sm:flex-row sm:items-center">
                 <div className="space-y-1">
-                    <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                    <h1 className="flex items-center gap-2 text-2xl font-bold text-foreground">
                         <Route className="size-6 text-primary" />
                         إدارة المسار والمحطات
                     </h1>
                     <p className="text-xs text-muted-foreground">
-                        تحكم بمحطات المسار التعليمي والمهني والمبادرات ({journey.length} محطة مسجلة).
+                        تحكم بمحطات المسار التعليمي والمهني والمبادرات (
+                        {journey.length} محطة مسجلة).
                     </p>
                 </div>
 
-                <Button onClick={openAddModal} className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold gap-2 shadow-md">
+                <Button
+                    onClick={openAddModal}
+                    className="gap-2 rounded-xl bg-primary font-bold text-primary-foreground shadow-md hover:bg-primary/90"
+                >
                     <PlusCircle className="size-4" />
                     إضافة محطة جديدة
                 </Button>
             </div>
 
             {/* Table */}
-            <div className="rounded-3xl border border-border/80 bg-card overflow-hidden shadow-sm">
+            <div className="overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm">
                 <div className="overflow-x-auto">
                     <table className="w-full text-right text-xs">
-                        <thead className="bg-muted/50 border-b border-border/80 font-bold text-muted-foreground">
+                        <thead className="border-b border-border/80 bg-muted/50 font-bold text-muted-foreground">
                             <tr>
                                 <th className="p-4">عنوان المحطة</th>
                                 <th className="p-4">المسمى / التخصص</th>
@@ -115,19 +119,27 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
                         </thead>
                         <tbody className="divide-y divide-border/60">
                             {journey.map((item) => (
-                                <tr key={item.id} className="hover:bg-muted/30 transition-colors">
+                                <tr
+                                    key={item.id}
+                                    className="transition-colors hover:bg-muted/30"
+                                >
                                     <td className="p-4 font-bold text-foreground">
                                         <div className="flex items-center gap-3">
-                                            <div className="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold">
+                                            <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10 font-bold text-primary">
                                                 <Rocket className="size-4" />
                                             </div>
                                             <span>{item.title}</span>
                                         </div>
                                     </td>
                                     <td className="p-4">{item.role}</td>
-                                    <td className="p-4 font-mono text-muted-foreground">{item.date_range}</td>
+                                    <td className="p-4 font-mono text-muted-foreground">
+                                        {item.date_range}
+                                    </td>
                                     <td className="p-4">
-                                        <Badge variant="outline" className="text-[10px]">
+                                        <Badge
+                                            variant="outline"
+                                            className="text-[10px]"
+                                        >
                                             {item.category_label}
                                         </Badge>
                                     </td>
@@ -136,7 +148,9 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => openEditModal(item)}
+                                                onClick={() =>
+                                                    openEditModal(item)
+                                                }
                                                 className="size-8 rounded-lg"
                                             >
                                                 <Edit3 className="size-3.5 text-primary" />
@@ -144,7 +158,9 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                onClick={() => handleDelete(item.id)}
+                                                onClick={() =>
+                                                    handleDelete(item.id)
+                                                }
                                                 className="size-8 rounded-lg hover:text-destructive"
                                             >
                                                 <Trash2 className="size-3.5" />
@@ -160,10 +176,12 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
 
             {/* Modal */}
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-                <DialogContent className="max-w-lg p-6 rounded-3xl">
-                    <DialogHeader className="text-right space-y-1">
+                <DialogContent className="max-w-lg rounded-3xl p-6">
+                    <DialogHeader className="space-y-1 text-right">
                         <DialogTitle className="text-lg font-bold">
-                            {editingJourney ? 'تعديل المحطة' : 'إضافة محطة جديدة في المسار'}
+                            {editingJourney
+                                ? 'تعديل المحطة'
+                                : 'إضافة محطة جديدة في المسار'}
                         </DialogTitle>
                         <DialogDescription className="text-xs text-muted-foreground">
                             أدخل تفاصيل الإنجاز أو المحطة الأكاديمية والمهنية.
@@ -172,23 +190,35 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
 
                     <form onSubmit={handleSubmit} className="space-y-4 pt-2">
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">عنوان المحطة أو الإنجاز *</label>
+                            <label className="text-xs font-semibold">
+                                عنوان المحطة أو الإنجاز *
+                            </label>
                             <Input
                                 value={data.title}
-                                onChange={(e) => setData('title', e.target.value)}
+                                onChange={(e) =>
+                                    setData('title', e.target.value)
+                                }
                                 placeholder="مثال: تطوير منصة سندباد ومحفظة ريال"
                                 required
                                 className="rounded-xl"
                             />
-                            {errors.title && <p className="text-xs text-destructive">{errors.title}</p>}
+                            {errors.title && (
+                                <p className="text-xs text-destructive">
+                                    {errors.title}
+                                </p>
+                            )}
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">المسمى / التخصص *</label>
+                                <label className="text-xs font-semibold">
+                                    المسمى / التخصص *
+                                </label>
                                 <Input
                                     value={data.role}
-                                    onChange={(e) => setData('role', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('role', e.target.value)
+                                    }
                                     placeholder="Full-Stack Developer"
                                     required
                                     className="rounded-xl"
@@ -196,10 +226,14 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-semibold">الفترة الزمنية *</label>
+                                <label className="text-xs font-semibold">
+                                    الفترة الزمنية *
+                                </label>
                                 <Input
                                     value={data.date_range}
-                                    onChange={(e) => setData('date_range', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('date_range', e.target.value)
+                                    }
                                     placeholder="2024 - 2025"
                                     required
                                     className="rounded-xl"
@@ -208,7 +242,9 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">نوع المحطة *</label>
+                            <label className="text-xs font-semibold">
+                                نوع المحطة *
+                            </label>
                             <select
                                 value={data.category}
                                 onChange={(e) => {
@@ -225,28 +261,34 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
                                         category_label: labels[val] || val,
                                     });
                                 }}
-                                className="w-full h-9 rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
+                                className="h-9 w-full rounded-xl border border-input bg-transparent px-3 py-1 text-xs shadow-sm"
                             >
                                 <option value="work">خبرة ومشاريع كبرى</option>
                                 <option value="learning">تعلّم وتخصص</option>
                                 <option value="community">مبادرة ومجتمع</option>
-                                <option value="education">تعليم أكاديمي وجامعي</option>
+                                <option value="education">
+                                    تعليم أكاديمي وجامعي
+                                </option>
                             </select>
                         </div>
 
                         <div className="space-y-1">
-                            <label className="text-xs font-semibold">نبذة تفصيلية *</label>
+                            <label className="text-xs font-semibold">
+                                نبذة تفصيلية *
+                            </label>
                             <Textarea
                                 rows={3}
                                 value={data.description}
-                                onChange={(e) => setData('description', e.target.value)}
+                                onChange={(e) =>
+                                    setData('description', e.target.value)
+                                }
                                 placeholder="اكتب نبذة مختصرة عن الإنجاز..."
                                 required
                                 className="rounded-xl"
                             />
                         </div>
 
-                        <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+                        <div className="flex items-center justify-end gap-3 border-t border-border pt-4">
                             <Button
                                 type="button"
                                 variant="ghost"
@@ -258,9 +300,13 @@ export default function AdminJourney({ journey }: AdminJourneyProps) {
                             <Button
                                 type="submit"
                                 disabled={processing}
-                                className="rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold"
+                                className="rounded-xl bg-primary font-bold text-primary-foreground hover:bg-primary/90"
                             >
-                                {processing ? 'جارٍ الحفظ...' : editingJourney ? 'حفظ التعديلات' : 'إضافة المحطة'}
+                                {processing
+                                    ? 'جارٍ الحفظ...'
+                                    : editingJourney
+                                      ? 'حفظ التعديلات'
+                                      : 'إضافة المحطة'}
                             </Button>
                         </div>
                     </form>

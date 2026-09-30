@@ -26,7 +26,7 @@ export interface Project {
 export interface Skill {
     id: number;
     name: string;
-    category: 'data-ai' | 'programming' | 'mobile' | 'tools' | string;
+    category: 'data-ai' | 'programming' | 'mobile' | 'tools' | (string & {});
     level: number;
     color: string;
     icon?: string | null;
@@ -40,7 +40,7 @@ export interface Certificate {
     title: string;
     issuer: string;
     date: string;
-    category: 'data-ai' | 'academic' | 'mobile' | 'web' | string;
+    category: 'data-ai' | 'academic' | 'mobile' | 'web' | (string & {});
     category_label: string;
     image?: string | null;
     fallback_icon?: string | null;
@@ -56,7 +56,7 @@ export interface Journey {
     title: string;
     role: string;
     date_range: string;
-    category: 'work' | 'learning' | 'community' | 'education' | string;
+    category: 'work' | 'learning' | 'community' | 'education' | (string & {});
     category_label: string;
     icon: string;
     description: string;

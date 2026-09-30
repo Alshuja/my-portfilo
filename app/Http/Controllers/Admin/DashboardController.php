@@ -41,7 +41,7 @@ class DashboardController extends Controller
             'recentMessages' => ContactMessage::latest()->take(5)->get(),
             'recentProjects' => Project::latest()->take(4)->get(),
             'recentServices' => Service::latest()->take(4)->get(),
-            'settings' => ProfileSetting::all()->pluck('value', 'key'),
+            'settings' => ProfileSetting::pluck('value', 'key'),
         ]);
     }
 
@@ -55,7 +55,8 @@ class DashboardController extends Controller
         ]);
 
         foreach ($validated['settings'] as $key => $value) {
-            ProfileSetting::setValue($key, is_string($value) ? $value : json_encode($value));
+            $serialized = is_string($value) ? $value : json_encode($value);
+            ProfileSetting::setValue($key, $serialized !== false ? $serialized : null);
         }
 
         return back()->with('success', 'تم حفظ إعدادات الملف الشخصي بنجاح.');
@@ -79,7 +80,7 @@ class DashboardController extends Controller
             'settings' => ProfileSetting::all(),
         ];
 
-        $json = json_encode($backup, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        $json = json_encode($backup, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?: '{}';
 
         return response($json, 200, [
             'Content-Type' => 'application/json',
@@ -96,7 +97,14 @@ class DashboardController extends Controller
             'backup_file' => ['required', 'file', 'mimes:json,txt'],
         ]);
 
-        $content = file_get_contents($request->file('backup_file')->getRealPath());
+        $file = $request->file('backup_file');
+        $realPath = $file ? $file->getRealPath() : false;
+        $content = $realPath ? file_get_contents($realPath) : false;
+
+        if ($content === false) {
+            return back()->with('error', 'تعذر قراءة ملف النسخة الاحتياطية.');
+        }
+
         $data = json_decode($content, true);
 
         if (! is_array($data)) {
@@ -172,7 +180,13 @@ class DashboardController extends Controller
             'image' => ['required', 'file', 'image', 'max:10240'],
         ]);
 
-        $path = $request->file('image')->store('uploads', 'public');
+        $image = $request->file('image');
+        $path = $image ? $image->store('uploads', 'public') : false;
+
+        if (! $path) {
+            return response()->json(['message' => 'تعذر رفع الصورة.'], 500);
+        }
+
         $url = Storage::url($path);
 
         return response()->json([

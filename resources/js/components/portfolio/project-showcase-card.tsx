@@ -1,6 +1,15 @@
 import React, { useRef } from 'react';
 import { Link } from '@inertiajs/react';
-import { Calendar, Info, ExternalLink, Star, Users, Shield, Cpu, Globe } from 'lucide-react';
+import {
+    Calendar,
+    Info,
+    ExternalLink,
+    Star,
+    Users,
+    Shield,
+    Cpu,
+    Globe,
+} from 'lucide-react';
 import type { Project } from '@/types/portfolio';
 import { playClickSound } from './sound-effects';
 import { Button } from '@/components/ui/button';
@@ -10,7 +19,10 @@ interface ProjectShowcaseCardProps {
     onOpenModal: (project: Project) => void;
 }
 
-export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCardProps) {
+export function ProjectShowcaseCard({
+    project,
+    onOpenModal,
+}: ProjectShowcaseCardProps) {
     const cardRef = useRef<HTMLElement | null>(null);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
@@ -35,7 +47,8 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
     const handleMouseLeave = () => {
         const card = cardRef.current;
         if (!card) return;
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        card.style.transform =
+            'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
     };
 
     // Determine badge type matching original design
@@ -49,7 +62,10 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
             );
         }
 
-        if (project.category === 'platform' || project.category === 'community') {
+        if (
+            project.category === 'platform' ||
+            project.category === 'community'
+        ) {
             return (
                 <span className="badge-community">
                     <Users className="size-3" />
@@ -84,12 +100,18 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
         );
     };
 
-    const primaryActionLabel = project.live_url && project.live_url !== '#'
-        ? (project.live_url.includes('sinbadd') ? 'زيارة الموقع (sinbadd.com)'
-            : project.live_url.includes('rial') ? 'الموقع الرسمي (rial.cash)'
-            : project.live_url.includes('t.me') ? 'قناة المنصة (Telegram)'
-            : 'زيارة الموقع')
-        : (project.github_url && project.github_url !== '#' ? 'كود المشروع (GitHub)' : 'معاينة المشروع');
+    const primaryActionLabel =
+        project.live_url && project.live_url !== '#'
+            ? project.live_url.includes('sinbadd')
+                ? 'زيارة الموقع (sinbadd.com)'
+                : project.live_url.includes('rial')
+                  ? 'الموقع الرسمي (rial.cash)'
+                  : project.live_url.includes('t.me')
+                    ? 'قناة المنصة (Telegram)'
+                    : 'زيارة الموقع'
+            : project.github_url && project.github_url !== '#'
+              ? 'كود المشروع (GitHub)'
+              : 'معاينة المشروع';
 
     return (
         <article
@@ -136,7 +158,7 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
                 <Link
                     href={`/projects/${project.slug}`}
                     onClick={() => playClickSound(650, 0.02)}
-                    className="hover:text-primary transition-colors"
+                    className="transition-colors hover:text-primary"
                 >
                     <h3>{project.title}</h3>
                 </Link>
@@ -157,7 +179,7 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
                             playClickSound(650, 0.03);
                             onOpenModal(project);
                         }}
-                        className="btn bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl gap-1.5 shadow-md shadow-primary/20 text-xs"
+                        className="btn gap-1.5 rounded-xl bg-primary text-xs font-bold text-primary-foreground shadow-md shadow-primary/20 hover:bg-primary/90"
                     >
                         <Info className="size-3.5" />
                         التفاصيل الكاملة
@@ -169,7 +191,7 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
                             variant="outline"
                             size="sm"
                             onClick={() => playClickSound(650, 0.02)}
-                            className="btn border-border/80 hover:bg-muted text-foreground font-semibold rounded-xl gap-1.5 text-xs truncate"
+                            className="btn gap-1.5 truncate rounded-xl border-border/80 text-xs font-semibold text-foreground hover:bg-muted"
                         >
                             <a
                                 href={project.live_url}
@@ -178,7 +200,9 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
                                 title={project.live_url}
                             >
                                 <ExternalLink className="size-3.5" />
-                                <span className="truncate">{primaryActionLabel}</span>
+                                <span className="truncate">
+                                    {primaryActionLabel}
+                                </span>
                             </a>
                         </Button>
                     ) : project.github_url && project.github_url !== '#' ? (
@@ -187,7 +211,7 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
                             variant="outline"
                             size="sm"
                             onClick={() => playClickSound(650, 0.02)}
-                            className="btn border-border/80 hover:bg-muted text-foreground font-semibold rounded-xl gap-1.5 text-xs truncate"
+                            className="btn gap-1.5 truncate rounded-xl border-border/80 text-xs font-semibold text-foreground hover:bg-muted"
                         >
                             <a
                                 href={project.github_url}
@@ -196,7 +220,9 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
                                 title={project.github_url}
                             >
                                 <ExternalLink className="size-3.5" />
-                                <span className="truncate">كود المشروع (GitHub)</span>
+                                <span className="truncate">
+                                    كود المشروع (GitHub)
+                                </span>
                             </a>
                         </Button>
                     ) : (
@@ -205,7 +231,7 @@ export function ProjectShowcaseCard({ project, onOpenModal }: ProjectShowcaseCar
                             variant="outline"
                             size="sm"
                             onClick={() => playClickSound(650, 0.02)}
-                            className="btn border-border/80 hover:bg-muted text-foreground font-semibold rounded-xl gap-1.5 text-xs"
+                            className="btn gap-1.5 rounded-xl border-border/80 text-xs font-semibold text-foreground hover:bg-muted"
                         >
                             <Link href={`/projects/${project.slug}`}>
                                 <ExternalLink className="size-3.5" />

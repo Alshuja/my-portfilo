@@ -24,7 +24,11 @@ import {
     FileText,
 } from 'lucide-react';
 import { useAppearance } from '@/hooks/use-appearance';
-import { isSoundEnabled, toggleSound, playClickSound } from '@/components/portfolio/sound-effects';
+import {
+    isSoundEnabled,
+    toggleSound,
+    playClickSound,
+} from '@/components/portfolio/sound-effects';
 import { AmbientBackground } from '@/components/portfolio/ambient-background';
 import { ScrollProgress } from '@/components/portfolio/scroll-progress';
 import { SmartAiAssistant } from '@/components/portfolio/smart-ai-assistant';
@@ -51,7 +55,8 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
 
         const handleScroll = () => {
             const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const docHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
             setIsScrolled(scrollTop > 20);
             if (docHeight > 0) {
                 setScrollProgress(Math.min((scrollTop / docHeight) * 100, 100));
@@ -97,7 +102,7 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-red-500/20 selection:text-red-500 font-sans relative">
+        <div className="relative flex min-h-screen flex-col bg-background font-sans text-foreground antialiased selection:bg-red-500/20 selection:text-red-500">
             {/* Top Glowing Scroll Progress Bar */}
             <ScrollProgress />
 
@@ -108,32 +113,33 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
             <header
                 className={`sticky top-0 z-40 w-full transition-all duration-300 ${
                     isScrolled
-                        ? 'bg-background/80 backdrop-blur-xl border-b border-border/70 shadow-sm py-3'
+                        ? 'border-b border-border/70 bg-background/80 py-3 shadow-sm backdrop-blur-xl'
                         : 'bg-transparent py-4'
                 }`}
             >
-                <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
+                <div className="container mx-auto flex items-center justify-between px-4 sm:px-6">
                     {/* Brand Logo */}
                     <Link
                         href="/"
                         onClick={() => playClickSound(650, 0.03)}
-                        className="flex items-center gap-2.5 group"
+                        className="group flex items-center gap-2.5"
                     >
-                        <div className="size-10 rounded-xl bg-gradient-to-br from-red-600 to-red-800 text-white flex items-center justify-center shadow-md shadow-red-600/20 group-hover:scale-105 transition-transform duration-300">
+                        <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-red-800 text-white shadow-md shadow-red-600/20 transition-transform duration-300 group-hover:scale-105">
                             <Terminal className="size-5" />
                         </div>
                         <div className="flex flex-col">
-                            <span className="font-bold text-lg leading-tight tracking-tight text-foreground flex items-center gap-1">
-                                عبدالرحمن <span className="text-red-600">.الشجاع</span>
+                            <span className="flex items-center gap-1 text-lg leading-tight font-bold tracking-tight text-foreground">
+                                عبدالرحمن{' '}
+                                <span className="text-red-600">.الشجاع</span>
                             </span>
-                            <span className="text-[10px] text-muted-foreground font-mono leading-none">
+                            <span className="font-mono text-[10px] leading-none text-muted-foreground">
                                 Data & AI · Software
                             </span>
                         </div>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-1 bg-muted/40 p-1.5 rounded-full border border-border/60 backdrop-blur-md">
+                    <nav className="hidden items-center gap-1 rounded-full border border-border/60 bg-muted/40 p-1.5 backdrop-blur-md lg:flex">
                         {navLinks.map((link) => {
                             const active = isLinkActive(link.href, link.exact);
                             const Icon = link.icon;
@@ -142,10 +148,10 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                                     key={link.href}
                                     href={link.href}
                                     onClick={() => playClickSound(550, 0.02)}
-                                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 flex items-center gap-1.5 ${
+                                    className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-200 ${
                                         active
-                                            ? 'bg-primary text-primary-foreground shadow-sm font-semibold'
-                                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
+                                            ? 'bg-primary font-semibold text-primary-foreground shadow-sm'
+                                            : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'
                                     }`}
                                 >
                                     <Icon className="size-3.5" />
@@ -162,10 +168,18 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                             variant="ghost"
                             size="icon"
                             onClick={handleSoundToggle}
-                            title={soundOn ? 'إيقاف المؤثرات الصوتية' : 'تفعيل المؤثرات الصوتية الميكانيكية'}
+                            title={
+                                soundOn
+                                    ? 'إيقاف المؤثرات الصوتية'
+                                    : 'تفعيل المؤثرات الصوتية الميكانيكية'
+                            }
                             className="size-9 rounded-xl border border-border/50 text-muted-foreground hover:text-foreground"
                         >
-                            {soundOn ? <Volume2 className="size-4 text-primary" /> : <VolumeX className="size-4" />}
+                            {soundOn ? (
+                                <Volume2 className="size-4 text-primary" />
+                            ) : (
+                                <VolumeX className="size-4" />
+                            )}
                         </Button>
 
                         {/* Theme Toggle */}
@@ -189,9 +203,12 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                             variant="ghost"
                             size="icon"
                             title="لوحة الإدارة"
-                            className="hidden sm:inline-flex size-9 rounded-xl border border-border/50 text-muted-foreground hover:text-foreground"
+                            className="hidden size-9 rounded-xl border border-border/50 text-muted-foreground hover:text-foreground sm:inline-flex"
                         >
-                            <Link href="/dashboard" onClick={() => playClickSound(600, 0.02)}>
+                            <Link
+                                href="/dashboard"
+                                onClick={() => playClickSound(600, 0.02)}
+                            >
                                 <Lock className="size-3.5" />
                             </Link>
                         </Button>
@@ -202,39 +219,52 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                                 <Button
                                     variant="outline"
                                     size="icon"
-                                    className="lg:hidden size-9 rounded-xl border-border/70"
+                                    className="size-9 rounded-xl border-border/70 lg:hidden"
                                 >
                                     <Menu className="size-4" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="right" className="w-72 p-6 flex flex-col justify-between">
+                            <SheetContent
+                                side="right"
+                                className="flex w-72 flex-col justify-between p-6"
+                            >
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3">
-                                        <div className="size-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center font-bold">
+                                        <div className="flex size-9 items-center justify-center rounded-xl bg-primary font-bold text-primary-foreground">
                                             <Terminal className="size-4" />
                                         </div>
                                         <div>
-                                            <div className="font-bold text-foreground">عبدالرحمن الشجاع</div>
-                                            <div className="text-xs text-muted-foreground">قائمة الموقع</div>
+                                            <div className="font-bold text-foreground">
+                                                عبدالرحمن الشجاع
+                                            </div>
+                                            <div className="text-xs text-muted-foreground">
+                                                قائمة الموقع
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col gap-1.5 pt-4 border-t border-border/60">
+                                    <div className="flex flex-col gap-1.5 border-t border-border/60 pt-4">
                                         {navLinks.map((link) => {
-                                            const active = isLinkActive(link.href, link.exact);
+                                            const active = isLinkActive(
+                                                link.href,
+                                                link.exact,
+                                            );
                                             const Icon = link.icon;
                                             return (
                                                 <Link
                                                     key={link.href}
                                                     href={link.href}
                                                     onClick={() => {
-                                                        playClickSound(550, 0.02);
+                                                        playClickSound(
+                                                            550,
+                                                            0.02,
+                                                        );
                                                         setMobileOpen(false);
                                                     }}
-                                                    className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors flex items-center gap-3 ${
+                                                    className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors ${
                                                         active
-                                                            ? 'bg-primary text-primary-foreground font-semibold'
-                                                            : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                                                            ? 'bg-primary font-semibold text-primary-foreground'
+                                                            : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                                                     }`}
                                                 >
                                                     <Icon className="size-4" />
@@ -245,7 +275,7 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                                         <Link
                                             href="/dashboard"
                                             onClick={() => setMobileOpen(false)}
-                                            className="px-4 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted flex items-center gap-3 mt-2 border-t border-border/50"
+                                            className="mt-2 flex items-center gap-3 rounded-xl border-t border-border/50 px-4 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
                                         >
                                             <Lock className="size-4 text-primary" />
                                             <span>لوحة الإدارة</span>
@@ -253,7 +283,7 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                                     </div>
                                 </div>
 
-                                <div className="pt-6 border-t border-border/60 text-xs text-muted-foreground text-center">
+                                <div className="border-t border-border/60 pt-6 text-center text-xs text-muted-foreground">
                                     عبدالرحمن عادل الشجاع © 2026
                                 </div>
                             </SheetContent>
@@ -263,31 +293,34 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
             </header>
 
             {/* Main Page Body */}
-            <main className="flex-1 w-full relative">{children}</main>
+            <main className="relative w-full flex-1">{children}</main>
 
             {/* Modern Footer */}
-            <footer className="border-t border-border/60 bg-muted/20 backdrop-blur-md pt-16 pb-12 mt-20">
+            <footer className="mt-20 border-t border-border/60 bg-muted/20 pt-16 pb-12 backdrop-blur-md">
                 <div className="container mx-auto px-4 sm:px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+                    <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
                         {/* Col 1: Bio */}
-                        <div className="md:col-span-2 space-y-4">
+                        <div className="space-y-4 md:col-span-2">
                             <div className="flex items-center gap-2.5">
-                                <div className="size-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold">
+                                <div className="flex size-8 items-center justify-center rounded-lg bg-primary font-bold text-primary-foreground">
                                     <Terminal className="size-4" />
                                 </div>
-                                <span className="font-bold text-lg text-foreground">
+                                <span className="text-lg font-bold text-foreground">
                                     عبدالرحمن عادل الشجاع
                                 </span>
                             </div>
-                            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-                                طالب علوم حاسوب وتقنية معلومات بجامعة إب، مطور برمجيات، شغوف بعلوم البيانات والذكاء الاصطناعي وبناء منصات رقمية متكاملة تخدم المجتمع. مؤسس مبادرة "فكرة مبرمج".
+                            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+                                طالب علوم حاسوب وتقنية معلومات بجامعة إب، مطور
+                                برمجيات، شغوف بعلوم البيانات والذكاء الاصطناعي
+                                وبناء منصات رقمية متكاملة تخدم المجتمع. مؤسس
+                                مبادرة "فكرة مبرمج".
                             </p>
                             <div className="flex items-center gap-3 pt-2">
                                 <a
                                     href="https://wa.me/967773853853"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors flex items-center gap-1.5"
+                                    className="flex items-center gap-1.5 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-medium text-emerald-600 transition-colors hover:bg-emerald-500/20 dark:text-emerald-400"
                                 >
                                     <MessageCircle className="size-3.5" />
                                     واتساب مباشر
@@ -296,7 +329,7 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                                     href="https://t.me/Alshuja_ai"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 hover:bg-sky-500/20 transition-colors flex items-center gap-1.5"
+                                    className="flex items-center gap-1.5 rounded-lg border border-sky-500/20 bg-sky-500/10 px-3.5 py-1.5 text-xs font-medium text-sky-600 transition-colors hover:bg-sky-500/20 dark:text-sky-400"
                                 >
                                     تيليجرام: @Alshuja_ai
                                 </a>
@@ -306,47 +339,71 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                         {/* Col 2: Navigation Links */}
                         {/* Col 2: Navigation Links */}
                         <div className="space-y-3">
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                            <h4 className="text-xs font-bold tracking-wider text-foreground uppercase">
                                 روابط الموقع
                             </h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
                                 <li>
-                                    <Link href="/" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         الرئيسية
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/about" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/about"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         عني ومساري المهني
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/services" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/services"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         الخدمات والحلول الرقمية
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/projects" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/projects"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         معرض المشاريع
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/cv" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/cv"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         السيرة الذاتية (CV)
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/skills" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/skills"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         المهارات التقنية
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/certificates" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/certificates"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         الشهادات والجوائز
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/journey" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/journey"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         المسار الأكاديمي والمهني
                                     </Link>
                                 </li>
@@ -355,27 +412,39 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
 
                         {/* Col 3: Community & Admin */}
                         <div className="space-y-3">
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                            <h4 className="text-xs font-bold tracking-wider text-foreground uppercase">
                                 المبادرة والتدوين
                             </h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
                                 <li>
-                                    <Link href="/programmer-idea" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/programmer-idea"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         منصة فكرة مبرمج
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/blog" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/blog"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         المدونة والمقالات
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/contact" className="hover:text-primary transition-colors">
+                                    <Link
+                                        href="/contact"
+                                        className="transition-colors hover:text-primary"
+                                    >
                                         تواصل معي
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/dashboard" className="text-xs text-primary hover:underline flex items-center gap-1 pt-2">
+                                    <Link
+                                        href="/dashboard"
+                                        className="flex items-center gap-1 pt-2 text-xs text-primary hover:underline"
+                                    >
                                         <Lock className="size-3" />
                                         لوحة التحكم والإدارة
                                     </Link>
@@ -384,15 +453,18 @@ export function PortfolioLayout({ children }: PortfolioLayoutProps) {
                         </div>
                     </div>
 
-                    <div className="mt-12 pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+                    <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 text-xs text-muted-foreground sm:flex-row">
                         <div>
-                            جميع الحقوق محفوظة للمهندس عبدالرحمن عادل الشجاع © {new Date().getFullYear()}
+                            جميع الحقوق محفوظة للمهندس عبدالرحمن عادل الشجاع ©{' '}
+                            {new Date().getFullYear()}
                         </div>
                         <div className="flex items-center gap-4">
-                            <span>صُنع بـ Laravel 12 &amp; React &amp; Tailwind</span>
+                            <span>
+                                صُنع بـ Laravel 12 &amp; React &amp; Tailwind
+                            </span>
                             <button
                                 onClick={scrollToTop}
-                                className="size-7 rounded-lg border border-border/80 flex items-center justify-center hover:bg-muted transition-colors"
+                                className="flex size-7 items-center justify-center rounded-lg border border-border/80 transition-colors hover:bg-muted"
                                 title="العودة لأعلى الصفحة"
                             >
                                 <ArrowUp className="size-3.5" />

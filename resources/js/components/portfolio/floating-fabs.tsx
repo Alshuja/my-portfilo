@@ -1,5 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, MessageSquare, Send, X, ExternalLink, Sparkles, User, CornerDownLeft } from 'lucide-react';
+import {
+    Bot,
+    MessageSquare,
+    Send,
+    X,
+    ExternalLink,
+    Sparkles,
+    User,
+    CornerDownLeft,
+} from 'lucide-react';
 import { playClickSound } from '@/components/portfolio/sound-effects';
 
 interface ChatMessage {
@@ -69,27 +78,62 @@ export function FloatingFabs() {
     const generateAssistantResponse = (query: string): string => {
         const q = query.toLowerCase();
 
-        if (q.includes('سندباد') || q.includes('sinbad') || q.includes('متجر') || q.includes('ماركت')) {
+        if (
+            q.includes('سندباد') ||
+            q.includes('sinbad') ||
+            q.includes('متجر') ||
+            q.includes('ماركت')
+        ) {
             return 'مشروع "سندباد" (Sinbad) هو منصة تجارة إلكترونية متعددة التجار متكاملة تربط العملاء والتجار ومندوبي التوصيل، قام عبدالرحمن بهندسة الباك اند باستخدام Laravel وبناء التطبيقات باستخدام Flutter، مع تتبع حي عبر الخرائط ونظام إدارة فواتير ومخزون فوري.';
         }
 
-        if (q.includes('فكرة مبرمج') || q.includes('تعليم') || q.includes('قناة') || q.includes('يوتيوب') || q.includes('تلجرام')) {
+        if (
+            q.includes('فكرة مبرمج') ||
+            q.includes('تعليم') ||
+            q.includes('قناة') ||
+            q.includes('يوتيوب') ||
+            q.includes('تلجرام')
+        ) {
             return 'مبادرة "فكرة مبرمج" (Programmer Idea) هي منصة تعليمية ومجتمع تقني أسسه عبدالرحمن الشجاع لنشر المحتوى البرمجي العربي واليمني، مع سلاسل شروحات في بايثون، الذكاء الاصطناعي، وفلاتر، يستفيد منها أكثر من 10,000 طالب ومطور.';
         }
 
-        if (q.includes('محفظة') || q.includes('ريال') || q.includes('مالي') || q.includes('fintech')) {
+        if (
+            q.includes('محفظة') ||
+            q.includes('ريال') ||
+            q.includes('مالي') ||
+            q.includes('fintech')
+        ) {
             return 'مشروع "محفظة ريال" (Riyal Wallet) هو تطبيق خدمات مالية ودفع رقمي مبني بـ Flutter يتيح التحويل السريع عبر الهواتف، ومسح رموز QR، وسداد الفواتير مع معايير أمان وتشفير عالية.';
         }
 
-        if (q.includes('مهارات') || q.includes('skills') || q.includes('بايثون') || q.includes('فلاتر') || q.includes('لارافيل') || q.includes('ذكاء')) {
+        if (
+            q.includes('مهارات') ||
+            q.includes('skills') ||
+            q.includes('بايثون') ||
+            q.includes('فلاتر') ||
+            q.includes('لارافيل') ||
+            q.includes('ذكاء')
+        ) {
             return 'يمتلك عبدالرحمن خبرة قوية في: Python (تحليل بيانات وذكاء اصطناعي عبر pandas, scikit-learn)، وتطوير تطبيقات الموبايل بـ Flutter و Dart، والـ Backend بـ Laravel و PHP، وقواعد البيانات SQL/MySQL، ولوحات Power BI، مع معمارية النظم النظيفة Clean Architecture.';
         }
 
-        if (q.includes('تواصل') || q.includes('واتساب') || q.includes('ايميل') || q.includes('رقم') || q.includes('اتصال') || q.includes('contact')) {
+        if (
+            q.includes('تواصل') ||
+            q.includes('واتساب') ||
+            q.includes('ايميل') ||
+            q.includes('رقم') ||
+            q.includes('اتصال') ||
+            q.includes('contact')
+        ) {
             return 'يمكنك التواصل مباشرة مع عبدالرحمن عبر واتساب على الرقم: 00967777580845 أو 00967773853853، أو عبر البريد الإلكتروني Abdulrahman_Alshujaa@gmail.com، أو زيارة صفحة التواصل في الموقع.';
         }
 
-        if (q.includes('سيرة') || q.includes('cv') || q.includes('شهادة') || q.includes('شهادات')) {
+        if (
+            q.includes('سيرة') ||
+            q.includes('cv') ||
+            q.includes('شهادة') ||
+            q.includes('شهادات')
+        ) {
             return 'يمكنك استعراض السيرة الذاتية التفاعلية وطباعتها بصيغة PDF عبر صفحة /cv في الموقع، كما يمكنك الاطلاع على أكثر من 9 شهادات معتمدة من IBM و Stanford في صفحة الشهادات /certificates.';
         }
 
@@ -104,19 +148,27 @@ export function FloatingFabs() {
     ];
 
     return (
-        <aside id="floating-fabs" aria-label="أدوات المساعدة السريعة والتواصل" className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-3">
+        <aside
+            id="floating-fabs"
+            aria-label="أدوات المساعدة السريعة والتواصل"
+            className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-3"
+        >
             {/* Chat Modal */}
             {isOpen && (
-                <div className="w-[330px] sm:w-[380px] h-[480px] rounded-3xl bg-card border border-border shadow-2xl flex flex-col overflow-hidden mb-2 fade-in">
+                <div className="mb-2 flex h-[480px] w-[330px] flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-2xl fade-in sm:w-[380px]">
                     {/* Header */}
-                    <div className="p-4 bg-gradient-to-r from-[#D71916] to-[#FF6A32] text-white flex items-center justify-between">
+                    <div className="flex items-center justify-between bg-gradient-to-r from-[#D71916] to-[#FF6A32] p-4 text-white">
                         <div className="flex items-center gap-2.5">
-                            <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
                                 <Bot className="h-5 w-5 text-white" />
                             </div>
                             <div>
-                                <h4 className="font-bold text-sm leading-none">المساعد الذكي (AI Assistant)</h4>
-                                <span className="text-[11px] text-white/80 font-medium mt-0.5 block">عبدالرحمن عادل الشجاع</span>
+                                <h4 className="text-sm leading-none font-bold">
+                                    المساعد الذكي (AI Assistant)
+                                </h4>
+                                <span className="mt-0.5 block text-[11px] font-medium text-white/80">
+                                    عبدالرحمن عادل الشجاع
+                                </span>
                             </div>
                         </div>
                         <button
@@ -125,35 +177,35 @@ export function FloatingFabs() {
                                 playClickSound();
                                 setIsOpen(false);
                             }}
-                            className="w-7 h-7 rounded-full bg-black/20 hover:bg-black/30 flex items-center justify-center transition-colors"
+                            className="flex h-7 w-7 items-center justify-center rounded-full bg-black/20 transition-colors hover:bg-black/30"
                         >
                             <X className="h-4 w-4 text-white" />
                         </button>
                     </div>
 
                     {/* Messages Body */}
-                    <div className="flex-1 p-4 overflow-y-auto space-y-3 text-xs leading-relaxed">
+                    <div className="flex-1 space-y-3 overflow-y-auto p-4 text-xs leading-relaxed">
                         {messages.map((m) => (
                             <div
                                 key={m.id}
                                 className={`flex gap-2 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
                             >
                                 {m.role === 'assistant' && (
-                                    <div className="w-6 h-6 rounded-full bg-[#D71916]/10 flex items-center justify-center shrink-0 mt-0.5">
+                                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D71916]/10">
                                         <Sparkles className="h-3.5 w-3.5 text-[#D71916]" />
                                     </div>
                                 )}
                                 <div
-                                    className={`p-3 rounded-2xl max-w-[80%] ${
+                                    className={`max-w-[80%] rounded-2xl p-3 ${
                                         m.role === 'user'
-                                            ? 'bg-gradient-to-r from-[#D71916] to-[#FF6A32] text-white rounded-br-sm'
-                                            : 'bg-secondary/70 text-foreground border border-border/60 rounded-bl-sm'
+                                            ? 'rounded-br-sm bg-gradient-to-r from-[#D71916] to-[#FF6A32] text-white'
+                                            : 'rounded-bl-sm border border-border/60 bg-secondary/70 text-foreground'
                                     }`}
                                 >
                                     {m.text}
                                 </div>
                                 {m.role === 'user' && (
-                                    <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center shrink-0 mt-0.5">
+                                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary">
                                         <User className="h-3.5 w-3.5 text-muted-foreground" />
                                     </div>
                                 )}
@@ -161,8 +213,8 @@ export function FloatingFabs() {
                         ))}
 
                         {isTyping && (
-                            <div className="flex items-center gap-2 text-muted-foreground text-xs py-1">
-                                <Sparkles className="h-3.5 w-3.5 text-[#D71916] animate-pulse" />
+                            <div className="flex items-center gap-2 py-1 text-xs text-muted-foreground">
+                                <Sparkles className="h-3.5 w-3.5 animate-pulse text-[#D71916]" />
                                 <span>جاري التفكير وصياغة الرد...</span>
                             </div>
                         )}
@@ -170,13 +222,13 @@ export function FloatingFabs() {
                     </div>
 
                     {/* Quick Suggestions */}
-                    <div className="px-3 py-2 bg-secondary/40 border-t border-border/50 flex gap-1.5 overflow-x-auto no-scrollbar">
+                    <div className="no-scrollbar flex gap-1.5 overflow-x-auto border-t border-border/50 bg-secondary/40 px-3 py-2">
                         {quickQuestions.map((q, i) => (
                             <button
                                 key={i}
                                 type="button"
                                 onClick={() => handleSend(q)}
-                                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-card hover:bg-secondary text-[11px] font-medium text-foreground/80 border border-border/60 transition-colors"
+                                className="rounded-full border border-border/60 bg-card px-2.5 py-1 text-[11px] font-medium whitespace-nowrap text-foreground/80 transition-colors hover:bg-secondary"
                             >
                                 {q}
                             </button>
@@ -189,19 +241,19 @@ export function FloatingFabs() {
                             e.preventDefault();
                             handleSend();
                         }}
-                        className="p-3 border-t border-border flex items-center gap-2 bg-card"
+                        className="flex items-center gap-2 border-t border-border bg-card p-3"
                     >
                         <input
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="اكتب استفسارك هنا..."
-                            className="flex-1 bg-secondary/50 border border-border rounded-xl px-3 py-2 text-xs text-foreground focus:outline-none focus:border-[#D71916]"
+                            className="flex-1 rounded-xl border border-border bg-secondary/50 px-3 py-2 text-xs text-foreground focus:border-[#D71916] focus:outline-none"
                         />
                         <button
                             type="submit"
                             disabled={!input.trim()}
-                            className="w-9 h-9 rounded-xl bg-gradient-to-r from-[#D71916] to-[#FF6A32] text-white flex items-center justify-center hover:opacity-90 disabled:opacity-40 transition-opacity"
+                            className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r from-[#D71916] to-[#FF6A32] text-white transition-opacity hover:opacity-90 disabled:opacity-40"
                         >
                             <Send className="h-4 w-4" />
                         </button>
@@ -218,12 +270,16 @@ export function FloatingFabs() {
                         playClickSound();
                         setIsOpen(!isOpen);
                     }}
-                    className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#D71916] to-[#FF6A32] text-white shadow-lg hover:shadow-xl hover:shadow-[#D71916]/30 hover:scale-105 active:scale-95 transition-all"
+                    className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-[#D71916] to-[#FF6A32] text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#D71916]/30 active:scale-95"
                     title="المساعد الذكي"
                 >
-                    {isOpen ? <X className="h-5 w-5" /> : <Bot className="h-5 w-5" />}
+                    {isOpen ? (
+                        <X className="h-5 w-5" />
+                    ) : (
+                        <Bot className="h-5 w-5" />
+                    )}
                     <span className="sr-only">المساعد الذكي</span>
-                    <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-background animate-pulse" />
+                    <span className="absolute -top-1 -right-1 h-3.5 w-3.5 animate-pulse rounded-full border-2 border-background bg-emerald-500" />
                 </button>
 
                 {/* WhatsApp FAB */}
@@ -232,7 +288,7 @@ export function FloatingFabs() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => playClickSound()}
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-xl hover:shadow-emerald-600/30 hover:scale-105 active:scale-95 transition-all"
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600 text-white shadow-lg transition-all hover:scale-105 hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/30 active:scale-95"
                     title="محادثة واتساب مباشرة"
                 >
                     <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
@@ -247,7 +303,7 @@ export function FloatingFabs() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => playClickSound()}
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-sky-500 hover:bg-sky-600 text-white shadow-lg hover:shadow-xl hover:shadow-sky-500/30 hover:scale-105 active:scale-95 transition-all"
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500 text-white shadow-lg transition-all hover:scale-105 hover:bg-sky-600 hover:shadow-xl hover:shadow-sky-500/30 active:scale-95"
                     title="تلجرام"
                 >
                     <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">

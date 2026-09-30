@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import { Link } from '@inertiajs/react';
-import { ExternalLink, Github, Calendar, Layers, CheckCircle2, AlertCircle, Sparkles, User, Briefcase, ArrowLeft } from 'lucide-react';
+import {
+    ExternalLink,
+    Github,
+    Calendar,
+    Layers,
+    CheckCircle2,
+    AlertCircle,
+    Sparkles,
+    User,
+    Briefcase,
+    ArrowLeft,
+} from 'lucide-react';
 import type { Project } from '@/types/portfolio';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -26,14 +37,19 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
     const allImages = [
         ...(project.image ? [project.image] : []),
-        ...(project.gallery && Array.isArray(project.gallery) ? project.gallery : []),
+        ...(project.gallery && Array.isArray(project.gallery)
+            ? project.gallery
+            : []),
     ].filter((img, idx, arr) => arr.indexOf(img) === idx);
 
-    const currentImg = allImages[activeImageIndex] || project.image || '/images/placeholder.jpg';
+    const currentImg =
+        allImages[activeImageIndex] ||
+        project.image ||
+        '/images/placeholder.jpg';
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-            <DialogContent className="max-w-3xl max-h-[92vh] overflow-y-auto p-0 border border-border/80 bg-card/95 backdrop-blur-2xl rounded-3xl shadow-2xl">
+            <DialogContent className="max-h-[92vh] max-w-3xl overflow-y-auto rounded-3xl border border-border/80 bg-card/95 p-0 shadow-2xl backdrop-blur-2xl">
                 {/* Hero Image & Gallery Bar */}
                 <div className="relative w-full overflow-hidden bg-muted">
                     <div className="aspect-video w-full overflow-hidden">
@@ -47,15 +63,15 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                             }}
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent pointer-events-none" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-background/10 to-transparent" />
 
                     {/* Top Badges */}
                     <div className="absolute top-4 right-4 flex gap-2">
-                        <Badge className="bg-primary text-primary-foreground border-none font-bold px-3 py-1 shadow-lg text-xs">
+                        <Badge className="border-none bg-primary px-3 py-1 text-xs font-bold text-primary-foreground shadow-lg">
                             {project.category_label || 'مشروع برمجي'}
                         </Badge>
                         {project.is_featured && (
-                            <Badge className="bg-amber-500 text-white border-none font-bold px-2.5 py-1 text-xs">
+                            <Badge className="border-none bg-amber-500 px-2.5 py-1 text-xs font-bold text-white">
                                 ★ مشروع رئيسي
                             </Badge>
                         )}
@@ -63,7 +79,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
                     {/* Gallery Thumbnails Strip */}
                     {allImages.length > 1 && (
-                        <div className="absolute bottom-3 left-4 right-4 flex items-center gap-2 overflow-x-auto p-1.5 rounded-2xl bg-black/50 backdrop-blur-md border border-white/20">
+                        <div className="absolute right-4 bottom-3 left-4 flex items-center gap-2 overflow-x-auto rounded-2xl border border-white/20 bg-black/50 p-1.5 backdrop-blur-md">
                             {allImages.map((img, idx) => (
                                 <button
                                     key={idx}
@@ -71,24 +87,30 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                                         playClickSound(650, 0.02);
                                         setActiveImageIndex(idx);
                                     }}
-                                    className={`relative size-14 rounded-xl overflow-hidden shrink-0 transition-all border-2 ${
-                                        activeImageIndex === idx ? 'border-primary scale-105 shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
+                                    className={`relative size-14 shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
+                                        activeImageIndex === idx
+                                            ? 'scale-105 border-primary shadow-md'
+                                            : 'border-transparent opacity-60 hover:opacity-100'
                                     }`}
                                 >
-                                    <img src={img} alt="" className="size-full object-cover" />
+                                    <img
+                                        src={img}
+                                        alt=""
+                                        className="size-full object-cover"
+                                    />
                                 </button>
                             ))}
                         </div>
                     )}
                 </div>
 
-                <div className="p-6 sm:p-8 space-y-6">
+                <div className="space-y-6 p-6 sm:p-8">
                     {/* Header */}
-                    <DialogHeader className="text-right space-y-2">
-                        <DialogTitle className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+                    <DialogHeader className="space-y-2 text-right">
+                        <DialogTitle className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
                             {project.title}
                         </DialogTitle>
-                        <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-muted-foreground pt-1">
+                        <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-muted-foreground sm:text-sm">
                             <span className="flex items-center gap-1.5 font-mono">
                                 <Calendar className="size-3.5 text-primary" />
                                 {project.date_range}
@@ -120,32 +142,32 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     </DialogHeader>
 
                     {/* Brief Note */}
-                    <DialogDescription className="text-base text-foreground/90 font-medium leading-relaxed bg-muted/40 p-4 sm:p-5 rounded-2xl border border-border/80 text-right">
+                    <DialogDescription className="rounded-2xl border border-border/80 bg-muted/40 p-4 text-right text-base leading-relaxed font-medium text-foreground/90 sm:p-5">
                         {project.brief}
                     </DialogDescription>
 
                     {/* Problem & Solution Architecture (if available) */}
                     {(project.problem || project.solution) && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             {project.problem && (
-                                <div className="p-4 sm:p-5 rounded-2xl bg-red-500/5 border border-red-500/20 space-y-2 text-right">
-                                    <h4 className="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400 flex items-center justify-end gap-1.5">
+                                <div className="space-y-2 rounded-2xl border border-red-500/20 bg-red-500/5 p-4 text-right sm:p-5">
+                                    <h4 className="flex items-center justify-end gap-1.5 text-xs font-bold tracking-wider text-red-600 uppercase dark:text-red-400">
                                         التحدي والمشكلة
                                         <AlertCircle className="size-4" />
                                     </h4>
-                                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                                         {project.problem}
                                     </p>
                                 </div>
                             )}
 
                             {project.solution && (
-                                <div className="p-4 sm:p-5 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 space-y-2 text-right">
-                                    <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center justify-end gap-1.5">
+                                <div className="space-y-2 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4 text-right sm:p-5">
+                                    <h4 className="flex items-center justify-end gap-1.5 text-xs font-bold tracking-wider text-emerald-600 uppercase dark:text-emerald-400">
                                         الحل التقني والهندسي
                                         <CheckCircle2 className="size-4" />
                                     </h4>
-                                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                                         {project.solution}
                                     </p>
                                 </div>
@@ -154,33 +176,37 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     )}
 
                     {/* Features List (if available) */}
-                    {project.features && Array.isArray(project.features) && project.features.length > 0 && (
-                        <div className="space-y-3 text-right">
-                            <h4 className="text-sm font-bold text-foreground flex items-center justify-end gap-2">
-                                أهم المزايا والخصائص المطبقة
-                                <Sparkles className="size-4 text-primary" />
-                            </h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                                {project.features.map((feature, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="p-3 rounded-xl bg-card border border-border/80 flex items-start gap-2.5 text-xs text-secondary-foreground"
-                                    >
-                                        <CheckCircle2 className="size-4 text-primary shrink-0 mt-0.5" />
-                                        <span className="leading-snug">{feature}</span>
-                                    </div>
-                                ))}
+                    {project.features &&
+                        Array.isArray(project.features) &&
+                        project.features.length > 0 && (
+                            <div className="space-y-3 text-right">
+                                <h4 className="flex items-center justify-end gap-2 text-sm font-bold text-foreground">
+                                    أهم المزايا والخصائص المطبقة
+                                    <Sparkles className="size-4 text-primary" />
+                                </h4>
+                                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                                    {project.features.map((feature, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="flex items-start gap-2.5 rounded-xl border border-border/80 bg-card p-3 text-xs text-secondary-foreground"
+                                        >
+                                            <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
+                                            <span className="leading-snug">
+                                                {feature}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
 
                     {/* Full Description */}
                     {project.description && (
                         <div className="space-y-2 text-right">
-                            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider">
+                            <h4 className="text-sm font-bold tracking-wider text-foreground uppercase">
                                 عن تفاصيل المشروع والتنفيذ
                             </h4>
-                            <div className="text-xs sm:text-sm text-muted-foreground leading-relaxed whitespace-pre-line bg-card/60 p-4 rounded-xl border border-border/60">
+                            <div className="rounded-xl border border-border/60 bg-card/60 p-4 text-xs leading-relaxed whitespace-pre-line text-muted-foreground sm:text-sm">
                                 {project.description}
                             </div>
                         </div>
@@ -188,14 +214,14 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
                     {/* Technologies Tags */}
                     <div className="space-y-2.5 text-right">
-                        <h4 className="text-xs font-bold text-foreground uppercase tracking-wider">
+                        <h4 className="text-xs font-bold tracking-wider text-foreground uppercase">
                             التقنيات والمكتبات المستخدمة
                         </h4>
-                        <div className="flex flex-wrap gap-2 justify-end">
+                        <div className="flex flex-wrap justify-end gap-2">
                             {project.tags.map((tag, idx) => (
                                 <span
                                     key={idx}
-                                    className="px-3 py-1 text-xs font-mono rounded-lg bg-secondary text-secondary-foreground border border-border/70"
+                                    className="rounded-lg border border-border/70 bg-secondary px-3 py-1 font-mono text-xs text-secondary-foreground"
                                 >
                                     {tag}
                                 </span>
@@ -204,35 +230,66 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     </div>
 
                     {/* Modal Footer Actions */}
-                    <div className="pt-4 border-t border-border/70 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-4">
                         <div className="flex flex-wrap items-center gap-2.5">
                             {project.live_url && project.live_url !== '#' && (
-                                <Button asChild size="sm" className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-md rounded-xl text-xs">
-                                    <a href={project.live_url} target="_blank" rel="noopener noreferrer">
+                                <Button
+                                    asChild
+                                    size="sm"
+                                    className="gap-2 rounded-xl bg-primary text-xs font-bold text-primary-foreground shadow-md hover:bg-primary/90"
+                                >
+                                    <a
+                                        href={project.live_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
                                         <ExternalLink className="size-3.5" />
                                         زيارة الموقع الحي
                                     </a>
                                 </Button>
                             )}
 
-                            {project.github_url && project.github_url !== '#' && (
-                                <Button asChild variant="outline" size="sm" className="gap-2 border-border/80 hover:bg-secondary rounded-xl text-xs">
-                                    <a href={project.github_url} target="_blank" rel="noopener noreferrer">
-                                        <Github className="size-3.5" />
-                                        مستودع الكود GitHub
-                                    </a>
-                                </Button>
-                            )}
+                            {project.github_url &&
+                                project.github_url !== '#' && (
+                                    <Button
+                                        asChild
+                                        variant="outline"
+                                        size="sm"
+                                        className="gap-2 rounded-xl border-border/80 text-xs hover:bg-secondary"
+                                    >
+                                        <a
+                                            href={project.github_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <Github className="size-3.5" />
+                                            مستودع الكود GitHub
+                                        </a>
+                                    </Button>
+                                )}
 
-                            <Button asChild variant="outline" size="sm" className="gap-2 border-primary/40 text-primary hover:bg-primary/10 rounded-xl text-xs">
-                                <Link href={`/projects/${project.slug}`} onClick={onClose}>
+                            <Button
+                                asChild
+                                variant="outline"
+                                size="sm"
+                                className="gap-2 rounded-xl border-primary/40 text-xs text-primary hover:bg-primary/10"
+                            >
+                                <Link
+                                    href={`/projects/${project.slug}`}
+                                    onClick={onClose}
+                                >
                                     صفحة المشروع والمعرض الكامل
                                     <ArrowLeft className="size-3.5" />
                                 </Link>
                             </Button>
                         </div>
 
-                        <Button variant="ghost" size="sm" onClick={onClose} className="text-muted-foreground hover:text-foreground text-xs">
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={onClose}
+                            className="text-xs text-muted-foreground hover:text-foreground"
+                        >
                             إغلاق النافذة
                         </Button>
                     </div>
