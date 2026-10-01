@@ -26,8 +26,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
 
-        if ($this->app->environment('production') || str_starts_with(config('app.url'), 'https://')) {
+        if ($this->app->environment('production') || str_starts_with((string) config('app.url'), 'https://')) {
             URL::forceScheme('https');
+
+            if ($appUrl = config('app.url')) {
+                URL::forceRootUrl($appUrl);
+            }
         }
     }
 

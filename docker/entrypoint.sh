@@ -11,9 +11,10 @@ if [ ! -f /var/www/html/.env ]; then
     fi
 fi
 
-# 2. Upgrade any http:// APP_URL in .env to https:// in production
+# 2. Upgrade any http:// APP_URL in .env to https:// in production and strip accidental :80
 if [ "${APP_ENV:-production}" = "production" ] && [ -f /var/www/html/.env ]; then
     sed -i 's|^APP_URL=http://|APP_URL=https://|g' /var/www/html/.env 2>/dev/null || true
+    sed -i -E 's|^APP_URL=(https?://[^:/]+):80/?$|APP_URL=\1|g' /var/www/html/.env 2>/dev/null || true
 fi
 
 # 3. Ensure APP_KEY exists
